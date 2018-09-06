@@ -1,5 +1,5 @@
-import React from 'react';
-import {getRandomInt} from '../utils.js';
+import React from 'react'
+import { getRandomInt } from '../utils.js'
 
 class Triangle extends React.Component {
   static defaultProps = {
@@ -14,24 +14,34 @@ class Triangle extends React.Component {
     y: this.props.y
   }
   render() {
-    const height = Math.floor(this.props.width * 0.75);
+    // height of equilateral triangle is
+    // half of width * sq root of 3
+    // `${Math.floor((parseInt(this.props.width) / 2) * 1.73)}px`
     const styles = {
       svg: {
         position: 'absolute',
-        left: `${this.state.x}%`,
-        top: `${this.state.y}%`,
+        // subtract width of triangle to prevent overflow
+        left: `calc(${this.state.x}% - ${this.props.width})`,
+        top: `calc(${this.state.y}% - ${this.props.width})`,
         overflow: 'visible',
         transition: '5s',
         width: this.props.width,
-        height: `calc(${this.props.width} * 0.75)`
+        height: this.props.width
       }
     }
     return (
       <svg viewBox="0 0 100 100" style={styles.svg}>
-        <polygon points="50 0 100 100 0 100" stroke={this.props.stroke || "#333"} fill="transparent" vectorEffect="non-scaling-stroke" transform={`rotate(${this.state.rotation || 0} 50 50)`} />
+        <polygon
+          points="50 0 100 100 0 100"
+          stroke={this.props.stroke || '#333'}
+          fill="transparent"
+          vectorEffect="non-scaling-stroke"
+          transform={`rotate(${this.state.rotation || 0} 50 50)`}
+          style={this.props.style}
+        />
       </svg>
     )
   }
 }
 
-export default Triangle;
+export default Triangle

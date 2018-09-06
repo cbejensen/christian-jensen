@@ -1,6 +1,14 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 body {
-  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial,
-    'Lucida Grande', sans-serif;
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue',
+    Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-weight: 300;
   font-size: 16px;
   margin: 0;
@@ -15,60 +23,4 @@ a {
 
 img {
   max-width: 100%;
-}
-
-nav {
-  width: 100%;
-  background: #108db8;
-}
-
-nav a {
-  color: white;
-  padding: 1rem;
-  display: inline-block;
-}
-
-.content {
-  padding: 1rem;
-}
-
-polygon {
-  mix-blend-mode: difference;
-}
-
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-body {
-  margin: 0;
-}
-h1 {
-  font-size: 3rem;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-align: center;
-  margin-top: 0;
-  background: tomato;
-  padding: 30px;
-}
-p {
-  padding: 100px;
-  text-align: justify;
-  font-size: 20px;
-  line-height: 1.5em;
-  background: white;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-@supports (initial-letter: 4) {
-  p::first-letter {
-     -webkit-initial-letter: 4;
-     initial-letter: 4;
-     color: #FE742F;
-     font-weight: bold;
-     margin-right: 0.5em;
-  }
 }

@@ -12,6 +12,7 @@ export default () => {
     'shape-outside',
     'polygon(0% 0%, 100% 0%, 0% 100%)'
   )
+  console.log('het')
   const createTriangles = points => {
     // width of each triangle
     const width = '50px'
@@ -78,11 +79,11 @@ export default () => {
 
 const getCurve = coords => {
   const shape = coords.reduce(
-    (acc, cur) => acc + `${cur.x}% ${cur.y}%, `,
+    (acc, cur) => `${acc} ${cur.x}% ${cur.y}%, `,
     'polygon(0% 0%, '
   )
   // remove trailing comma
-  return shape.slice(0, -2) + ')'
+  return `${shape.slice(0, -2)})`
 }
 
 const Curve = styled.div`

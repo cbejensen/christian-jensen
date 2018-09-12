@@ -1,47 +1,41 @@
 import React from 'react'
-import { getRandomInt } from '../utils.js'
+import styled from 'styled-components'
 
-class Triangle extends React.Component {
-  static defaultProps = {
-    rotation: getRandomInt(0, 359),
-    x: 0,
-    y: 0,
-    width: '100px'
+class Triangle extends React.PureComponent {
+  componentDidMount() {
+    console.log('mounted')
   }
-  state = {
-    rotation: this.props.rotation,
-    x: this.props.x,
-    y: this.props.y
+  componentDidUpdate() {
+    console.log('updated')
   }
   render() {
-    // height of equilateral triangle is
-    // half of width * sq root of 3
-    // `${Math.floor((parseInt(this.props.width) / 2) * 1.73)}px`
-    const styles = {
-      svg: {
-        position: 'absolute',
-        // subtract width of triangle to prevent overflow
-        left: `calc(${this.state.x}% - ${this.props.width})`,
-        top: `calc(${this.state.y}% - ${this.props.width})`,
-        overflow: 'visible',
-        transition: '5s',
-        width: this.props.width,
-        height: this.props.width
-      }
-    }
+    const { x, y, rotation, width, style, ...otherProps } = this.props
     return (
-      <svg viewBox="0 0 100 100" style={styles.svg}>
+      <StyledSVG x={x} y={y} width={width}>
         <polygon
           points="50 0 100 100 0 100"
-          stroke={this.props.stroke || '#333'}
+          stroke="#333"
           fill="transparent"
           vectorEffect="non-scaling-stroke"
-          transform={`rotate(${this.state.rotation || 0} 50 50)`}
-          style={this.props.style}
+          transform={`rotate(${rotation || 0} 50 50)`}
+          style={{ transition: '.5s' }}
         />
-      </svg>
+      </StyledSVG>
     )
   }
 }
+
+const StyledSVG = styled.svg.attrs({
+  viewBox: '0 0 100 100'
+})`
+  position: absolute;
+  overflow: visible;
+  ${props => `
+    left: calc(${props.x}% - ${props.width});
+    top: calc(${props.y}% - ${props.width});
+    width: ${props.width};
+    height: ${props.width};
+  `};
+`
 
 export default Triangle

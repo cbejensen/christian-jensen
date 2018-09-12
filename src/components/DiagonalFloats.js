@@ -9,8 +9,8 @@ export default function DiagonalFloats({
   floatMargin
 }) {
   const floats = []
-  // if we want floats horizontal, every float is the same height
-  // otherwise they are all the same width
+  // if we want floats horizontal, every float shares a common height
+  // otherwise they share a common width
   const commonSize = horizontal ? 'height' : 'width'
   const differentSize = horizontal ? 'width' : 'height'
   const marginDirection = horizontal ? 'marginRight' : 'marginBottom'

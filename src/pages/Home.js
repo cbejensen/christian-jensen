@@ -1,9 +1,10 @@
 import React from 'react'
+import styled from 'styled-components'
 import CurvePoints from '../components/CurvePoints'
 import DiagonalFloats from '../components/DiagonalFloats'
+import CurveShapes from '../containers/CurveShapes'
 import Triangle from '../containers/Triangle'
 import { getRandomInt } from '../utils.js'
-import styled from 'styled-components'
 
 export default () => {
   const curveHeight = '100vh'
@@ -12,40 +13,33 @@ export default () => {
     'shape-outside',
     'polygon(0% 0%, 100% 0%, 0% 100%)'
   )
-  console.log('het')
-  const createTriangles = points => {
-    // width of each triangle
-    const width = '50px'
-    return points.map((point, i) => {
-      const coords = {
-        x: point.x,
-        y: getRandomInt(0, point.y)
-      }
-      const rotation = getRandomInt(0, 359)
-      return (
-        <Triangle
-          {...coords}
-          width={width}
-          key={i}
-          rotation={rotation}
-          style={{ mixBlendMode: 'difference' }}
-        />
-      )
-    })
-  }
   return (
     <main>
       <CurvePoints>
         {points => (
           <React.Fragment>
-            <Curve
+            <CurveContainer
               shapeOutsideSupported={shapeOutsideSupported}
               width={curveWidth}
               height={curveHeight}
-              coords={points}
+              borderPoints={points}
             >
-              {createTriangles(points)}
-            </Curve>
+              <CurveShapes borderPoints={points} interval={300}>
+                {shapePositions => (
+                  <React.Fragment>
+                    {shapePositions.map((shape, i) => (
+                      <Triangle
+                        x={shape.x}
+                        y={shape.y}
+                        rotation={shape.rotation}
+                        width="40px"
+                        key={i}
+                      />
+                    ))}
+                  </React.Fragment>
+                )}
+              </CurveShapes>
+            </CurveContainer>
             {shapeOutsideSupported ? null : (
               <DiagonalFloats width={curveWidth} height={curveHeight} />
             )}
@@ -86,14 +80,15 @@ const getCurve = coords => {
   return `${shape.slice(0, -2)})`
 }
 
-const Curve = styled.div`
+const CurveContainer = styled.div`
   float: left;
   pointer-events: none;
   position: ${props => (props.shapeOutsideSupported ? 'relative' : 'absolute')};
   height: ${props => props.height};
   width: ${props => props.width};
   ${props =>
-    props.shapeOutsideSupported && `shape-outside: ${getCurve(props.coords)}`};
+    props.shapeOutsideSupported &&
+    `shape-outside: ${getCurve(props.borderPoints)}`};
 `
 
 const H1 = styled.h1`

@@ -1,5 +1,5 @@
 export default {
-  plugins: ['react-static-plugin-emotion'],
+  plugins: ['react-static-plugin-styled-components'],
   getSiteData: () => ({
     title: 'Christian Jensen'
   }),

@@ -14,8 +14,6 @@ export default () => {
         randomlyRotate
       >
         {item => {
-          console.log(item)
-
           const style = {
             position: 'absolute',
             // subtract itemSize to avoid overflow

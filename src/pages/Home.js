@@ -8,17 +8,19 @@ export default () => {
       <CornerCurve
         width="80%"
         height="100vh"
+        float="left"
         itemSize={40}
         preventOverlap
         randomlyRotate
-        float
       >
         {item => {
+          console.log(item)
+
           const style = {
             position: 'absolute',
             // subtract itemSize to avoid overflow
-            left: item.x - item.size,
-            top: item.y - item.size,
+            left: `calc(${item.x}% - ${item.size}px)`,
+            top: `calc(${item.y}% - ${item.size}px)`,
             width: item.size,
             height: item.size,
             overflow: 'visible'
@@ -65,7 +67,6 @@ export default () => {
 const H1 = styled.h1`
   font-size: 3rem;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  text-align: center;
   margin-top: 0;
   background: tomato;
   padding: 30px;

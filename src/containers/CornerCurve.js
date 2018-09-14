@@ -10,6 +10,24 @@ class CornerCurve extends React.Component {
   }
   componentDidMount() {
     this.updateSize()
+    // listen for resize events, but use throttler to limit resource usage
+    // https://developer.mozilla.org/en-US/docs/Web/Events/resize#setTimeout
+    let resizeTimeout
+    const resizeThrottler = () => {
+      // ignore resize events as long as execution is in the queue
+      if (!resizeTimeout) {
+        resizeTimeout = setTimeout(() => {
+          resizeTimeout = null
+          this.updateSize()
+          // will execute at a rate of 15fps
+        }, 66)
+      }
+    }
+    this.resizeListener = window.addEventListener(
+      'resize',
+      resizeThrottler,
+      false
+    )
   }
   updateSize = () => {
     if (this.containerRef) {
@@ -19,52 +37,60 @@ class CornerCurve extends React.Component {
       })
     }
   }
+  getExponentialInt = (int, max) => {
+    return Math.floor(Math.sqrt(Math.pow(max, 2) - Math.pow(int, 2)))
+  }
+  getCurveBorderPoints = gridSize => {
+    // returns the x,y coords (points) along a slope
+    // (i.e. the border of the curve)
+    // where slope goes from top left to bottom right
+    const points = []
+    for (var i = 0; i <= gridSize; i++) {
+      const x = i
+      // subtract from grid size to flip the curve
+      // and subtract x from grid zie to make this curve concave
+      const y = gridSize - this.getExponentialInt(gridSize - x, gridSize)
+      points.push({ x, y })
+    }
+    return points
+  }
+  componentWillUnmount() {
+    window.removeEventListener(this.resizeListener)
+  }
   render() {
-    // if (!this.state.width || !this.state.height) return null
-    const shapeOutsideSupported = CSS.supports(
-      'shape-outside',
-      'polygon(0% 0%, 100% 0%, 0% 100%)'
-    )
+    const useShapeOutside =
+      this.props.float &&
+      CSS.supports('shape-outside', 'polygon(0% 0%, 100% 0%, 0% 100%)')
+    const shapeOutsidePoints = useShapeOutside && this.getCurveBorderPoints(100)
+    const showCurveItems = this.state.width && this.state.height
     return (
-      <CurvePoints num={100}>
-        {curveBorderPoints => (
-          <Container
-            innerRef={elem => (this.containerRef = elem)}
-            float={this.props.float}
-            width={this.props.width}
-            height={this.props.height}
-            shapeOutsidePoints={shapeOutsideSupported && curveBorderPoints}
+      <Container
+        innerRef={elem => (this.containerRef = elem)}
+        float={this.props.float}
+        width={this.props.width}
+        height={this.props.height}
+        shapeOutsidePoints={shapeOutsidePoints}
+      >
+        {showCurveItems && (
+          <CurveItems
+            getExponentialInt={this.getExponentialInt}
+            maxItems={
+              this.props.maxItems ||
+              getApproxMaxItems(
+                this.props.itemSize,
+                this.state.width,
+                this.state.height
+              )
+            }
+            containerWidth={this.state.width}
+            containerHeight={this.state.height}
+            itemSize={this.props.itemSize}
+            preventOverlap={this.props.preventOverlap}
           >
-            {this.state.width &&
-              this.state.height && (
-                <CurvePoints
-                  random
-                  num={
-                    this.props.maxItems ||
-                    getMaximumNumOfItems(
-                      this.props.itemSize,
-                      this.state.width,
-                      this.state.height
-                    )
-                  }
-                >
-                  {randomPoints => (
-                    <CurveItems
-                      points={randomPoints}
-                      containerWidth={this.state.width}
-                      containerHeight={this.state.height}
-                      itemSize={this.props.itemSize}
-                      preventOverlap={this.props.preventOverlap}
-                      randomlyRotate={this.props.randomlyRotate}
-                    >
-                      {item => this.props.children(item)}
-                    </CurveItems>
-                  )}
-                </CurvePoints>
-              )}
-          </Container>
+            {item => this.props.children(item)}
+          </CurveItems>
         )}
-      </CurvePoints>
+      </Container>
     )
   }
 }
@@ -75,7 +101,7 @@ CornerCurve.defaultProps = {
 }
 
 const Container = styled.div`
-  float: ${props => (props.float ? 'left' : 'none')};
+  float: ${props => props.float || 'none'};
   pointer-events: none;
   position: ${props =>
     props.float && props.shapeOutsidePoints ? 'relative' : 'absolute'};
@@ -95,11 +121,11 @@ function getShape(points) {
   return `${shape.slice(0, -2)})`
 }
 
-function getMaximumNumOfItems(itemSize, width, height) {
+function getApproxMaxItems(itemSize, width, height) {
   // TODO: make this rough estimate more exact
   const approxXCapacity = width / itemSize
   const approxYCapacity = height / itemSize
-  return Math.ceil((approxXCapacity * approxYCapacity) / 2)
+  return Math.ceil((approxXCapacity * approxYCapacity) / 4)
 }
 
 export default CornerCurve

@@ -2,12 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 class Triangle extends React.PureComponent {
-  componentDidMount() {
-    console.log('mounted')
-  }
-  componentDidUpdate() {
-    console.log('updated')
-  }
   render() {
     const { x, y, rotation, width, style, ...otherProps } = this.props
     return (

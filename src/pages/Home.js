@@ -1,51 +1,42 @@
 import React from 'react'
 import styled from 'styled-components'
-import CurvePoints from '../components/CurvePoints'
-import DiagonalFloats from '../components/DiagonalFloats'
-import CurveShapes from '../containers/CurveShapes'
-import Triangle from '../containers/Triangle'
-import { getRandomInt } from '../utils.js'
+import CornerCurve from '../containers/CornerCurve.js'
 
 export default () => {
-  const curveHeight = '100vh'
-  const curveWidth = '80%'
-  const shapeOutsideSupported = CSS.supports(
-    'shape-outside',
-    'polygon(0% 0%, 100% 0%, 0% 100%)'
-  )
   return (
     <main>
-      <CurvePoints>
-        {points => (
-          <React.Fragment>
-            <CurveContainer
-              shapeOutsideSupported={shapeOutsideSupported}
-              width={curveWidth}
-              height={curveHeight}
-              borderPoints={points}
-            >
-              <CurveShapes borderPoints={points} interval={300}>
-                {shapePositions => (
-                  <React.Fragment>
-                    {shapePositions.map((shape, i) => (
-                      <Triangle
-                        x={shape.x}
-                        y={shape.y}
-                        rotation={shape.rotation}
-                        width="40px"
-                        key={i}
-                      />
-                    ))}
-                  </React.Fragment>
-                )}
-              </CurveShapes>
-            </CurveContainer>
-            {shapeOutsideSupported ? null : (
-              <DiagonalFloats width={curveWidth} height={curveHeight} />
-            )}
-          </React.Fragment>
-        )}
-      </CurvePoints>
+      <CornerCurve
+        width="80%"
+        height="100vh"
+        itemSize={40}
+        preventOverlap
+        randomlyRotate
+        float
+      >
+        {item => {
+          const style = {
+            position: 'absolute',
+            // subtract itemSize to avoid overflow
+            left: item.x - item.size,
+            top: item.y - item.size,
+            width: item.size,
+            height: item.size,
+            overflow: 'visible'
+          }
+          return (
+            <svg style={style} viewBox="0 0 100 100">
+              <polygon
+                points="50 0 100 100 0 100"
+                stroke="#333"
+                fill="transparent"
+                vectorEffect="non-scaling-stroke"
+                transform={`rotate(${item.rotation || 0} 50 50)`}
+                style={{ transition: '.5s' }}
+              />
+            </svg>
+          )
+        }}
+      </CornerCurve>
       <H1>Hello World</H1>
       <Intro>
         My name is Christian Jensen, and I am a web developer. I started
@@ -71,26 +62,6 @@ export default () => {
   )
 }
 
-const getCurve = coords => {
-  const shape = coords.reduce(
-    (acc, cur) => `${acc} ${cur.x}% ${cur.y}%, `,
-    'polygon(0% 0%, '
-  )
-  // remove trailing comma
-  return `${shape.slice(0, -2)})`
-}
-
-const CurveContainer = styled.div`
-  float: left;
-  pointer-events: none;
-  position: ${props => (props.shapeOutsideSupported ? 'relative' : 'absolute')};
-  height: ${props => props.height};
-  width: ${props => props.width};
-  ${props =>
-    props.shapeOutsideSupported &&
-    `shape-outside: ${getCurve(props.borderPoints)}`};
-`
-
 const H1 = styled.h1`
   font-size: 3rem;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -101,7 +72,7 @@ const H1 = styled.h1`
 `
 
 const Intro = styled.p`
-  padding: 100px;
+  padding: 0 100px;
   text-align: justify;
   font-size: 20px;
   line-height: 1.5em;

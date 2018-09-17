@@ -1,42 +1,34 @@
 import React from 'react'
 import styled from 'styled-components'
-import CornerCurve from '../containers/CornerCurve.js'
+import CornerCurveScatter from '../containers/CornerCurveScatter.js'
+import RandomRotations from '../containers/RandomRotations.js'
+
+const curveItemSize = 40
 
 export default () => {
   return (
     <main>
-      <CornerCurve
-        width="80%"
-        height="100vh"
+      <CornerCurveScatter
+        width="100%"
+        height="700px"
         float="left"
-        itemSize={40}
-        preventOverlap
+        itemSize={curveItemSize}
         randomlyRotate
       >
-        {item => {
-          const style = {
-            position: 'absolute',
-            // subtract itemSize to avoid overflow
-            left: `calc(${item.x}% - ${item.size}px)`,
-            top: `calc(${item.y}% - ${item.size}px)`,
-            width: item.size,
-            height: item.size,
-            overflow: 'visible'
-          }
-          return (
-            <svg style={style} viewBox="0 0 100 100">
-              <polygon
-                points="50 0 100 100 0 100"
-                stroke="#333"
-                fill="transparent"
-                vectorEffect="non-scaling-stroke"
-                transform={`rotate(${item.rotation || 0} 50 50)`}
-                style={{ transition: '.5s' }}
-              />
-            </svg>
-          )
-        }}
-      </CornerCurve>
+        {items => (
+          <RandomRotations itemsToRotate={items} rotationInterval={300}>
+            {rotations => (
+              <React.Fragment>
+                {items.map((item, i) => (
+                  <SVG item={item} key={i}>
+                    <Triangle rotation={rotations[i]} />
+                  </SVG>
+                ))}
+              </React.Fragment>
+            )}
+          </RandomRotations>
+        )}
+      </CornerCurveScatter>
       <H1>Hello World</H1>
       <Intro>
         My name is Christian Jensen, and I am a web developer. I started
@@ -71,11 +63,34 @@ const H1 = styled.h1`
 `
 
 const Intro = styled.p`
-  padding: 0 100px;
+  padding: 0 15px;
   text-align: justify;
   font-size: 20px;
   line-height: 1.5em;
-  background: white;
   max-width: 1000px;
   margin: 0 auto;
+`
+
+const SVG = styled.svg.attrs({
+  viewBox: '0 0 100 100'
+})`
+  position: absolute;
+  overflow: visible;
+  ${({ item }) => `
+    left: calc(${item.x}% - ${item.size}px);
+    top: calc(${item.y}% - ${item.size}px);
+    width: ${curveItemSize}px;
+    height: ${curveItemSize}px;
+  `};
+`
+
+const Triangle = styled.polygon.attrs({
+  points: '50 0 100 100 0 100',
+  stroke: '#333',
+  fill: 'transparent',
+  vectorEffect: 'non-scaling-stroke',
+  transform: props => `rotate(${props.rotation || 0} 50 50)`
+})`
+  transition: 0.5s;
+  mix-blend-mode: difference;
 `

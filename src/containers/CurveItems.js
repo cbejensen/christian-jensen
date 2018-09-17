@@ -19,40 +19,20 @@ class CurveItems extends React.Component {
       // now convert our percentage-based coords to absolute values
       let item = {
         x,
-        y
+        y,
+        size: this.props.itemSize
       }
-      if (this.props.enableRotation) {
-        items.push({ ...item, rotation: getRandomInt(0, 359) })
-      } else {
-        items.push(item)
-      }
+      items.push(item)
     }
     this.setState({ items })
   }
-  componentDidUpdate(prevProps, prevState) {}
-  getAbsolutePositions = items => {
-    return items.map(item => ({
-      // change from 100x100-grid-based points (percentages)
-      // to the actual pixel location based on container size
-      x: (this.props.containerWidth / 100) * item.x,
-      y: (this.props.containerHeight / 100) * item.y,
-      size: this.props.itemSize
-    }))
-  }
-  sortPoints = items => {
-    return items.sort((a, b) => {
-      // sort points from closest to 0,0 to farthest
-      if (a.x > b.x) {
-        return 1
-      } else if (a.x < b.x) {
-        return -1
-      } else {
-        // a.x === b.x, so test y
-        return a.y > b.y ? 1 : 0
-      }
-    })
-  }
-  preventOverlap = items => {
+  addPadding = items => {
+    const getAbsoluteX = xPercentage => {
+      return (this.props.containerWidth / 100) * xPercentage
+    }
+    const getAbsoluteY = yPercentage => {
+      return (this.props.containerHeight / 100) * yPercentage
+    }
     const sorted = items.sort((a, b) => {
       // sort points from closest to 0,0 to farthest
       if (a.x > b.x) {
@@ -64,36 +44,25 @@ class CurveItems extends React.Component {
         return a.y > b.y ? 1 : 0
       }
     })
-    // if rotation is activated, minimum separation between
-    // items is length of diagonal from corner to opposite corner
-    // so that no matter how shapes are rotated they will not touch
-    const minSeparation = this.props.randomlyRotate
-      ? Math.ceil(Math.sqrt(Math.pow(this.props.itemSize, 2) * 2))
-      : this.props.itemSize
     return sorted.reduce(
       (finalArr, currentItem) => {
         // for each item in the sorted array, see if it's
         // too close to any of the items we've approved so far
         let tooClose
-        const getAbsoluteX = xPercentage => {
-          return (this.props.containerWidth / 100) * xPercentage
-        }
-        const getAbsoluteY = yPercentage => {
-          return (this.props.containerHeight / 100) * yPercentage
-        }
         for (let i = 0; i < finalArr.length; i++) {
           const compareItem = finalArr[i]
-          if (
+          // padding is amount of pixels between each item
+          const padding = this.props.itemPadding || this.props.itemSize
+          const xTooClose =
             Math.abs(
               getAbsoluteX(currentItem.x) - getAbsoluteX(compareItem.x)
-            ) <= minSeparation &&
+            ) <= padding
+          const yTooClose =
             Math.abs(
               getAbsoluteY(currentItem.y) - getAbsoluteY(compareItem.y)
-            ) <= minSeparation
-          ) {
-            tooClose = true
-            break
-          }
+            ) <= padding
+          tooClose = xTooClose && yTooClose
+          if (tooClose) break
         }
         if (!tooClose) {
           finalArr.push(currentItem)
@@ -105,61 +74,18 @@ class CurveItems extends React.Component {
   }
   render() {
     if (!this.state.items.length) return null
-    const items = this.props.preventOverlap
-      ? this.preventOverlap(this.state.items)
-      : this.state.items
-    return items.map(item => {
-      item = { ...item, size: this.props.itemSize }
-      return React.Children.only(this.props.children(item))
-    })
+    // if item padding was explcitily set as 0, use items array as is
+    // otherwise add padding, using item size as default padding (no overlap)
+    const items =
+      this.props.itemPadding === 0
+        ? this.state.items
+        : this.addPadding(this.state.items)
+    return React.Children.only(this.props.children(items))
   }
 }
 CurveItems.defaultProps = {
-  rotationInterval: 500
+  getExponentialInt: (int, max) =>
+    Math.floor(Math.sqrt(Math.pow(max, 2) - Math.pow(int, 2)))
 }
-
-// class RotationHandler extends React.Component {
-//   state = {
-//     items: []
-//   }
-//   componentDidMount() {
-//     this.setState({ items: this.props.items })
-//   }
-//   randomlyRotate = items => {
-//     this.rotationInterval = setInterval(
-//       this.rotateRandomItem,
-//       this.props.rotationInterval
-//     )
-//     return items.map(item => ({
-//       ...item,
-//       rotation: getRandomInt(0, 359)
-//     }))
-//   }
-//   rotateRandomItem = () => {
-//     if (this.state.items.length) {
-//       this.setState(prevState => {
-//         const updatedItems = [...prevState.items]
-//         const index = getRandomInt(0, updatedItems.length - 1)
-//         const rotation = updatedItems[index].rotation
-//         if (!rotation) return
-//         // add 45 degrees to rotation, unless it's within 45 of 359,
-//         // in which case we start counting from 0
-//         updatedItems[index].rotation =
-//           rotation <= 314 ? rotation + 45 : Math.abs(rotation - 359)
-//         return updatedItems
-//       })
-//     }
-//   }
-//   componentWillUnmount() {
-//     clearInterval(this.rotationInterval)
-//   }
-//   render() {
-//     if (!this.state.items.length) return null
-//     return this.state.items.map(item => {
-//       item = { ...item, size: this.props.itemSize }
-//       return React.Children.only(this.props.children(item))
-//     })
-//   }
-// }
 
 export default CurveItems

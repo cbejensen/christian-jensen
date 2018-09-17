@@ -29,7 +29,17 @@ export default () => {
           </RandomRotations>
         )}
       </CornerCurveScatter>
-      <H1>Hello World</H1>
+      <TopBar>
+        <img
+          src="https://source.unsplash.com/random/500x350"
+          alt="test"
+          style={{
+            width: 50,
+            height: 50,
+            borderRadius: '100%'
+          }}
+        />
+      </TopBar>
       <Intro>
         My name is Christian Jensen, and I am a web developer. I started
         learning the basics from{' '}
@@ -54,12 +64,10 @@ export default () => {
   )
 }
 
-const H1 = styled.h1`
-  font-size: 3rem;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  margin-top: 0;
+const TopBar = styled.h1`
+  margin: 0;
   background: tomato;
-  padding: 30px;
+  padding: 20px;
 `
 
 const Intro = styled.p`
@@ -68,7 +76,7 @@ const Intro = styled.p`
   font-size: 20px;
   line-height: 1.5em;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 30px auto 0;
 `
 
 const SVG = styled.svg.attrs({

@@ -1,0 +1,24 @@
+{
+  "projects": {
+    "wishfull": {
+      "title": "Wishfull",
+      "summary": "Make and share wishes",
+      "description": "Every year my family celebrates Christmas together, which means buying presents for siblings, parents, kids, etc. Naturally, we want to get the perfect gift, and if we're honest, we'd really like to get good gifts ourselves! I figured a web site that enabled us to know what each person really wanted and see if anyone has bought it yet would be helpful. Turns out I was right - my family has been using Wishfull ever since!",
+      "technologies": {
+        "React": "React",
+        "Bootstrap": "Bootstrap",
+        "Firebase": "Firebase"
+      }
+    },
+    "andale": {
+      "title": "Andale",
+      "summary": "Get support fast",
+      "description": "As a musician, I really enjoyed working at Musician's Friend. What I did not enjoy so much was how tough it was to give customers the support they needed efficiently. With the vast array of musical instruments, brands and products that we were asked to support, information was sometimes hard to find. Thus, I created Andale - a single place for all the data my team needed, offering easy search functionality, interactive image galleries, and detailed specifications.",
+      "technologies": {
+        "React": "React",
+        "Bootstrap": "Bootstrap",
+        "Firebase": "Firebase"
+      }
+    }
+  }
+}

@@ -6,7 +6,6 @@ class RandomRotations extends React.Component {
     rotations: []
   }
   componentDidMount() {
-    console.log(this.props.itemsToRotate)
     this.init()
     this.rotationInterval = this.props.rotationInterval
       ? setInterval(this.randomlyRotate, this.props.rotationInterval)

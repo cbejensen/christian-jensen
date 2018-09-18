@@ -26,6 +26,7 @@ class CornerCurveScatter extends React.Component {
     return points
   }
   render() {
+    console.log('corvercurve rendered')
     // if floated, use shape outside CSS prop if available
     // otherwise use DiagonalFloats component
     const useShapeOutside =

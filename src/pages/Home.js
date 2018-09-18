@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import CornerCurveScatter from '../components/CornerCurveScatter.js'
 import RandomRotations from '../containers/RandomRotations.js'
+import PortfolioCategories from '../containers/PortfolioCategories.js'
+import GalleryPreview from '../components/GalleryPreview'
 
 const curveItemSize = 40
 
@@ -50,13 +52,22 @@ export default () => {
         <a href="https://www.180fusion.com/">180Fusion</a>, helping small
         businesses with SEO and site performance.
       </Intro>
+      <PortfolioCategories>
+        {cats => (
+          <React.Fragment>
+            {cats.map((cat, i) => (
+              <GalleryPreview title={cat.title} items={cat.items} key={i} />
+            ))}
+          </React.Fragment>
+        )}
+      </PortfolioCategories>
     </main>
   )
 }
 
 const TopBar = styled.h1`
   margin: 0;
-  background: tomato;
+  background: ${props => props.theme.primaryColor};
   padding: 20px;
 `
 

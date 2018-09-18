@@ -26,9 +26,6 @@ class CurveItems extends React.Component {
     }
     this.setState({ items })
   }
-  componentDidUpdate() {
-    console.log(this.props.containerWidth)
-  }
   addPadding = items => {
     const getAbsoluteX = xPercentage => {
       return (this.props.containerWidth / 100) * xPercentage
@@ -76,8 +73,6 @@ class CurveItems extends React.Component {
     )
   }
   render() {
-    console.log('curve item rendered')
-
     if (!this.state.items.length) return null
     // if item padding was explcitily set as 0, use items array as is
     // otherwise add padding, using item size as default padding (no overlap)

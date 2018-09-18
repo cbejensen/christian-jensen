@@ -1,7 +1,7 @@
 import React from 'react'
-import CurveItems from './CurveItems'
+import CurveItems from '../containers/CurveItems'
 import styled from 'styled-components'
-import ViewportWatcher from './ViewportWatcher'
+import ViewportWatcher from '../containers/ViewportWatcher'
 
 class CornerCurveScatter extends React.Component {
   setRef = elem => {
@@ -26,49 +26,59 @@ class CornerCurveScatter extends React.Component {
     return points
   }
   render() {
+    // if floated, use shape outside CSS prop if available
+    // otherwise use DiagonalFloats component
     const useShapeOutside =
       this.props.float &&
       CSS.supports('shape-outside', 'polygon(0% 0%, 100% 0%, 0% 100%)')
+    const useDiagonalFloats = this.props.float && !useShapeOutside
     const shapeOutsidePoints = useShapeOutside && this.getCurveBorderPoints(100)
     const containerHasSize =
       this.containerRef &&
       this.containerRef.clientWidth &&
       this.containerRef.clientHeight
     return (
-      <Container
-        innerRef={elem => !this.containerRef && this.setRef(elem)}
-        float={this.props.float}
-        width={this.props.width}
-        height={this.props.height}
-        shapeOutsidePoints={containerHasSize && shapeOutsidePoints}
-      >
-        {containerHasSize && (
-          <ViewportWatcher>
-            {() => (
-              <CurveItems
-                containerWidth={this.containerRef.clientWidth}
-                containerHeight={this.containerRef.clientHeight}
-                getExponentialInt={this.getExponentialInt}
-                maxItems={
-                  this.props.maxItems ||
-                  getApproxMaxItems(
-                    this.props.itemSize,
-                    this.containerRef.clientWidth,
-                    this.containerRef.clientHeight
-                  )
-                }
-                itemSize={this.props.itemSize}
-                itemPadding={this.props.itemPadding}
-              >
-                {items => {
-                  console.log(this.containerRef.clientWidth)
-                  return React.Children.only(this.props.children(items))
-                }}
-              </CurveItems>
-            )}
-          </ViewportWatcher>
-        )}
-      </Container>
+      <React.Fragment>
+        <Container
+          innerRef={elem => !this.containerRef && this.setRef(elem)}
+          float={this.props.float}
+          width={this.props.width}
+          height={this.props.height}
+          shapeOutsidePoints={containerHasSize && shapeOutsidePoints}
+        >
+          {containerHasSize && (
+            <ViewportWatcher>
+              {() => (
+                <CurveItems
+                  containerWidth={this.containerRef.clientWidth}
+                  containerHeight={this.containerRef.clientHeight}
+                  getExponentialInt={this.getExponentialInt}
+                  maxItems={
+                    this.props.maxItems ||
+                    getApproxMaxItems(
+                      this.props.itemSize,
+                      this.containerRef.clientWidth,
+                      this.containerRef.clientHeight
+                    )
+                  }
+                  itemSize={this.props.itemSize}
+                  itemPadding={this.props.itemPadding}
+                >
+                  {items => React.Children.only(this.props.children(items))}
+                </CurveItems>
+              )}
+            </ViewportWatcher>
+          )}
+        </Container>
+        {containerHasSize &&
+          useDiagonalFloats && (
+            <DiagonalFloats
+              width={this.containerRef.clientWidth}
+              height={this.containerRef.clientHeight}
+              horizontal
+            />
+          )}
+      </React.Fragment>
     )
   }
 }
@@ -94,7 +104,7 @@ const Container = styled.div`
 
 function getShape(points) {
   const shape = points.reduce(
-    (acc, cur, index) => `${acc} ${cur.x}% ${cur.y}%, `,
+    (acc, cur) => `${acc} ${cur.x}% ${cur.y}%, `,
     'polygon(0% 0%, '
   )
   // remove trailing comma

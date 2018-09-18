@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import CornerCurveScatter from '../containers/CornerCurveScatter.js'
+import CornerCurveScatter from '../components/CornerCurveScatter.js'
 import RandomRotations from '../containers/RandomRotations.js'
 
 const curveItemSize = 40
@@ -13,16 +13,15 @@ export default () => {
         height="700px"
         float="left"
         itemSize={curveItemSize}
-        randomlyRotate
       >
         {items => (
           <RandomRotations itemsToRotate={items} rotationInterval={300}>
             {rotations => (
               <React.Fragment>
                 {items.map((item, i) => (
-                  <SVG item={item} key={i}>
+                  <StyledSVG item={item} key={i}>
                     <Triangle rotation={rotations[i]} />
-                  </SVG>
+                  </StyledSVG>
                 ))}
               </React.Fragment>
             )}
@@ -41,24 +40,15 @@ export default () => {
         />
       </TopBar>
       <Intro>
-        My name is Christian Jensen, and I am a web developer. I started
-        learning the basics from{' '}
-        <a href="https://www.codecademy.com/">CodeCademy</a>, and after
-        realizing my love for coding, decided to attend{' '}
-        <a href="https://devmountain.com/">DevMountain</a> - a 3-month bootcamp
-        for front-end web development - in 2015. After graduating, I was invited
+        My name is Christian Jensen, and I am a web developer. In 2015, I
+        attended <a href="https://devmountain.com/">DevMountain</a> - a 3-month
+        bootcamp for front-end web development. After graduating, I was invited
         to sit in on another 3-month cohort to learn additional material, which
         is when I was introduced to <a href="https://reactjs.org/">React</a>.
         Since then, I have primarily been coding in React for my personal
         projects, which you can see below. Currently, I am a web developer at{' '}
         <a href="https://www.180fusion.com/">180Fusion</a>, helping small
-        businesses with{' '}
-        <a href="https://developer.mozilla.org/en-US/docs/Glossary/SEO">SEO</a>{' '}
-        and{' '}
-        <a href="https://developers.google.com/web/tools/lighthouse/">
-          site performance
-        </a>
-        .
+        businesses with SEO and site performance.
       </Intro>
     </main>
   )
@@ -79,7 +69,7 @@ const Intro = styled.p`
   margin: 30px auto 0;
 `
 
-const SVG = styled.svg.attrs({
+const StyledSVG = styled.svg.attrs({
   viewBox: '0 0 100 100'
 })`
   position: absolute;
@@ -97,8 +87,11 @@ const Triangle = styled.polygon.attrs({
   stroke: '#333',
   fill: 'transparent',
   vectorEffect: 'non-scaling-stroke',
-  transform: props => `rotate(${props.rotation || 0} 50 50)`
+  style: props => ({
+    transform: `rotate(${props.rotation || 0}deg)`
+  })
 })`
+  transform-origin: center;
   transition: 0.5s;
   mix-blend-mode: difference;
 `

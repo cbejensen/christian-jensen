@@ -30,7 +30,10 @@ class ViewportWatcher extends React.Component {
     )
   }
   updateSize = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight })
+    this.setState({
+      viewportWidth: window.innerWidth,
+      viewportHeight: window.innerHeight
+    })
     // if (this.containerRef) {
     //   this.setState({
     //     width: this.containerRef.clientWidth,

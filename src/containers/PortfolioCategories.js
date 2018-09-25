@@ -6,13 +6,12 @@ export default class PortfolioCategories extends React.Component {
     categories: null
   }
   componentDidMount = () => {
-    // convert to array
-    const array = Object.keys(data).map(key => ({
-      title: key,
-      items: Object.values(data[key])
+    const categories = Object.keys(data).map(key => ({
+      category: key,
+      items: data[key]
     }))
     this.setState({
-      categories: array
+      categories
     })
   }
   render() {

@@ -1,74 +1,69 @@
 import React from 'react'
 import styled from 'styled-components'
-import CornerCurveScatter from '../components/CornerCurveScatter.js'
-import RandomRotations from '../containers/RandomRotations.js'
 import PortfolioCategories from '../containers/PortfolioCategories.js'
-import GalleryPreview from '../components/GalleryPreview'
+import CategoryGallery from '../components/CategoryGallery'
+import TriangleCurve from '../components/TriangleCurve'
+import { H1 } from '../components/Headings'
 
-const curveItemSize = 40
-
-export default () => {
-  return (
-    <main>
-      <CornerCurveScatter
-        width="100%"
-        height="700px"
-        float="left"
-        itemSize={curveItemSize}
-      >
-        {items => (
-          <RandomRotations itemsToRotate={items} rotationInterval={300}>
-            {rotations => (
+export default class Home extends React.Component {
+  render() {
+    // TODO: figure out what to do with the hideous header
+    return (
+      <React.Fragment>
+        <header>
+          <TopBar>Christian Jensen</TopBar>
+        </header>
+        <TriangleCurve
+          triangleSize={40}
+          width="70%"
+          height="100vh"
+          float="left"
+        />
+        <main style={{ maxWidth: 800, padding: '0 15px', margin: 'auto' }}>
+          <Intro>
+            My name is Christian Jensen, and I am a front-end web developer. In
+            2015, I attended <a href="https://devmountain.com/">DevMountain</a>{' '}
+            - a 3-month coding bootcamp. After graduating, I was invited to sit
+            in on another 3-month cohort, which is when I was introduced to{' '}
+            <a href="https://reactjs.org/">React</a>. Since then, I have
+            primarily been coding in React for my personal projects, which you
+            can see below. Currently, I am a web developer at{' '}
+            <a href="https://www.180fusion.com/">180Fusion</a>, helping small
+            businesses with SEO and site performance.
+          </Intro>
+          <PortfolioCategories>
+            {cats => (
               <React.Fragment>
-                {items.map((item, i) => (
-                  <StyledSVG item={item} key={i}>
-                    <Triangle rotation={rotations[i]} />
-                  </StyledSVG>
+                {cats.map((cat, i) => (
+                  <CategoryGallery
+                    title={cat.category}
+                    items={cat.items}
+                    key={i}
+                  />
                 ))}
               </React.Fragment>
             )}
-          </RandomRotations>
-        )}
-      </CornerCurveScatter>
-      <TopBar>
-        <img
-          src="https://source.unsplash.com/random/500x350"
-          alt="test"
-          style={{
-            width: 50,
-            height: 50,
-            borderRadius: '100%'
-          }}
-        />
-      </TopBar>
-      <Intro>
-        My name is Christian Jensen, and I am a web developer. In 2015, I
-        attended <a href="https://devmountain.com/">DevMountain</a> - a 3-month
-        bootcamp for front-end web development. After graduating, I was invited
-        to sit in on another 3-month cohort to learn additional material, which
-        is when I was introduced to <a href="https://reactjs.org/">React</a>.
-        Since then, I have primarily been coding in React for my personal
-        projects, which you can see below. Currently, I am a web developer at{' '}
-        <a href="https://www.180fusion.com/">180Fusion</a>, helping small
-        businesses with SEO and site performance.
-      </Intro>
-      <PortfolioCategories>
-        {cats => (
-          <React.Fragment>
-            {cats.map((cat, i) => (
-              <GalleryPreview title={cat.title} items={cat.items} key={i} />
-            ))}
-          </React.Fragment>
-        )}
-      </PortfolioCategories>
-    </main>
-  )
+          </PortfolioCategories>
+        </main>
+      </React.Fragment>
+    )
+  }
 }
 
-const TopBar = styled.h1`
-  margin: 0;
-  background: ${props => props.theme.primaryColor};
-  padding: 20px;
+const TopBar = styled.div`
+  position: relative;
+  background: ${props => props.theme.black};
+  background: linear-gradient(to right, #333, blue);
+  text-transform: uppercase;
+  font-size: 2em;
+  color: ${props => props.theme.white};
+  mix-blend-mode: difference;
+`
+
+const SiteTitle = styled(H1)`
+  text-transform: uppercase;
+  font-size: 2em;
+  color: ${props => props.theme.white};
 `
 
 const Intro = styled.p`
@@ -77,32 +72,5 @@ const Intro = styled.p`
   font-size: 20px;
   line-height: 1.5em;
   max-width: 1000px;
-  margin: 30px auto 0;
-`
-
-const StyledSVG = styled.svg.attrs({
-  viewBox: '0 0 100 100'
-})`
-  position: absolute;
-  overflow: visible;
-  ${({ item }) => `
-    left: calc(${item.x}% - ${item.size}px);
-    top: calc(${item.y}% - ${item.size}px);
-    width: ${curveItemSize}px;
-    height: ${curveItemSize}px;
-  `};
-`
-
-const Triangle = styled.polygon.attrs({
-  points: '50 0 100 100 0 100',
-  stroke: '#333',
-  fill: 'transparent',
-  vectorEffect: 'non-scaling-stroke',
-  style: props => ({
-    transform: `rotate(${props.rotation || 0}deg)`
-  })
-})`
-  transform-origin: center;
-  transition: 0.5s;
-  mix-blend-mode: difference;
+  margin: 3em auto 0;
 `

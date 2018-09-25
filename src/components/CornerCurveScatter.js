@@ -2,6 +2,7 @@ import React from 'react'
 import CurveItems from '../containers/CurveItems'
 import styled from 'styled-components'
 import ViewportWatcher from '../containers/ViewportWatcher'
+import DiagonalFloats from './DiagonalFloats'
 
 class CornerCurveScatter extends React.Component {
   setRef = elem => {
@@ -26,7 +27,6 @@ class CornerCurveScatter extends React.Component {
     return points
   }
   render() {
-    console.log('corvercurve rendered')
     // if floated, use shape outside CSS prop if available
     // otherwise use DiagonalFloats component
     const useShapeOutside =

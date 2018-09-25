@@ -7,25 +7,38 @@ import { H1 } from '../styled-components/Headings.js'
 
 export default class Home extends React.Component {
   render() {
+    const zIndexes = {
+      trianglesRight: -1,
+      headerStick: -1
+    }
     // TODO: figure out what to do with the hideous header
     return (
       <React.Fragment>
-        {/* <header>
-          <TopBar>Christian Jensen</TopBar>
-        </header> */}
         <TriangleCurve
           triangleSize={40}
+          triangleColor="gray"
           width="50%"
-          height="400px"
+          height="500px"
           float="left"
         />
+        <TriangleCurve
+          triangleSize={40}
+          triangleColor="gray"
+          width="50%"
+          height="500px"
+          positionRight
+          containerStyles={{ zIndex: zIndexes.trianglesRight }}
+        />
+        <Header>
+          <HeaderStick>Christian</HeaderStick>
+          <HeaderStick zIndex={zIndexes.headerStick}>Jensen</HeaderStick>
+        </Header>
+        {/* <H1 style={{ background: 'black', color: '#fff' }}>Christian Jensen</H1> */}
         <main style={{ maxWidth: 800, padding: '0 15px', margin: 'auto' }}>
+          <Mug src="/me.jpg" alt="Christian Jensen" />
           <Intro>
-            <Mug src="/me.jpg" alt="Christian Jensen" />
-            My name is Christian Jensen, and I am a front-end web developer. In
-            2015, I attended <a href="https://devmountain.com/">
-              DevMountain
-            </a>{' '}
+            Hello! My name is Christian, and I am a front-end web developer. In
+            2015, I attended <a href="https://devmountain.com/">DevMountain</a>{' '}
             - a 3-month coding bootcamp. After graduating, I was invited to sit
             in on another 3-month cohort, which is when I was introduced to{' '}
             <a href="https://reactjs.org/">React</a>. Since then, I have
@@ -53,23 +66,27 @@ export default class Home extends React.Component {
   }
 }
 
-const TopBar = styled.div`
-  position: relative;
-  background: ${props => props.theme.black};
-  background: linear-gradient(to right, #333, blue);
-  text-transform: uppercase;
-  font-size: 2em;
-  color: ${props => props.theme.white};
-  mix-blend-mode: difference;
+const Header = styled(H1)`
+  margin: 0;
+  line-height: 1.1;
 `
 
-const Intro = styled.p`
-  padding-top: 15px;
-  text-align: justify;
-  font-size: 20px;
-  line-height: 1.5em;
-  max-width: 1000px;
-  margin: 0;
+const HeaderStick = styled.div`
+  width: 200vw;
+  position: relative;
+  left: -50%;
+  margin-top: 10px;
+  color: ${props => props.theme.white};
+  padding: 5px;
+  background: ${props => props.theme.primaryColor};
+  text-align: center;
+  z-index: ${props => props.zIndex};
+  :first-child {
+    transform: rotate(-3deg);
+  }
+  :nth-child(2) {
+    transform: rotate(3deg);
+  }
 `
 
 const Mug = styled.img.attrs({
@@ -83,4 +100,19 @@ const Mug = styled.img.attrs({
   @supports (shape-outside: circle(60px)) {
     shape-outside: circle(60px);
   }
+`
+
+const Intro = styled.p`
+  padding-top: 15px;
+  font-size: 20px;
+  line-height: 1.5em;
+  max-width: 1000px;
+  margin: 0;
+  @media (min-width: ${props => props.theme.media.small}) {
+    text-align: justify;
+  }
+  /* position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; */
 `

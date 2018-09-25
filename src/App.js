@@ -7,9 +7,16 @@ import { ThemeProvider, injectGlobal } from 'styled-components'
 const theme = {
   black: '#171717',
   white: '#f1f1f1',
-  primaryColor: '#e54712',
+  gray: '#404040',
+  primaryColor: '#c73d15',
   secondaryColor: '#108db8',
-  maxContentWidth: 800
+  maxContentWidth: 800,
+  media: {
+    small: '500px',
+    medium: '700px',
+    large: '900px',
+    xLarge: '1200px'
+  }
 }
 
 injectGlobal`
@@ -36,6 +43,7 @@ injectGlobal`
     text-decoration: none;
     color: #108db8;
     font-weight: bold;
+    transition: .3s;
   }
   a:hover {
     color: ${theme.primaryColor};

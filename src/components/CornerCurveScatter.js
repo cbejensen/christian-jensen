@@ -46,6 +46,8 @@ class CornerCurveScatter extends React.Component {
           width={this.props.width}
           height={this.props.height}
           shapeOutsidePoints={containerHasSize && shapeOutsidePoints}
+          positionRight={this.props.positionRight}
+          style={this.props.containerStyles}
         >
           {containerHasSize && (
             <ViewportWatcher>
@@ -93,6 +95,8 @@ const Container = styled.div`
   float: ${props => props.float || 'none'};
   position: ${props =>
     props.float && props.shapeOutsidePoints ? 'relative' : 'absolute'};
+  right: ${props => (props.positionRight ? 0 : 'initial')};
+  bottom: ${props => (props.positionBottom ? 0 : 'initial')};
   width: ${props =>
     typeof props.width === 'number' ? props.width + 'px' : props.width};
   height: ${props =>

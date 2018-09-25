@@ -16,7 +16,7 @@ export default class Home extends React.Component {
       <React.Fragment>
         <TriangleCurve
           triangleSize={40}
-          triangleColor="gray"
+          triangleColor="#000"
           width="50%"
           height="500px"
           float="left"
@@ -30,7 +30,7 @@ export default class Home extends React.Component {
           containerStyles={{ zIndex: zIndexes.trianglesRight }}
         />
         <Header>
-          <HeaderStick>Christian</HeaderStick>
+          <HeaderStick zIndex={zIndexes.headerStick}>Christian</HeaderStick>
           <HeaderStick zIndex={zIndexes.headerStick}>Jensen</HeaderStick>
         </Header>
         {/* <H1 style={{ background: 'black', color: '#fff' }}>Christian Jensen</H1> */}

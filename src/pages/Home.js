@@ -10,19 +10,22 @@ export default class Home extends React.Component {
     // TODO: figure out what to do with the hideous header
     return (
       <React.Fragment>
-        <header>
+        {/* <header>
           <TopBar>Christian Jensen</TopBar>
-        </header>
+        </header> */}
         <TriangleCurve
           triangleSize={40}
-          width="70%"
-          height="100vh"
+          width="50%"
+          height="400px"
           float="left"
         />
         <main style={{ maxWidth: 800, padding: '0 15px', margin: 'auto' }}>
           <Intro>
+            <Mug src="/me.jpg" alt="Christian Jensen" />
             My name is Christian Jensen, and I am a front-end web developer. In
-            2015, I attended <a href="https://devmountain.com/">DevMountain</a>{' '}
+            2015, I attended <a href="https://devmountain.com/">
+              DevMountain
+            </a>{' '}
             - a 3-month coding bootcamp. After graduating, I was invited to sit
             in on another 3-month cohort, which is when I was introduced to{' '}
             <a href="https://reactjs.org/">React</a>. Since then, I have
@@ -60,17 +63,24 @@ const TopBar = styled.div`
   mix-blend-mode: difference;
 `
 
-const SiteTitle = styled(H1)`
-  text-transform: uppercase;
-  font-size: 2em;
-  color: ${props => props.theme.white};
-`
-
 const Intro = styled.p`
-  padding: 0 15px;
+  padding-top: 15px;
   text-align: justify;
   font-size: 20px;
   line-height: 1.5em;
   max-width: 1000px;
-  margin: 3em auto 0;
+  margin: 0;
+`
+
+const Mug = styled.img.attrs({
+  src: '/me.jpg',
+  alt: 'Christian Jensen'
+})`
+  float: right;
+  width: 100px;
+  border-radius: 100%;
+  margin-left: 15px;
+  @supports (shape-outside: circle(60px)) {
+    shape-outside: circle(60px);
+  }
 `

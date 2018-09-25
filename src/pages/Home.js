@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PortfolioCategories from '../containers/PortfolioCategories.js'
 import CategoryGallery from '../components/CategoryGallery'
 import TriangleCurve from '../components/TriangleCurve'
-import { H1 } from '../components/Headings'
+import { H1 } from '../styled-components/Headings.js'
 
 export default class Home extends React.Component {
   render() {

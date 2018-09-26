@@ -2,8 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PortfolioCategories from '../containers/PortfolioCategories.js'
 import CategoryGallery from '../components/CategoryGallery'
-import TriangleCurve from '../components/TriangleCurve'
-import { H1 } from '../styled-components/Headings.js'
+import Header from '../components/Header'
 
 export default class Home extends React.Component {
   render() {
@@ -14,32 +13,14 @@ export default class Home extends React.Component {
     // TODO: figure out what to do with the hideous header
     return (
       <React.Fragment>
-        <TriangleCurve
-          triangleSize={40}
-          triangleColor="gray"
-          width="50%"
-          height="100vh"
-          float="left"
-        />
-        <TriangleCurve
-          triangleSize={40}
-          triangleColor="gray"
-          width="50%"
-          height="500px"
-          positionRight
-        />
-        <Header height={headerHeight}>
-          <HeaderStick>Christian</HeaderStick>
-          <HeaderStick>Jensen</HeaderStick>
-        </Header>
-        {/* <H1 style={{ background: 'black', color: '#fff' }}>Christian Jensen</H1> */}
+        <Header height={headerHeight} />
         <Main>
-          <Mug
-            style={{
-              zIndex: zIndexes.mug
-            }}
-          />
-          <Section>
+          <Section className="contained">
+            <Mug
+              style={{
+                zIndex: zIndexes.mug
+              }}
+            />
             <Intro>
               Hello! My name is Christian, and I am a front-end web developer.
               In 2015, I attended{' '}
@@ -70,40 +51,6 @@ export default class Home extends React.Component {
   }
 }
 
-const Header = styled(H1)`
-  position: absolute;
-  top: 0;
-  height: ${props => props.height};
-  width: 100%;
-  margin: 0;
-  line-height: 1.1;
-  text-transform: uppercase;
-`
-
-const HeaderStick = styled.div`
-  width: 200vw;
-  position: absolute;
-  left: -50%;
-  margin-top: 10px;
-  color: ${props => props.theme.white};
-  padding: 5px;
-  background: linear-gradient(
-    to right,
-    white,
-    ${props => props.theme.primaryColor} 50%
-  );
-  text-align: center;
-  z-index: ${props => props.zIndex};
-  :first-child {
-    top: 0.5em;
-    transform: rotate(-3deg);
-  }
-  :nth-child(2) {
-    bottom: 0.5em;
-    transform: rotate(6deg);
-  }
-`
-
 const Mug = styled.img.attrs({
   src: '/me.jpg',
   alt: 'Christian Jensen'
@@ -114,16 +61,20 @@ const Mug = styled.img.attrs({
   border-radius: 100%;
   margin: 0 0 5px 15px;
   shape-outside: circle(60px);
+  @media (min-width: ${props => props.theme.media.medium}) {
+    width: 200px;
+    shape-outside: circle(120px);
+  }
 `
 
 const Main = styled.main`
-  max-width: ${props => props.theme.maxContentWidth};
+  /* max-width: ${props => props.theme.maxContentWidth}; */
   padding: 200px 15px 0;
   margin: auto;
 `
 
 const Section = styled.section`
-  max-width: ${props => (props.contained ? '800px' : 'initial')};
+  /* max-width: ${props => (props.contained ? '800px' : 'initial')}; */
 `
 
 const Intro = styled.p`

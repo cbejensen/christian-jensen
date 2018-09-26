@@ -52,6 +52,12 @@ injectGlobal`
   img {
     max-width: 100%;
   }
+
+  .contained {
+    max-width: ${theme.maxContentWidth};
+    margin-left: auto;
+    margin-right: auto;
+  }
 `
 
 const App = () => (

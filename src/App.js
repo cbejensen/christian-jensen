@@ -10,7 +10,7 @@ const theme = {
   gray: '#404040',
   primaryColor: '#c73d15',
   secondaryColor: '#108db8',
-  maxContentWidth: 800,
+  maxContentWidth: '800px',
   media: {
     small: '500px',
     medium: '700px',

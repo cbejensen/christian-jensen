@@ -7,18 +7,18 @@ import { H1 } from '../styled-components/Headings.js'
 
 export default class Home extends React.Component {
   render() {
+    const headerHeight = '200px'
     const zIndexes = {
-      trianglesRight: -1,
-      headerStick: -1
+      mug: 1
     }
     // TODO: figure out what to do with the hideous header
     return (
       <React.Fragment>
         <TriangleCurve
           triangleSize={40}
-          triangleColor="#000"
+          triangleColor="gray"
           width="50%"
-          height="500px"
+          height="100vh"
           float="left"
         />
         <TriangleCurve
@@ -27,65 +27,80 @@ export default class Home extends React.Component {
           width="50%"
           height="500px"
           positionRight
-          containerStyles={{ zIndex: zIndexes.trianglesRight }}
         />
-        <Header>
-          <HeaderStick zIndex={zIndexes.headerStick}>Christian</HeaderStick>
-          <HeaderStick zIndex={zIndexes.headerStick}>Jensen</HeaderStick>
+        <Header height={headerHeight}>
+          <HeaderStick>Christian</HeaderStick>
+          <HeaderStick>Jensen</HeaderStick>
         </Header>
         {/* <H1 style={{ background: 'black', color: '#fff' }}>Christian Jensen</H1> */}
-        <main style={{ maxWidth: 800, padding: '0 15px', margin: 'auto' }}>
-          <Mug src="/me.jpg" alt="Christian Jensen" />
-          <Intro>
-            Hello! My name is Christian, and I am a front-end web developer. In
-            2015, I attended <a href="https://devmountain.com/">DevMountain</a>{' '}
-            - a 3-month coding bootcamp. After graduating, I was invited to sit
-            in on another 3-month cohort, which is when I was introduced to{' '}
-            <a href="https://reactjs.org/">React</a>. Since then, I have
-            primarily been coding in React for my personal projects, which you
-            can see below. Currently, I am a web developer at{' '}
-            <a href="https://www.180fusion.com/">180Fusion</a>, helping small
-            businesses with SEO and site performance.
-          </Intro>
+        <Main>
+          <Mug
+            style={{
+              zIndex: zIndexes.mug
+            }}
+          />
+          <Section>
+            <Intro>
+              Hello! My name is Christian, and I am a front-end web developer.
+              In 2015, I attended{' '}
+              <a href="https://devmountain.com/">DevMountain</a> - a 3-month
+              coding bootcamp. After graduating, I was invited to sit in on
+              another 3-month cohort, which is when I was introduced to{' '}
+              <a href="https://reactjs.org/">React</a>. Since then, I have
+              primarily been coding in React for my personal projects, which you
+              can see below. Currently, I am a web developer at{' '}
+              <a href="https://www.180fusion.com/">180Fusion</a>, helping small
+              businesses with SEO and site performance.
+            </Intro>
+          </Section>
           <PortfolioCategories>
             {cats => (
               <React.Fragment>
                 {cats.map((cat, i) => (
-                  <CategoryGallery
-                    title={cat.category}
-                    items={cat.items}
-                    key={i}
-                  />
+                  <Section key={i}>
+                    <CategoryGallery title={cat.category} items={cat.items} />
+                  </Section>
                 ))}
               </React.Fragment>
             )}
           </PortfolioCategories>
-        </main>
+        </Main>
       </React.Fragment>
     )
   }
 }
 
 const Header = styled(H1)`
+  position: absolute;
+  top: 0;
+  height: ${props => props.height};
+  width: 100%;
   margin: 0;
   line-height: 1.1;
+  text-transform: uppercase;
 `
 
 const HeaderStick = styled.div`
   width: 200vw;
-  position: relative;
+  position: absolute;
   left: -50%;
   margin-top: 10px;
   color: ${props => props.theme.white};
   padding: 5px;
-  background: ${props => props.theme.primaryColor};
+  background: linear-gradient(
+    to right,
+    white,
+    ${props => props.theme.primaryColor} 50%
+  );
   text-align: center;
   z-index: ${props => props.zIndex};
   :first-child {
+    top: 0.5em;
     transform: rotate(-3deg);
   }
   :nth-child(2) {
-    transform: rotate(3deg);
+    bottom: 0.5em;
+    transform: rotate(6deg);
   }
 `
 
@@ -93,21 +108,31 @@ const Mug = styled.img.attrs({
   src: '/me.jpg',
   alt: 'Christian Jensen'
 })`
+  position: relative;
   float: right;
   width: 100px;
   border-radius: 100%;
-  margin-left: 15px;
-  @supports (shape-outside: circle(60px)) {
-    shape-outside: circle(60px);
-  }
+  margin: 0 0 5px 15px;
+  shape-outside: circle(60px);
+`
+
+const Main = styled.main`
+  max-width: ${props => props.theme.maxContentWidth};
+  padding: 200px 15px 0;
+  margin: auto;
+`
+
+const Section = styled.section`
+  max-width: ${props => (props.contained ? '800px' : 'initial')};
 `
 
 const Intro = styled.p`
-  padding-top: 15px;
+  margin-top: ${props => props.paddingTop};
   font-size: 20px;
   line-height: 1.5em;
   max-width: 1000px;
-  margin: 0;
+  // margin: 0;
+  z-index: 1;
   @media (min-width: ${props => props.theme.media.small}) {
     text-align: justify;
   }

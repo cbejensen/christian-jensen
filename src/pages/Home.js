@@ -3,49 +3,51 @@ import styled from 'styled-components'
 import PortfolioCategories from '../containers/PortfolioCategories.js'
 import CategoryGallery from '../components/CategoryGallery'
 import Header from '../components/Header'
+import { ThemeProvider } from 'styled-components'
 
 export default class Home extends React.Component {
   render() {
     const headerHeight = '200px'
     const zIndexes = {
-      mug: 1
+      mug: 1,
+      headerStickLower: 1
     }
     return (
-      <React.Fragment>
-        <Header height={headerHeight} />
-        <Main>
-          <Section className="contained">
-            <Mug
-              style={{
-                zIndex: zIndexes.mug
-              }}
-            />
-            <Intro>
-              Hello! My name is Christian, and I am a front-end web developer.
-              In 2015, I attended{' '}
-              <a href="https://devmountain.com/">DevMountain</a> - a 3-month
-              coding bootcamp. After graduating, I was invited to sit in on
-              another 3-month cohort, which is when I was introduced to{' '}
-              <a href="https://reactjs.org/">React</a>. Since then, I have
-              primarily been coding in React for my personal projects, which you
-              can see below. Currently, I am a web developer at{' '}
-              <a href="https://www.180fusion.com/">180Fusion</a>, helping small
-              businesses with SEO and site performance.
-            </Intro>
-          </Section>
-          <PortfolioCategories>
-            {cats => (
-              <React.Fragment>
-                {cats.map((cat, i) => (
+      <ThemeProvider theme={{ zIndexes }}>
+        <React.Fragment>
+          <Header height={headerHeight} />
+          <Main>
+            <Section className="contained">
+              <Mug
+                style={{
+                  zIndex: zIndexes.mug
+                }}
+              />
+              <Intro>
+                Hello! My name is Christian, and I am a front-end web developer.
+                In 2015, I attended{' '}
+                <a href="https://devmountain.com/">DevMountain</a> - a 3-month
+                coding bootcamp. After graduating, I was invited to sit in on
+                another 3-month cohort, which is when I was introduced to{' '}
+                <a href="https://reactjs.org/">React</a>. Since then, I have
+                primarily been coding in React for my personal projects, which
+                you can see below. Currently, I am a web developer at{' '}
+                <a href="https://www.180fusion.com/">180Fusion</a>, helping
+                small businesses with SEO and site performance.
+              </Intro>
+            </Section>
+            <PortfolioCategories>
+              {cats =>
+                cats.map((cat, i) => (
                   <Section key={i}>
                     <CategoryGallery title={cat.category} items={cat.items} />
                   </Section>
-                ))}
-              </React.Fragment>
-            )}
-          </PortfolioCategories>
-        </Main>
-      </React.Fragment>
+                ))
+              }
+            </PortfolioCategories>
+          </Main>
+        </React.Fragment>
+      </ThemeProvider>
     )
   }
 }
@@ -79,17 +81,21 @@ const Section = styled.section`
 
 const Intro = styled.p`
   margin-top: ${props => props.paddingTop};
-  font-size: 20px;
+  font-size: 1.4rem;
   line-height: 1.5em;
   max-width: 1000px;
-  background: #cae3e8;
-  padding: 15px;
+  background: #dce5e7;
+  padding: 20px 30px;
   border-radius: 15px;
   mix-blend-mode: lighten;
   z-index: 1;
   @media (min-width: ${props => props.theme.media.small}) {
     text-align: justify;
   }
+  color: ${props => {
+    console.log(props.theme)
+    return 'black'
+  }};
   /* position: relative;
   left: 50%;
   transform: translateX(-50%);

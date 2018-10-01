@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { H3 } from '../../styled-components/Headings'
+import { H3 } from '../styled/Headings'
 
 export default class CategoryBlock extends React.Component {
   setDialogRef = elem => {

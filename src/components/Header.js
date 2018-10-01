@@ -53,7 +53,7 @@ const HeaderStick = styled.div`
     transform: rotate(-7deg);
     background: linear-gradient(
       to right,
-      ${props => props.theme.gray},
+      ${props => props.theme.darkGray},
       ${props => props.theme.primaryColor} 50%
     );
   }
@@ -62,9 +62,10 @@ const HeaderStick = styled.div`
     transform: rotate(6deg);
     background: linear-gradient(
       to left,
-      ${props => props.theme.gray},
+      ${props => props.theme.darkGray},
       ${props => props.theme.primaryColor} 50%
     );
+    z-index: ${props => props.theme.zIndexes.headerStickLower};
   }
 `
 export default Header

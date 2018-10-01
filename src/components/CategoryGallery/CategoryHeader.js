@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-static'
-import { H2, withHash } from '../../styled-components/Headings'
+import { H2, withHash } from '../styled/Headings'
 import styled from 'styled-components'
 
 export default class CategoryHeader extends React.Component {

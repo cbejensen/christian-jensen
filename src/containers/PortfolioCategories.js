@@ -16,6 +16,6 @@ export default class PortfolioCategories extends React.Component {
   }
   render() {
     if (!this.state.categories) return null
-    return React.Children.only(this.props.children(this.state.categories))
+    return this.props.children(this.state.categories)
   }
 }

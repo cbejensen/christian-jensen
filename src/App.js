@@ -5,11 +5,12 @@ import Routes from 'react-static-routes'
 import { ThemeProvider, injectGlobal } from 'styled-components'
 
 const theme = {
-  black: '#171717',
-  white: '#f1f1f1',
-  gray: '#404040',
   primaryColor: '#c73d15',
   secondaryColor: '#108db8',
+  black: '#171717',
+  white: '#f1f1f1',
+  lightGray: '#e2e2e2',
+  darkGray: '#404040',
   maxContentWidth: '800px',
   media: {
     small: '500px',

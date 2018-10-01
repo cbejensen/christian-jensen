@@ -26,29 +26,24 @@ export default class CategoryHeader extends React.Component {
 const HashHeading = styled(withHash(H2))`
   position: relative;
   transition: 0.4s;
+  overflow: hidden;
   :before {
-    background: ${props => props.theme.white};
     vertical-align: middle;
   }
   :after {
     content: '';
     background: ${props => props.theme.primaryColor};
     width: 100%;
+    margin-right: -100%;
     height: 1px;
     display: inline-block;
     vertical-align: middle;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    z-index: -1;
   }
   :hover:after {
     background: ${props => props.theme.secondaryColor};
   }
 `
 const HeadingText = styled.span`
-  background: ${props => props.theme.white};
   padding-right: 10px;
   color: ${props => props.theme.black};
 `

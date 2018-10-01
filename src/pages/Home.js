@@ -4,6 +4,7 @@ import PortfolioCategories from '../containers/PortfolioCategories.js'
 import CategoryGallery from '../components/CategoryGallery'
 import Header from '../components/Header'
 import { ThemeProvider } from 'styled-components'
+import CategoryHeader from '../components/CategoryGallery/CategoryHeader'
 
 export default class Home extends React.Component {
   render() {
@@ -49,6 +50,7 @@ export default class Home extends React.Component {
                 ))
               }
             </PortfolioCategories>
+            <CategoryHeader title="work history" style={{ marginTop: 80 }} />
           </Main>
         </React.Fragment>
       </ThemeProvider>
@@ -92,8 +94,4 @@ const Intro = styled.p`
   @media (min-width: ${props => props.theme.media.small}) {
     text-align: justify;
   }
-  color: ${props => {
-    console.log(props.theme)
-    return 'black'
-  }};
 `

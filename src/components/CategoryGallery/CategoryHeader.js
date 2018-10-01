@@ -5,8 +5,12 @@ import styled from 'styled-components'
 
 export default class CategoryHeader extends React.Component {
   render() {
+    // if no hashLink is proivded, use the title, but replace
+    // any spaces with dashes
     return (
-      <Link to="#projects">
+      <Link
+        to={`#${this.props.hashLink || this.props.title.replace(/ /, '-')}`}
+      >
         <HashHeading
           id="projects"
           className="contained"
@@ -24,6 +28,7 @@ const HashHeading = styled(withHash(H2))`
   transition: 0.4s;
   :before {
     background: ${props => props.theme.white};
+    vertical-align: middle;
   }
   :after {
     content: '';

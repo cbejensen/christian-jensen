@@ -11,13 +11,13 @@ class Header extends React.Component {
           triangleSize={40}
           triangleColor="gray"
           width="50%"
-          height="150vh"
+          height="200vh"
         />
         <TriangleCurve
           triangleSize={40}
           triangleColor="gray"
           width="50%"
-          height="150vh"
+          height="200vh"
           positionRight
         />
         <HeaderSticks height={this.props.height}>

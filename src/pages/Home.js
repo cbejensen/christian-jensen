@@ -10,7 +10,6 @@ export default class Home extends React.Component {
     const zIndexes = {
       mug: 1
     }
-    // TODO: figure out what to do with the hideous header
     return (
       <React.Fragment>
         <Header height={headerHeight} />
@@ -59,7 +58,8 @@ const Mug = styled.img.attrs({
   float: right;
   width: 100px;
   border-radius: 100%;
-  margin: 0 0 5px 15px;
+  margin: -20px -5px 5px 15px;
+  box-shadow: -4px 4px 15px #000;
   shape-outside: circle(60px);
   @media (min-width: ${props => props.theme.media.medium}) {
     width: 200px;
@@ -82,7 +82,10 @@ const Intro = styled.p`
   font-size: 20px;
   line-height: 1.5em;
   max-width: 1000px;
-  // margin: 0;
+  background: #cae3e8;
+  padding: 15px;
+  border-radius: 15px;
+  mix-blend-mode: lighten;
   z-index: 1;
   @media (min-width: ${props => props.theme.media.small}) {
     text-align: justify;

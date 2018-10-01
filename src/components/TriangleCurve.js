@@ -18,7 +18,7 @@ export default class TriangleCurve extends React.Component {
         containerStyles={this.props.containerStyles}
       >
         {items => (
-          <RandomRotations itemsToRotate={items} rotationInterval={500}>
+          <RandomRotations itemsToRotate={items} rotationInterval={200}>
             {rotations => (
               <React.Fragment>
                 {items.map((item, i) => (

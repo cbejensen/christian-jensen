@@ -31,22 +31,11 @@ const Block = styled.figure`
   :hover {
     cursor: pointer;
   }
-  /* :hover:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 30px;
-    bottom: 30px;
-    left: 30px;
-    transform: scale(1.1);
-    background: #000;
-    opacity: 0.5;
-  } */
 `
 
 const Image = styled.img`
   width: 90%;
-  transition: 0.7s;
+  transition: 0.5s;
   box-shadow: 2px 2px 10px #000;
   ${Block}:hover & {
     transform: scale(1.1);
@@ -57,12 +46,12 @@ const Image = styled.img`
 
 const Caption = styled.figcaption`
   position: absolute;
-  top: 100%;
+  top: calc(100% + 0.5em);
   left: 50%;
   transform: translateX(-50%);
   font-weight: bold;
   font-size: 1.5em;
-  transition: 0.7s;
+  transition: 0.6s;
   ${Block}:hover & {
     top: calc(50%);
     transform: translate(-50%, -50%) scale(1.8);

@@ -44,7 +44,7 @@ export default class Home extends React.Component {
                     <CategoryGallery
                       title={cat.category}
                       items={cat.items}
-                      headerStyle={{ marginTop: 60 }}
+                      headerStyle={{ margin: '60px auto 0' }}
                     />
                   </section>
                 ))

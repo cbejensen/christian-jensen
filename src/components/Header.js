@@ -11,7 +11,7 @@ class Header extends React.Component {
           triangleSize={40}
           triangleColor="gray"
           width="50%"
-          height="100vh"
+          height="150vh"
         />
         <TriangleCurve
           triangleSize={40}

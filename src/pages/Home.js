@@ -17,7 +17,7 @@ export default class Home extends React.Component {
         <React.Fragment>
           <Header height={headerHeight} />
           <Main>
-            <Section className="contained">
+            <section className="contained">
               <Mug
                 style={{
                   zIndex: zIndexes.mug
@@ -35,13 +35,17 @@ export default class Home extends React.Component {
                 <a href="https://www.180fusion.com/">180Fusion</a>, helping
                 small businesses with SEO and site performance.
               </Intro>
-            </Section>
+            </section>
             <PortfolioCategories>
               {cats =>
                 cats.map((cat, i) => (
-                  <Section key={i}>
-                    <CategoryGallery title={cat.category} items={cat.items} />
-                  </Section>
+                  <section key={i}>
+                    <CategoryGallery
+                      title={cat.category}
+                      items={cat.items}
+                      headerStyle={{ marginTop: 60 }}
+                    />
+                  </section>
                 ))
               }
             </PortfolioCategories>
@@ -62,10 +66,10 @@ const Mug = styled.img.attrs({
   border-radius: 100%;
   margin: -20px -5px 5px 15px;
   box-shadow: -4px 4px 15px #000;
-  shape-outside: circle(60px);
+  shape-outside: circle(55px);
   @media (min-width: ${props => props.theme.media.medium}) {
     width: 200px;
-    shape-outside: circle(120px);
+    shape-outside: circle(110px);
   }
 `
 
@@ -73,10 +77,6 @@ const Main = styled.main`
   /* max-width: ${props => props.theme.maxContentWidth}; */
   padding: 200px 15px 0;
   margin: auto;
-`
-
-const Section = styled.section`
-  /* max-width: ${props => (props.contained ? '800px' : 'initial')}; */
 `
 
 const Intro = styled.p`
@@ -96,8 +96,4 @@ const Intro = styled.p`
     console.log(props.theme)
     return 'black'
   }};
-  /* position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw; */
 `

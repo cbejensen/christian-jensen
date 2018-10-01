@@ -8,7 +8,10 @@ export default class CategoryGallery extends React.Component {
     // TODO: Control all heading levels (h1, h2, etc) here
     return (
       <React.Fragment>
-        <CategoryHeader title={this.props.title} />
+        <CategoryHeader
+          title={this.props.title}
+          style={this.props.headerStyle}
+        />
         <CategoryBlocks items={this.props.items} />
       </React.Fragment>
     )

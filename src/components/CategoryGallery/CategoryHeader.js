@@ -7,7 +7,11 @@ export default class CategoryHeader extends React.Component {
   render() {
     return (
       <Link to="#projects">
-        <HashHeading id="projects" className="contained">
+        <HashHeading
+          id="projects"
+          className="contained"
+          style={this.props.style}
+        >
           <HeadingText>{this.props.title}</HeadingText>
         </HashHeading>
       </Link>
@@ -16,9 +20,7 @@ export default class CategoryHeader extends React.Component {
 }
 
 const HashHeading = styled(withHash(H2))`
-  color: ${props => props.theme.black};
   position: relative;
-  margin-bottom: 0.5em;
   transition: 0.4s;
   :before {
     background: ${props => props.theme.white};
@@ -43,4 +45,5 @@ const HashHeading = styled(withHash(H2))`
 const HeadingText = styled.span`
   background: ${props => props.theme.white};
   padding-right: 10px;
+  color: ${props => props.theme.black};
 `

@@ -26,35 +26,46 @@ export default class CategoryBlock extends React.Component {
 
 const Block = styled.figure`
   position: relative;
-  padding: 0 15px 2rem;
-  margin: 0 0 30px;
+  margin: 30px;
   text-align: center;
   :hover {
     cursor: pointer;
   }
+  /* :hover:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 30px;
+    bottom: 30px;
+    left: 30px;
+    transform: scale(1.1);
+    background: #000;
+    opacity: 0.5;
+  } */
 `
 
 const Image = styled.img`
   width: 90%;
   transition: 0.7s;
+  box-shadow: 2px 2px 10px #000;
   ${Block}:hover & {
-    width: 100%;
-    box-shadow: 5px 5px 30px 5px #000;
+    transform: scale(1.1);
+    box-shadow: 8px 8px 30px #000;
+    opacity: 0.3;
   }
 `
 
 const Caption = styled.figcaption`
   position: absolute;
-  bottom: 0;
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   font-weight: bold;
   font-size: 1.5em;
   transition: 0.7s;
   ${Block}:hover & {
-    bottom: calc(50% + 2rem);
-    transform: translate(-50%, 50%) scale(1.8);
-    color: ${props => props.theme.primaryColor};
+    top: calc(50%);
+    transform: translate(-50%, -50%) scale(1.8);
   }
 `
 

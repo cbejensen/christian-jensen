@@ -1,9 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
 import PortfolioCategories from '../containers/PortfolioCategories.js'
 import CategoryGallery from '../components/CategoryGallery'
 import Header from '../components/Header'
-import { ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider, keyframes } from 'styled-components'
 import CategoryHeader from '../components/CategoryGallery/CategoryHeader'
 
 export default class Home extends React.Component {
@@ -60,6 +59,18 @@ export default class Home extends React.Component {
   }
 }
 
+const clunkyTurn = keyframes`
+  10% {
+    transform: rotate(-10deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+  }
+  90% {
+    transform: rotate(370deg) scale(1.1);
+  }
+`
+
 const Mug = styled.img.attrs({
   src: '/me.jpg',
   alt: 'Christian Jensen'
@@ -71,6 +82,10 @@ const Mug = styled.img.attrs({
   margin: -20px -5px 5px 15px;
   box-shadow: -4px 4px 15px #000;
   shape-outside: circle(55px);
+  transition: 0.4s;
+  :hover {
+    transform: rotate(-6deg) scale(1.1);
+  }
   @media (min-width: ${props => props.theme.media.medium}) {
     width: 200px;
     shape-outside: circle(110px);

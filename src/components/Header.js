@@ -18,7 +18,7 @@ class Header extends React.Component {
           triangleColor="gray"
           width="50%"
           height="200vh"
-          positionRight
+          corner="right"
         />
         <HeaderSticks height={this.props.height}>
           <HeaderStick>Christian</HeaderStick>

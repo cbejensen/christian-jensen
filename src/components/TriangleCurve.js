@@ -5,17 +5,13 @@ import styled from 'styled-components'
 
 export default class TriangleCurve extends React.Component {
   render() {
-    console.log(this.props.triangleColor)
-
     return (
       <CornerCurveScatter
         width={this.props.width}
         height={this.props.height}
         float={this.props.float}
         itemSize={this.props.triangleSize}
-        positionRight={this.props.positionRight}
-        positionBottom={this.props.positionBottom}
-        containerStyles={this.props.containerStyles}
+        corner={this.props.corner}
       >
         {items => (
           <RandomRotations itemsToRotate={items} rotationInterval={200}>
@@ -23,8 +19,7 @@ export default class TriangleCurve extends React.Component {
               <React.Fragment>
                 {items.map((item, i) => (
                   <StyledSVG
-                    positionRight={this.props.positionRight}
-                    positionBottom={this.props.positionBottom}
+                    corner={this.props.corner}
                     item={item}
                     size={this.props.triangleSize}
                     key={i}
@@ -49,18 +44,26 @@ const StyledSVG = styled.svg.attrs({
 })`
   position: absolute;
   overflow: visible;
-  /* mix-blend-mode: difference; */
-  ${({ item, size, ...props }) => `
-    ${props.positionRight ? 'right' : 'left'}: calc(${item.y}% - ${
-    item.size
-  }px);
-    ${props.positionBottom ? 'bottom' : 'top'}: calc(${item.x}% - ${
-    item.size
-  }px);
+  ${({ corner, item, size }) => getCoords(corner, item.x, item.y, size)};
+`
+
+function getCoords(corner, itemX, itemY, size) {
+  let topOrBottom, rightOrLeft
+  if (!corner) {
+    // no corner set? use top left as default
+    topOrBottom = 'top'
+    rightOrLeft = 'left'
+  } else {
+    topOrBottom = corner.includes('bottom') ? 'bottom' : 'top'
+    rightOrLeft = corner.includes('right') ? 'right' : 'left'
+  }
+  return `
+    ${topOrBottom}: calc(${itemY}% - ${size}px);
+    ${rightOrLeft}: calc(${itemX}% - ${size}px);
     width: ${size}px;
     height: ${size}px;
-  `};
-`
+  `
+}
 
 const Triangle = styled.polygon.attrs({
   points: '50 0 100 100 0 100',

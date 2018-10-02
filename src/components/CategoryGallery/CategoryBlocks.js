@@ -5,20 +5,17 @@ import styled from 'styled-components'
 export default class CategoryBlocks extends React.Component {
   render() {
     return (
-      <div>
-        <Container>
-          {this.props.items.map(item => (
-            <CategoryBlock {...item} key={item.id} />
-          ))}
-        </Container>
-      </div>
+      <Container>
+        {this.props.items.map(item => (
+          <CategoryBlock {...item} key={item.id} />
+        ))}
+      </Container>
     )
   }
 }
 
 const Container = styled.div`
   display: flex;
-  white-space: nowrap;
   flex-wrap: wrap;
   justify-content: center;
 `

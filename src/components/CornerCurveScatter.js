@@ -46,7 +46,7 @@ class CornerCurveScatter extends React.Component {
           width={this.props.width}
           height={this.props.height}
           shapeOutsidePoints={containerHasSize && shapeOutsidePoints}
-          positionRight={this.props.positionRight}
+          corner={this.props.corner}
           style={this.props.containerStyles}
         >
           {containerHasSize && (
@@ -92,11 +92,7 @@ CornerCurveScatter.defaultProps = {
 }
 
 const Container = styled.div`
-  float: ${props => props.float || 'none'};
-  position: ${props =>
-    props.float && props.shapeOutsidePoints ? 'relative' : 'absolute'};
-  right: ${props => (props.positionRight ? 0 : 'initial')};
-  bottom: ${props => (props.positionBottom ? 0 : 'initial')};
+  ${props => getPosition(props.corner)}
   width: ${props =>
     typeof props.width === 'number' ? props.width + 'px' : props.width};
   height: ${props =>
@@ -106,6 +102,26 @@ const Container = styled.div`
     `shape-outside: ${getShape(props.shapeOutsidePoints)}`};
   pointer-events: none;
 `
+
+function getPosition(corner) {
+  let position = 'absolute',
+    float = 'none',
+    topOrBottom = 'top',
+    rightOrLeft = 'left'
+  if (corner && corner.includes('float')) {
+    position = 'relative'
+    float = corner.includes('right') ? 'right' : 'left'
+  } else if (corner) {
+    topOrBottom = corner.includes('bottom') ? 'bottom' : 'top'
+    rightOrLeft = corner.includes('right') ? 'right' : 'left'
+  }
+  return `
+    position: ${position};
+    float: ${float};
+    ${topOrBottom}: ${float === 'none' ? 0 : 'initial'};
+    ${rightOrLeft}: ${float === 'none' ? 0 : 'initial'};
+  `
+}
 
 function getShape(points) {
   const shape = points.reduce(

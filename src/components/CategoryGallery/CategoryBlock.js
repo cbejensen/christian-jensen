@@ -40,7 +40,8 @@ const Image = styled.img`
   ${Block}:hover & {
     transform: scale(1.1);
     box-shadow: 8px 8px 30px #000;
-    opacity: 0.3;
+    opacity: 0.6;
+    filter: blur(1px);
   }
 `
 

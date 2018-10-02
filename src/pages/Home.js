@@ -27,7 +27,7 @@ export default class Home extends React.Component {
               <Intro>
                 Hello! My name is Christian, and I am a front-end web developer.
                 In 2015, I attended{' '}
-                <a href="https://devmountain.com/">DevMountain</a> - a 3-month
+                <a href="https://devmountain.com/">DevMountain</a>, a 3-month
                 coding bootcamp. After graduating, I was invited to sit in on
                 another 3-month cohort, which is when I was introduced to{' '}
                 <a href="https://reactjs.org/">React</a>. Since then, I have
@@ -50,6 +50,8 @@ export default class Home extends React.Component {
                 ))
               }
             </PortfolioCategories>
+            <CategoryHeader title="education" style={{ marginTop: 80 }} />
+
             <CategoryHeader title="work history" style={{ marginTop: 80 }} />
           </Main>
         </React.Fragment>

@@ -49,9 +49,6 @@ export default class Home extends React.Component {
                 ))
               }
             </PortfolioCategories>
-            <CategoryHeader title="education" style={{ marginTop: 80 }} />
-
-            <CategoryHeader title="work history" style={{ marginTop: 80 }} />
           </Main>
         </React.Fragment>
       </ThemeProvider>

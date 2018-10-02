@@ -7,12 +7,11 @@ export default class CategoryHeader extends React.Component {
   render() {
     // if no hashLink is proivded, use the title, but replace
     // any spaces with dashes
+    const hashLink = this.props.hashLink || this.props.title.replace(/ /, '-')
     return (
-      <Link
-        to={`#${this.props.hashLink || this.props.title.replace(/ /, '-')}`}
-      >
+      <Link to={`#${hashLink}`}>
         <HashHeading
-          id="projects"
+          id={hashLink}
           className="contained"
           style={this.props.style}
         >

@@ -14,13 +14,17 @@ export default class CategoryBlock extends React.Component {
     // TODO: move inline styles into styled-components
     const transitionSpeed = '0.4s'
     return (
-      <Block onClick={this.showModal}>
-        <Image
-          src={this.props.img}
-          alt={this.props.alt}
-          transitionSpeed={transitionSpeed}
-        />
-        <Caption transitionSpeed={transitionSpeed}>{this.props.title}</Caption>
+      <React.Fragment>
+        <Block onClick={this.showModal}>
+          <Image
+            src={this.props.img}
+            alt={this.props.alt}
+            transitionSpeed={transitionSpeed}
+          />
+          <Caption transitionSpeed={transitionSpeed}>
+            {this.props.title}
+          </Caption>
+        </Block>
         <Dialog innerRef={this.setDialogRef}>
           <H3>{this.props.title}</H3>
           <Description>{this.props.description}</Description>
@@ -32,7 +36,7 @@ export default class CategoryBlock extends React.Component {
             corner="bottom right"
           />
         </Dialog>
-      </Block>
+      </React.Fragment>
     )
   }
 }

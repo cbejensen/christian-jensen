@@ -1,8 +1,8 @@
 import React from 'react'
-import CurveItems from '../containers/CurveItems'
+import CurveItems from './CurveItems'
 import styled from 'styled-components'
-import ViewportWatcher from '../containers/ViewportWatcher'
-import DiagonalFloats from './DiagonalFloats'
+import ViewportWatcher from './ViewportWatcher'
+import DummyFloats from '../components/DummyFloats'
 
 class CornerCurveScatter extends React.Component {
   setRef = elem => {
@@ -20,7 +20,7 @@ class CornerCurveScatter extends React.Component {
     for (var i = 0; i <= gridSize; i++) {
       const x = i
       // subtract from grid size to flip the curve
-      // and subtract x from grid zie to make this curve concave
+      // and subtract x from grid size to make this curve concave
       const y = gridSize - this.getExponentialInt(gridSize - x, gridSize)
       points.push({ x, y })
     }
@@ -32,24 +32,21 @@ class CornerCurveScatter extends React.Component {
     const useShapeOutside =
       this.props.float &&
       CSS.supports('shape-outside', 'polygon(0% 0%, 100% 0%, 0% 100%)')
-    const useDiagonalFloats = this.props.float && !useShapeOutside
+    const useDummyFloats =
+      this.props.useDummyFloats || (this.props.float && !useShapeOutside)
     const shapeOutsidePoints = useShapeOutside && this.getCurveBorderPoints(100)
-    const containerHasSize =
-      this.containerRef &&
-      this.containerRef.clientWidth &&
-      this.containerRef.clientHeight
     return (
       <React.Fragment>
         <Container
-          innerRef={elem => !this.containerRef && this.setRef(elem)}
+          innerRef={this.setRef}
           float={this.props.float}
           width={this.props.width}
           height={this.props.height}
-          shapeOutsidePoints={containerHasSize && shapeOutsidePoints}
+          shapeOutsidePoints={this.containerRef && shapeOutsidePoints}
           corner={this.props.corner}
           style={this.props.containerStyles}
         >
-          {containerHasSize && (
+          {this.containerRef && (
             <ViewportWatcher>
               {() => (
                 <CurveItems
@@ -73,9 +70,9 @@ class CornerCurveScatter extends React.Component {
             </ViewportWatcher>
           )}
         </Container>
-        {containerHasSize &&
-          useDiagonalFloats && (
-            <DiagonalFloats
+        {this.containerRef &&
+          useDummyFloats && (
+            <DummyFloats
               width={this.containerRef.clientWidth}
               height={this.containerRef.clientHeight}
               horizontal

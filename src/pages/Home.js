@@ -3,7 +3,6 @@ import PortfolioCategories from '../containers/PortfolioCategories.js'
 import CategoryGallery from '../components/CategoryGallery'
 import Header from '../components/Header'
 import styled, { ThemeProvider, keyframes } from 'styled-components'
-import CategoryHeader from '../components/CategoryGallery/CategoryHeader'
 
 export default class Home extends React.Component {
   render() {
@@ -55,18 +54,6 @@ export default class Home extends React.Component {
     )
   }
 }
-
-const clunkyTurn = keyframes`
-  10% {
-    transform: rotate(-10deg) scale(1.1);
-  }
-  50% {
-    transform: rotate(180deg) scale(0.8);
-  }
-  90% {
-    transform: rotate(370deg) scale(1.1);
-  }
-`
 
 const Mug = styled.img.attrs({
   src: '/me.jpg',

@@ -5,9 +5,6 @@ class ViewportWatcher extends React.Component {
     viewportWidth: window.innerWidth,
     viewportHeight: window.innerHeight
   }
-  setRef = elem => {
-    this.ref = elem
-  }
   componentDidMount() {
     // this.updateSize()
     // listen for resize events, but use throttler to limit resource usage
@@ -34,12 +31,6 @@ class ViewportWatcher extends React.Component {
       viewportWidth: window.innerWidth,
       viewportHeight: window.innerHeight
     })
-    // if (this.containerRef) {
-    //   this.setState({
-    //     width: this.containerRef.clientWidth,
-    //     height: this.containerRef.clientHeight
-    //   })
-    // }
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeListener)

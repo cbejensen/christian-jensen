@@ -1,11 +1,23 @@
 import React from 'react'
 import { getRandomInt } from '../utils'
 
-class CurveItems extends React.Component {
+class CurveItems extends React.PureComponent {
   state = {
     items: []
   }
   componentDidMount() {
+    this.generateItemCoords()
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.props.containerWidth !== prevProps.containerWidth ||
+      this.props.containerHeight !== prevProps.containerHeight ||
+      this.props.maxItems !== prevProps.maxItems
+    ) {
+      this.generateItemCoords()
+    }
+  }
+  generateItemCoords = () => {
     const items = []
     for (var i = 0; i <= this.props.maxItems; i++) {
       // we use 100 to make coords percentage-based
@@ -19,21 +31,21 @@ class CurveItems extends React.Component {
       // now convert our percentage-based coords to absolute values
       let item = {
         x,
-        y,
-        size: this.props.itemSize
+        y
       }
       items.push(item)
     }
     this.setState({ items })
   }
   addPadding = items => {
+    const padding = this.props.itemPadding || this.props.itemSize
     const getAbsoluteX = xPercentage => {
       return (this.props.containerWidth / 100) * xPercentage
     }
     const getAbsoluteY = yPercentage => {
       return (this.props.containerHeight / 100) * yPercentage
     }
-    const sorted = items.sort((a, b) => {
+    const itemsSorted = items.sort((a, b) => {
       // sort points from closest to 0,0 to farthest
       if (a.x > b.x) {
         return 1
@@ -44,37 +56,43 @@ class CurveItems extends React.Component {
         return a.y > b.y ? 1 : 0
       }
     })
-    return sorted.reduce(
-      (finalArr, currentItem) => {
+    const itemsWithPadding = itemsSorted.reduce(
+      (finalArray, currentItem, i) => {
+        // on first iteration, just return currentItem in array
+        if (i === 0) return [currentItem]
         // for each item in the sorted array, see if it's
-        // too close to any of the items we've approved so far
+        // too close to any of the items in our final array
+        // that is being built
         let tooClose
-        for (let i = 0; i < finalArr.length; i++) {
-          const compareItem = finalArr[i]
-          // padding is amount of pixels between each item
-          const padding = this.props.itemPadding || this.props.itemSize
-          const xTooClose =
-            Math.abs(
-              getAbsoluteX(currentItem.x) - getAbsoluteX(compareItem.x)
-            ) <= padding
-          const yTooClose =
-            Math.abs(
-              getAbsoluteY(currentItem.y) - getAbsoluteY(compareItem.y)
-            ) <= padding
-          tooClose = xTooClose && yTooClose
-          if (tooClose) break
+        for (let j = 0; j < finalArray.length; j++) {
+          const compareItem = finalArray[j]
+          const currentX = getAbsoluteX(currentItem.x)
+          const currentY = getAbsoluteY(currentItem.y)
+          const compareX = getAbsoluteX(compareItem.x)
+          const compareY = getAbsoluteY(compareItem.y)
+          const xDistance = Math.abs(currentX - compareX)
+          const yDistance = Math.abs(currentY - compareY)
+          // if both x and y coords are equal to or less than padding
+          // these two items are too close
+          if (xDistance <= padding && yDistance <= padding) {
+            tooClose = true
+            break
+          }
         }
         if (!tooClose) {
-          finalArr.push(currentItem)
+          finalArray.push(currentItem)
         }
-        return finalArr
+        return finalArray
       },
-      [sorted[0]]
+      [itemsSorted[0]]
     )
+    console.log(itemsSorted, itemsWithPadding, padding)
+
+    return itemsWithPadding
   }
   render() {
     if (!this.state.items.length) return null
-    // if item padding was explcitily set as 0, use items array as is
+    // if item padding was explicitly set as 0, use items array as is
     // otherwise add padding, using item size as default padding (no overlap)
     const items =
       this.props.itemPadding === 0

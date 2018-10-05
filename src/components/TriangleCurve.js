@@ -1,39 +1,43 @@
 import React from 'react'
-import CornerCurveScatter from '../components/CornerCurveScatter.js'
+import CornerCurveScatter from '../containers/CornerCurveScatter.js'
 import RandomRotations from '../containers/RandomRotations.js'
 import styled from 'styled-components'
 
 export default class TriangleCurve extends React.Component {
   render() {
+    const triangleSize = this.props.triangleSize
     return (
       <CornerCurveScatter
         width={this.props.width}
         height={this.props.height}
         float={this.props.float}
-        itemSize={this.props.triangleSize}
+        itemSize={triangleSize}
         corner={this.props.corner}
       >
-        {items => (
-          <RandomRotations itemsToRotate={items} rotationInterval={200}>
-            {rotations => (
-              <React.Fragment>
-                {items.map((item, i) => (
-                  <StyledSVG
-                    corner={this.props.corner}
-                    item={item}
-                    size={this.props.triangleSize}
-                    key={i}
-                  >
-                    <Triangle
-                      color={this.props.triangleColor}
-                      rotation={rotations[i]}
-                    />
-                  </StyledSVG>
-                ))}
-              </React.Fragment>
-            )}
-          </RandomRotations>
-        )}
+        {items => {
+          // console.log(items)
+          return (
+            <RandomRotations itemsToRotate={items} rotationInterval={200}>
+              {rotations => (
+                <React.Fragment>
+                  {items.map((item, i) => (
+                    <StyledSVG
+                      corner={this.props.corner}
+                      item={item}
+                      size={triangleSize}
+                      key={i}
+                    >
+                      <Triangle
+                        color={this.props.triangleColor}
+                        rotation={rotations[i]}
+                      />
+                    </StyledSVG>
+                  ))}
+                </React.Fragment>
+              )}
+            </RandomRotations>
+          )
+        }}
       </CornerCurveScatter>
     )
   }

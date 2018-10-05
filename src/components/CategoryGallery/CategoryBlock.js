@@ -4,18 +4,39 @@ import { H3 } from '../styled/Headings'
 import TriangleCurve from '../TriangleCurve'
 
 export default class CategoryBlock extends React.Component {
+  state = {
+    showDialog: false
+  }
   setDialogRef = elem => {
     this.dialogRef = elem
+    // we want to know when user clicks outside dialog box
+    // so we can close the dialog box.
+    // we need to add a custom event listener instead of using
+    // React's event dispatcher, otherwise every click will always
+    // trigger a body or html element event listener, whether
+    // inside or outside actual dialog box
+    this.dialogRef.addEventListener('click', e => {
+      if (e.target.tagName !== 'BUTTON') e.stopPropagation()
+    })
   }
-  showModal = () => {
+  showDialog = () => {
     this.dialogRef.showModal()
+    // if click is outside dialog box, close dialog
+    document.documentElement.addEventListener('click', this.closeDialog, {
+      once: true
+    })
+    this.setState({ showDialog: true })
+  }
+  closeDialog = e => {
+    console.log('got it')
+    this.dialogRef.close()
+    this.setState({ showDialog: false })
   }
   render() {
-    // TODO: move inline styles into styled-components
     const transitionSpeed = '0.4s'
     return (
       <React.Fragment>
-        <Block onClick={this.showModal}>
+        <Block onClick={this.showDialog}>
           <Image
             src={this.props.img}
             alt={this.props.alt}
@@ -25,7 +46,9 @@ export default class CategoryBlock extends React.Component {
             {this.props.title}
           </Caption>
         </Block>
+        <DialogBackdrop show={this.state.showDialog} />
         <Dialog innerRef={this.setDialogRef}>
+          <CloseBtn onClickCapture={this.closeDialog}>&times;</CloseBtn>
           <H3>{this.props.title}</H3>
           <Description>{this.props.description}</Description>
           <TriangleCurve
@@ -84,7 +107,9 @@ const Caption = styled.figcaption`
   }
 `
 
-const Dialog = styled.dialog`
+const Dialog = styled.dialog.attrs({
+  open: props => props.showDialog
+})`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -92,10 +117,38 @@ const Dialog = styled.dialog`
   overflow: hidden;
   transform: translate(-50%, -50%);
   cursor: default;
+  ::backdrop {
+    display: none;
+  }
+`
+
+const DialogBackdrop = styled.div`
+  display: ${props => (props.show ? 'block' : 'none')};
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+`
+
+const CloseBtn = styled.button`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  :hover {
+    color: ${props => props.theme.primaryColor};
+  }
 `
 
 const Description = styled.p`
   white-space: pre-wrap;
   line-height: 1.5em;
   text-align: left;
+  cursor: text;
 `

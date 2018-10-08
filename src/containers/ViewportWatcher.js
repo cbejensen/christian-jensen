@@ -36,7 +36,7 @@ class ViewportWatcher extends React.Component {
     window.removeEventListener('resize', this.resizeListener)
   }
   render() {
-    return React.Children.only(this.props.children(this.state))
+    return this.props.children(this.state)
   }
 }
 

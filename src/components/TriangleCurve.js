@@ -20,29 +20,27 @@ export default class TriangleCurve extends React.Component {
         itemSize={triangleSize}
         corner={this.props.corner}
       >
-        {items => {
-          return (
-            <RandomRotations itemsToRotate={items} rotationInterval={200}>
-              {rotations =>
-                items.map((item, i) => (
-                  <StyledSVG
-                    xReference={xReference}
-                    yReference={yReference}
-                    x={item.x}
-                    y={item.y}
-                    size={triangleSize}
-                    key={i}
-                  >
-                    <Triangle
-                      color={this.props.triangleColor}
-                      rotation={rotations[i]}
-                    />
-                  </StyledSVG>
-                ))
-              }
-            </RandomRotations>
-          )
-        }}
+        {items => (
+          <RandomRotations itemsToRotate={items} rotationInterval={200}>
+            {rotations =>
+              items.map((item, i) => (
+                <StyledSVG
+                  xReference={xReference}
+                  yReference={yReference}
+                  x={item.x}
+                  y={item.y}
+                  size={triangleSize}
+                  key={i}
+                >
+                  <Triangle
+                    color={this.props.triangleColor}
+                    rotation={rotations[i]}
+                  />
+                </StyledSVG>
+              ))
+            }
+          </RandomRotations>
+        )}
       </CornerCurveScatter>
     )
   }

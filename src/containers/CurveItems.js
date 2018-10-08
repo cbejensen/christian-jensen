@@ -96,7 +96,7 @@ class CurveItems extends React.PureComponent {
       this.props.itemPadding === 0
         ? this.state.items
         : this.addPadding(this.state.items)
-    return React.Children.only(this.props.children(items))
+    return this.props.children(items)
   }
 }
 CurveItems.defaultProps = {

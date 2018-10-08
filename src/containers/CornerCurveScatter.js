@@ -64,7 +64,7 @@ class CornerCurveScatter extends React.Component {
                   itemSize={this.props.itemSize}
                   itemPadding={this.props.itemPadding}
                 >
-                  {items => React.Children.only(this.props.children(items))}
+                  {items => this.props.children(items)}
                 </CurveItems>
               )}
             </ViewportWatcher>

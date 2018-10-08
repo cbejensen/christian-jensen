@@ -22,7 +22,7 @@
       "id": "createChefs",
       "title": "Create Chefs",
       "summary": "Cooking for kids",
-      "description": "My mom is a great cook. She's been preparing homemade meals for me as long as I can remember, and I (almost) always love what she creates. So when she asked me to build her a web site for her child-oriented cooking classes, I was excited to both gain some real-world experience and give her a tangible \"thank you!\" Although my mother has since taken a break from these classes, the site is still usable. Prospective customers can easily sign up for an account, add as many children as they need to their account, and register eacg child for individual classes.",
+      "description": "My mom is a great cook. She's been preparing homemade meals for me as long as I can remember, and I (almost) always love what she creates. So when she asked me to build her a web site for her child-oriented cooking classes, I was excited to both gain some real-world experience and give her a tangible \"thank you!\" Although my mother has since taken a break from these classes, the site is still usable. Prospective customers can easily sign up for an account, add as many children as they need to their account, and register each child for individual classes.",
       "technologies": ["React", "Bootstrap", "Firebase"],
       "img": "https://source.unsplash.com/random/500x350",
       "alt": "Random image"
@@ -42,7 +42,7 @@
       "id": "paradigm",
       "title": "Paradigm",
       "summary": "Charter High School",
-      "description": "I attended Paradigm from the second half of 11th grade through my senior year, and graduated with a GPA of 3.8.",
+      "description": "I attended Paradigm High School from the second half of 11th grade through my senior year, and graduated with a GPA of 3.8.",
       "img": "https://source.unsplash.com/random/600x300",
       "alt": "Random image"
     }

@@ -86,8 +86,6 @@ class CurveItems extends React.PureComponent {
       },
       [itemsSorted[0]]
     )
-    console.log(itemsSorted, itemsWithPadding, padding)
-
     return itemsWithPadding
   }
   render() {

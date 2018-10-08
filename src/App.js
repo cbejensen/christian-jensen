@@ -41,6 +41,13 @@ injectGlobal`
     overflow-x: hidden;
   }
 
+  *:focus {
+    outline: none;
+  }
+  body.user-is-tabbing *:focus {
+    outline: 5px auto ${theme.secondaryColor};
+  }
+
   a {
     text-decoration: none;
     color: #108db8;
@@ -60,7 +67,31 @@ injectGlobal`
     margin-left: auto;
     margin-right: auto;
   }
+
+  dialog::backdrop {
+    display: none;
+  }
 `
+
+// if user starts tabbing, add class to body for focus rings
+function handleFirstTab(e) {
+  if (e.keyCode === 9) {
+    document.body.classList.add('user-is-tabbing')
+
+    window.removeEventListener('keydown', handleFirstTab)
+    window.addEventListener('mousedown', handleMouseDownOnce)
+  }
+}
+
+// if user clicks, remove tabbing class to avoid focus rings
+function handleMouseDownOnce() {
+  document.body.classList.remove('user-is-tabbing')
+
+  window.removeEventListener('mousedown', handleMouseDownOnce)
+  window.addEventListener('keydown', handleFirstTab)
+}
+
+window.addEventListener('keydown', handleFirstTab)
 
 const App = () => (
   <Router>

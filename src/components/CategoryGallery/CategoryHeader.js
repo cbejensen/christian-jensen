@@ -28,6 +28,7 @@ const HashHeading = styled(withHash(H2))`
   overflow: hidden;
   :before {
     vertical-align: middle;
+    outline: none;
   }
   :after {
     content: '';
@@ -37,6 +38,7 @@ const HashHeading = styled(withHash(H2))`
     height: 1px;
     display: inline-block;
     vertical-align: middle;
+    outline: none;
   }
   :hover:after {
     background: ${props => props.theme.secondaryColor};

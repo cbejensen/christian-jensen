@@ -9,7 +9,8 @@ export default class Home extends React.Component {
     const headerHeight = '200px'
     const zIndexes = {
       mug: 1,
-      headerStickLower: 1
+      headerStickLower: 1,
+      dialog: 2
     }
     return (
       <ThemeProvider theme={{ zIndexes }}>

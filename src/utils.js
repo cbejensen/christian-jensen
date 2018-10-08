@@ -7,3 +7,11 @@ export function getRandomInt(min, max) {
 export function getExponentialInt(int, max) {
   return Math.floor(Math.sqrt(Math.pow(max, 2) - Math.pow(int, 2)))
 }
+
+export function createZIndexes(elementNames) {
+  let zIndex = 1
+  return elementNames.reduceRight((acc, curr) => {
+    acc[curr] = zIndex++
+    return acc
+  }, {})
+}

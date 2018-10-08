@@ -3,15 +3,17 @@ import PortfolioCategories from '../containers/PortfolioCategories.js'
 import CategoryGallery from '../components/CategoryGallery'
 import Header from '../components/Header'
 import styled, { ThemeProvider, keyframes } from 'styled-components'
+import { createZIndexes } from '../utils'
 
 export default class Home extends React.Component {
   render() {
     const headerHeight = '200px'
-    const zIndexes = {
-      mug: 1,
-      headerStickLower: 1,
-      dialog: 2
-    }
+    const zIndexes = createZIndexes([
+      'dialog',
+      'mug',
+      'headerStickLower',
+      'intro'
+    ])
     return (
       <ThemeProvider theme={{ zIndexes }}>
         <React.Fragment>
@@ -88,10 +90,17 @@ const Intro = styled.p`
   font-size: 1.4rem;
   line-height: 1.5em;
   max-width: 1000px;
-  background: #dce5e7;
-  padding: 20px 30px;
+  background: ${props => props.theme.white};
+  border: 10px solid;
+  border-image: linear-gradient(
+      to bottom right,
+      ${props => props.theme.secondaryColor},
+      #15c785
+    )
+    27;
   border-radius: 15px;
-  mix-blend-mode: lighten;
+  padding: 20px 30px;
+  position: relative;
   z-index: 1;
   @media (min-width: ${props => props.theme.media.small}) {
     text-align: justify;

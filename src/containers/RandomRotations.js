@@ -41,7 +41,7 @@ class RandomRotations extends React.Component {
     if (this.rotationInterval) clearInterval(this.rotationInterval)
   }
   render() {
-    return React.Children.only(this.props.children(this.state.rotations))
+    return this.props.children(this.state.rotations)
   }
 }
 

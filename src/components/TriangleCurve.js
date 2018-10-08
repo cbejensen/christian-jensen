@@ -23,25 +23,23 @@ export default class TriangleCurve extends React.Component {
         {items => {
           return (
             <RandomRotations itemsToRotate={items} rotationInterval={200}>
-              {rotations => (
-                <React.Fragment>
-                  {items.map((item, i) => (
-                    <StyledSVG
-                      xReference={xReference}
-                      yReference={yReference}
-                      x={item.x}
-                      y={item.y}
-                      size={triangleSize}
-                      key={i}
-                    >
-                      <Triangle
-                        color={this.props.triangleColor}
-                        rotation={rotations[i]}
-                      />
-                    </StyledSVG>
-                  ))}
-                </React.Fragment>
-              )}
+              {rotations =>
+                items.map((item, i) => (
+                  <StyledSVG
+                    xReference={xReference}
+                    yReference={yReference}
+                    x={item.x}
+                    y={item.y}
+                    size={triangleSize}
+                    key={i}
+                  >
+                    <Triangle
+                      color={this.props.triangleColor}
+                      rotation={rotations[i]}
+                    />
+                  </StyledSVG>
+                ))
+              }
             </RandomRotations>
           )
         }}

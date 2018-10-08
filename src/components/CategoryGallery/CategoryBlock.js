@@ -49,7 +49,7 @@ export default class CategoryBlock extends React.Component {
           <H3>{this.props.title}</H3>
           <Description>{this.props.description}</Description>
           <TriangleCurve
-            triangleSize={15}
+            triangleSize="10-20"
             triangleColor="gray"
             width="100%"
             height="200px"

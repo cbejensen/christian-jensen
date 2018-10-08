@@ -8,13 +8,13 @@ class Header extends React.Component {
     return (
       <React.Fragment>
         <TriangleCurve
-          triangleSize={40}
+          triangleSize="15-40"
           triangleColor="gray"
           width="50%"
           height="200vh"
         />
         <TriangleCurve
-          triangleSize={40}
+          triangleSize="15-40"
           triangleColor="gray"
           width="50%"
           height="200vh"

@@ -12,14 +12,14 @@ class CurveItems extends React.PureComponent {
     if (
       this.props.containerWidth !== prevProps.containerWidth ||
       this.props.containerHeight !== prevProps.containerHeight ||
-      this.props.maxItems !== prevProps.maxItems
+      this.props.maxItemNum !== prevProps.maxItemNum
     ) {
       this.generateItemCoords()
     }
   }
   generateItemCoords = () => {
     const items = []
-    for (var i = 0; i <= this.props.maxItems; i++) {
+    for (var i = 0; i <= this.props.maxItemNum; i++) {
       // we use 100 to make coords percentage-based
       // we want more shapes to the left side,
       // so we take advantage of getExponentialInt and
@@ -38,7 +38,7 @@ class CurveItems extends React.PureComponent {
     this.setState({ items })
   }
   addPadding = items => {
-    const padding = this.props.itemPadding || this.props.itemSize
+    const padding = this.props.itemPadding || this.props.maxItemSize
     const getAbsoluteX = xPercentage => {
       return (this.props.containerWidth / 100) * xPercentage
     }

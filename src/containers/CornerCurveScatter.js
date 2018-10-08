@@ -53,15 +53,8 @@ class CornerCurveScatter extends React.Component {
                   containerWidth={this.containerRef.clientWidth}
                   containerHeight={this.containerRef.clientHeight}
                   getExponentialInt={this.getExponentialInt}
-                  maxItems={
-                    this.props.maxItems ||
-                    getApproxMaxItems(
-                      this.props.itemSize,
-                      this.containerRef.clientWidth,
-                      this.containerRef.clientHeight
-                    )
-                  }
-                  itemSize={this.props.itemSize}
+                  maxItemNum={this.props.maxItemNum || 100}
+                  maxItemSize={this.props.maxItemSize}
                   itemPadding={this.props.itemPadding}
                 >
                   {items => this.props.children(items)}
@@ -85,7 +78,7 @@ class CornerCurveScatter extends React.Component {
 CornerCurveScatter.defaultProps = {
   width: '100%',
   height: '100%',
-  itemSize: 20
+  maxItemSize: 20
 }
 
 const Container = styled.div`
@@ -127,13 +120,6 @@ function getShape(points) {
   )
   // remove trailing comma
   return `${shape.slice(0, -2)})`
-}
-
-function getApproxMaxItems(itemSize, width, height) {
-  // TODO: make this rough estimate more exact
-  const approxXCapacity = width / itemSize
-  const approxYCapacity = height / itemSize
-  return Math.ceil((approxXCapacity * approxYCapacity) / 4)
 }
 
 export default CornerCurveScatter

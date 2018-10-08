@@ -7,51 +7,19 @@ export default class CategoryBlock extends React.Component {
   state = {
     showDialog: false
   }
-  setDialogRef = elem => {
-    this.dialogRef = elem
-    // we want to know when user clicks outside dialog box
-    // so we can close the dialog box, so we need to add
-    // a custom event listener instead of using
-    // React's event dispatcher, otherwise every click will always
-    // trigger a body or html element event listener, whether
-    // inside or outside actual dialog box
-    this.dialogListener = this.dialogRef.addEventListener('click', e => {
-      // if the close button was not clicked, stop propagation
-      // so no clicks are registered on the html element
-      if (e.target.tagName !== 'BUTTON') e.stopPropagation()
-    })
-  }
   setCloseBtnRef = elem => {
     // used to set focus on close button when dialog is opened
     this.closeBtnRef = elem
   }
   showDialog = () => {
-    // if browser supports dialog element, just use that
-    if (this.dialogRef.showModal) {
-      this.dialogSupported = true
-      this.dialogRef.showModal()
-    }
-    // close dialog box when clicking elsewhere
-    // this.htmlListener = document.documentElement.addEventListener(
-    //   'click',
-    //   this.closeDialog,
-    //   {
-    //     once: true
-    //   }
-    // )
     this.setState({ showDialog: true })
     this.closeBtnRef.focus()
   }
   closeDialog = e => {
-    console.log('closed')
-    if (this.dialogRef.close) this.dialogRef.close()
     this.setState({ showDialog: false })
   }
-  componentWillUnmount() {
-    window.removeEventListener('click', this.dialogListener)
-    // just in case the options object of addEventListener isn't supported
-    if (this.htmlListener)
-      window.removeEventListener('click', this.htmlListener)
+  focus = () => {
+    this.closeBtnRef.focus()
   }
   render() {
     const transitionSpeed = '0.4s'
@@ -69,17 +37,12 @@ export default class CategoryBlock extends React.Component {
             </Caption>
           </figure>
         </Block>
-        <DialogBackdrop
-          show={this.state.showDialog}
-          onClick={() => console.log('got it friend')}
-        />
-        <Dialog
-          innerRef={this.setDialogRef}
-          open={this.dialogSupported ? false : this.state.showDialog}
-        >
+        <DialogBackdrop show={this.state.showDialog} onClick={this.focus} />
+        <Dialog open={this.state.showDialog}>
           <CloseBtn
             innerRef={this.setCloseBtnRef}
             onClickCapture={this.closeDialog}
+            tabbable={this.state.showDialog}
           >
             &times;
           </CloseBtn>
@@ -153,6 +116,9 @@ const Caption = styled.figcaption`
 const Dialog = styled.dialog.attrs({
   open: props => props.open
 })`
+  display: block;
+  opacity: ${props => (props.open ? 1 : 0)};
+  pointer-events: ${props => (props.open ? 'initial' : 'none')};
   position: fixed;
   top: 50%;
   left: 50%;
@@ -160,6 +126,7 @@ const Dialog = styled.dialog.attrs({
   overflow: hidden;
   transform: translate(-50%, -50%);
   z-index: ${props => props.theme.zIndexes.dialog};
+  transition: 0.4s;
   cursor: default;
   ::backdrop {
     display: none;
@@ -177,7 +144,9 @@ const DialogBackdrop = styled.div`
   z-index: ${props => props.theme.zIndexes.dialog};
 `
 
-const CloseBtn = styled.button`
+const CloseBtn = styled.button.attrs({
+  tabIndex: props => (props.tabbable ? 0 : -1)
+})`
   position: absolute;
   top: 5px;
   right: 5px;
@@ -186,15 +155,9 @@ const CloseBtn = styled.button`
   font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
-  /* :hover,
-  :focus {
+  :hover {
     color: ${props => props.theme.primaryColor};
-    border: none;
   }
-  :-moz-focusring {
-    outline: auto;
-    border: none;
-  } */
 `
 
 const Description = styled.p`

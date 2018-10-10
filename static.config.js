@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ServerStyleSheet } from 'styled-components'
 
 export default {
-  siteRoot: 'https://christian-jensen.netlify.com',
+  siteRoot: 'https://christianjensen.netlify.com',
   getRoutes: async () => [
     {
       path: '/',

@@ -92,7 +92,7 @@ function handleMouseDownOnce() {
   window.addEventListener('keydown', handleFirstTab)
 }
 
-// make sure we're in browser
+// make sure we're in browser before activating tab listening
 // https://react-static.js.org/docs/concepts/#writing-universal-node-safe-code
 if (typeof window !== 'undefined')
   window.addEventListener('keydown', handleFirstTab)

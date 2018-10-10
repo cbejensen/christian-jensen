@@ -7,7 +7,7 @@
     "start": "react-static start",
     "stage": "react-static build --staging",
     "build": "react-static build",
-    "serve": "serve dist -p 3000"
+    "serve": "serve dist"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -17,7 +17,7 @@
     "react-dom": "^16.0.0",
     "react-hot-loader": "^4.0.0-beta.21",
     "react-router": "^4.2.0",
-    "react-static": "^5.9.7",
+    "react-static": "^5.9.12",
     "react-static-plugin-styled-components": "^1.0.5",
     "styled-components": "^3.4.9"
   },

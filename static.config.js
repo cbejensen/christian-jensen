@@ -10,12 +10,8 @@ export default {
       component: 'src/pages/Home'
     },
     {
-      path: '/about',
-      component: 'src/pages/About'
-    },
-    {
       is404: true,
-      component: 'src/pages/404'
+      component: 'src/pages/Home'
     }
   ]
 }

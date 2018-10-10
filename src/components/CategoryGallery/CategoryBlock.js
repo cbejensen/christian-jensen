@@ -165,7 +165,8 @@ const Dialog = styled.dialog.attrs({
 `
 
 const DialogBackdrop = styled.div`
-  display: ${props => (props.show ? 'block' : 'none')};
+  opacity: ${props => (props.show ? 1 : 0)};
+  visibility: ${props => (props.show ? 'visible' : 'hidden')};
   position: fixed;
   top: 0;
   right: 0;
@@ -173,6 +174,7 @@ const DialogBackdrop = styled.div`
   left: 0;
   background: rgba(0, 0, 0, 0.2);
   z-index: ${props => props.theme.zIndexes.dialog};
+  transition: 0.4s;
 `
 
 const CloseBtn = styled.button.attrs({

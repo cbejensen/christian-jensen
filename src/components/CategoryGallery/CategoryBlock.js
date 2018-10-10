@@ -1,7 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { H3 } from '../styled/Headings'
 import TriangleCurve from '../TriangleCurve'
+import { Image, Video } from 'cloudinary-react'
 
 export default class CategoryBlock extends React.Component {
   state = {
@@ -27,11 +28,20 @@ export default class CategoryBlock extends React.Component {
       <React.Fragment>
         <Block onClick={this.showDialog}>
           <figure>
-            <Image
-              src={this.props.img}
-              alt={this.props.alt}
-              transitionSpeed={transitionSpeed}
-            />
+            {!this.props.video && (
+              <StyledImage
+                publicId={this.props.img}
+                alt={this.props.alt}
+                transitionSpeed={transitionSpeed}
+              />
+            )}
+            {this.props.video && (
+              <StyledVideo
+                publicId={this.props.video}
+                resourceType="video"
+                transitionSpeed={transitionSpeed}
+              />
+            )}
             <Caption transitionSpeed={transitionSpeed}>
               {this.props.title}
             </Caption>
@@ -50,7 +60,7 @@ export default class CategoryBlock extends React.Component {
           <Description>{this.props.description}</Description>
           <TriangleCurve
             triangleSize="10-20"
-            triangleColor="gray"
+            triangleColor="rgba(0,0,0,0.2)"
             width="100%"
             height="200px"
             corner="bottom right"
@@ -68,7 +78,7 @@ const Block = styled.button`
   border: none;
   margin: 30px 30px 5em;
   min-width: 300px;
-  max-width: 1000px;
+  max-width: 600px;
   text-align: center;
   :hover {
     cursor: pointer;
@@ -81,7 +91,9 @@ const Block = styled.button`
   }
 `
 
-const Image = styled.img`
+// shared by StyledImage and StyledVideo
+const media = css`
+  width: 100%;
   border-radius: 5px;
   box-shadow: 2px 2px 10px #000;
   transition: ${props => props.transitionSpeed};
@@ -89,9 +101,28 @@ const Image = styled.img`
   ${Block}:focus & {
     transform: scale(1.1);
     box-shadow: 8px 8px 30px #000;
-    filter: blur(1px);
     outline: none;
   }
+`
+
+// for StyledImage and StyledVideo, we need to pass some
+// props to cloudinary's Image and Video components, but
+// we don't want to pass transitionSpeed since cloudinary
+// will just pass it on to the DOM. Thus, we extract that
+// prop and pass the rest
+const StyledImage = styled(({ transitionSpeed, ...rest }) => (
+  <Image {...rest} />
+))`
+  ${media};
+`
+
+const StyledVideo = styled(({ transitionSpeed, ...rest }) => (
+  <Video {...rest} />
+)).attrs({
+  autoPlay: true,
+  loop: true
+})`
+  ${media};
 `
 
 const Caption = styled.figcaption`
@@ -102,14 +133,13 @@ const Caption = styled.figcaption`
   font-weight: bold;
   font-size: 1.5em;
   transition: ${props => props.transitionSpeed};
-  background: ${props => props.theme.white};
   ${Block}:hover &,
   ${Block}:focus & {
     top: calc(50%);
     transform: translate(-50%, -50%) scale(1.8) rotate(4deg);
     background: ${props => props.theme.primaryColor};
     color: ${props => props.theme.white};
-    padding: 5px;
+    padding: 4px 20px;
   }
 `
 
@@ -123,6 +153,7 @@ const Dialog = styled.dialog.attrs({
   top: 50%;
   left: 50%;
   width: 80%;
+  max-width: ${props => props.theme.maxContentWidth};
   overflow: hidden;
   transform: translate(-50%, -50%);
   z-index: ${props => props.theme.zIndexes.dialog};

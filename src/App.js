@@ -3,6 +3,7 @@ import { Router } from 'react-static'
 import { hot } from 'react-hot-loader'
 import Routes from 'react-static-routes'
 import { ThemeProvider, injectGlobal } from 'styled-components'
+import { CloudinaryContext } from 'cloudinary-react'
 
 const theme = {
   primaryColor: '#c73d15',
@@ -91,12 +92,17 @@ function handleMouseDownOnce() {
   window.addEventListener('keydown', handleFirstTab)
 }
 
-window.addEventListener('keydown', handleFirstTab)
+// make sure we're in browser
+// https://react-static.js.org/docs/concepts/#writing-universal-node-safe-code
+if (typeof window !== 'undefined')
+  window.addEventListener('keydown', handleFirstTab)
 
 const App = () => (
   <Router>
     <ThemeProvider theme={theme}>
-      <Routes />
+      <CloudinaryContext cloudName="cbejensen">
+        <Routes />
+      </CloudinaryContext>
     </ThemeProvider>
   </Router>
 )

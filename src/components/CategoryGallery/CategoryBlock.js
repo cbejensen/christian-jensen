@@ -91,7 +91,6 @@ const Block = styled.button`
   }
 `
 
-// shared by StyledImage and StyledVideo
 const media = css`
   width: 100%;
   border-radius: 5px;
@@ -148,6 +147,7 @@ const Dialog = styled.dialog.attrs({
 })`
   display: block;
   opacity: ${props => (props.open ? 1 : 0)};
+  background: #fff;
   pointer-events: ${props => (props.open ? 'initial' : 'none')};
   position: fixed;
   top: 50%;

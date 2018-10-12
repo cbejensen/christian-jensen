@@ -16,7 +16,7 @@ export default class Home extends React.Component {
     ])
     return (
       <ThemeProvider theme={{ zIndexes }}>
-        <React.Fragment>
+        <Container>
           <Header height={headerHeight} />
           <Main>
             <section className="contained">
@@ -52,11 +52,15 @@ export default class Home extends React.Component {
               }
             </PortfolioCategories>
           </Main>
-        </React.Fragment>
+        </Container>
       </ThemeProvider>
     )
   }
 }
+
+const Container = styled.div`
+  overflow-x: hidden;
+`
 
 const Mug = styled.img.attrs({
   src: '/me.jpg',
@@ -80,13 +84,11 @@ const Mug = styled.img.attrs({
 `
 
 const Main = styled.main`
-  /* max-width: ${props => props.theme.maxContentWidth}; */
-  padding: 200px 15px 0;
+  padding: 0 15px;
   margin: auto;
 `
 
 const Intro = styled.p`
-  margin-top: ${props => props.paddingTop};
   font-size: 1.4rem;
   line-height: 1.5em;
   max-width: 1000px;

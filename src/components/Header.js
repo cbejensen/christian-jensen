@@ -6,7 +6,7 @@ import { H1 } from '../components/styled/Headings.js'
 class Header extends React.Component {
   render() {
     return (
-      <React.Fragment>
+      <HeaderContainer>
         <TriangleCurve
           triangleSize="15-40"
           triangleColor="gray"
@@ -24,10 +24,15 @@ class Header extends React.Component {
           <HeaderStick>Christian</HeaderStick>
           <HeaderStick>Jensen</HeaderStick>
         </HeaderSticks>
-      </React.Fragment>
+      </HeaderContainer>
     )
   }
 }
+
+const HeaderContainer = styled.header`
+  position: relative;
+  height: 200px;
+`
 
 const HeaderSticks = styled(H1)`
   position: absolute;

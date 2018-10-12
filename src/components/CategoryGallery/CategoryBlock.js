@@ -33,7 +33,12 @@ export default class CategoryBlock extends React.Component {
   render() {
     const transitionSpeed = '0.4s'
     return (
-      <Block onClick={this.expand} tabIndex="0" onKeyDown={this.catchEnterKey}>
+      <Block
+        expanded={this.state.expanded}
+        onClick={this.expand}
+        tabIndex="0"
+        onKeyDown={this.catchEnterKey}
+      >
         {this.props.video ? (
           <StyledVideo
             publicId={this.props.video}
@@ -72,12 +77,10 @@ export default class CategoryBlock extends React.Component {
   }
 }
 
-const Block = styled.div`
-  position: relative;
+const normalBlock = css`
   padding: 30px;
   padding-bottom: 2em;
   margin: 10px;
-  font-size: 30px;
   min-width: 300px;
   max-width: 600px;
   text-align: center;
@@ -92,12 +95,13 @@ const Block = styled.div`
   }
 `
 
-const Button = styled.button`
-  display: block;
-  background: none;
-  border: none;
-  width: 100%;
-  height: 100%;
+const expandedBlock = css`
+  position: fixed;
+`
+
+const Block = styled.div`
+  ${props => (props.expanded ? expandedBlock : normalBlock)};
+  font-size: 30px;
 `
 
 const media = css`

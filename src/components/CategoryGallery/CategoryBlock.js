@@ -4,50 +4,51 @@ import { H3 } from '../styled/Headings'
 import TriangleCurve from '../TriangleCurve'
 import { Image, Video } from 'cloudinary-react'
 
+// TODO: move dialog to parent
 export default class CategoryBlock extends React.Component {
   state = {
-    showDialog: false
+    expanded: false
   }
+  componentDidMount() {}
   setCloseBtnRef = elem => {
-    // used to set focus on close button when dialog is opened
+    // used to set focus on close button when expanded
     this.closeBtnRef = elem
   }
-  showDialog = () => {
-    this.setState({ showDialog: true })
-    this.closeBtnRef.focus()
+  expand = () => {
+    this.setState({ expanded: true })
+    // this.closeBtnRef.focus()
   }
   closeDialog = e => {
-    this.setState({ showDialog: false })
+    this.setState({ expanded: false })
   }
   focus = () => {
     this.closeBtnRef.focus()
   }
+  catchEnterKey = e => {
+    if (e.keyCode === 13) {
+      this.expand()
+    }
+    console.log(e, e.target, e.keyCode)
+  }
   render() {
     const transitionSpeed = '0.4s'
     return (
-      <React.Fragment>
-        <Block onClick={this.showDialog}>
-          <figure>
-            {!this.props.video && (
-              <StyledImage
-                publicId={this.props.img}
-                alt={this.props.alt}
-                transitionSpeed={transitionSpeed}
-              />
-            )}
-            {this.props.video && (
-              <StyledVideo
-                publicId={this.props.video}
-                resourceType="video"
-                transitionSpeed={transitionSpeed}
-              />
-            )}
-            <Caption transitionSpeed={transitionSpeed}>
-              {this.props.title}
-            </Caption>
-          </figure>
-        </Block>
-        <DialogBackdrop show={this.state.showDialog} onClick={this.focus} />
+      <Block onClick={this.expand} tabIndex="0" onKeyDown={this.catchEnterKey}>
+        {this.props.video ? (
+          <StyledVideo
+            publicId={this.props.video}
+            resourceType="video"
+            transitionSpeed={transitionSpeed}
+          />
+        ) : (
+          <StyledImage
+            publicId={this.props.img}
+            alt={this.props.alt}
+            transitionSpeed={transitionSpeed}
+          />
+        )}
+        <Title transitionSpeed={transitionSpeed}>{this.props.title}</Title>
+        {/* <DialogBackdrop show={this.state.showDialog} onClick={this.focus} />
         <Dialog open={this.state.showDialog}>
           <CloseBtn
             innerRef={this.setCloseBtnRef}
@@ -65,30 +66,38 @@ export default class CategoryBlock extends React.Component {
             height="200px"
             corner="bottom right"
           />
-        </Dialog>
-      </React.Fragment>
+        </Dialog> */}
+      </Block>
     )
   }
 }
 
-const Block = styled.button`
+const Block = styled.div`
   position: relative;
-  display: block;
-  background: none;
-  border: none;
-  margin: 30px 30px 5em;
+  padding: 30px;
+  padding-bottom: 2em;
+  margin: 10px;
+  font-size: 30px;
   min-width: 300px;
   max-width: 600px;
   text-align: center;
   :hover {
     cursor: pointer;
   }
-  :focus {
-    outline: none !important;
+  .user-is-tabbing &:focus {
+    outline: 5px auto ${props => props.theme.secondaryColor};
   }
   @media (min-width: ${props => props.theme.media.medium}) {
     flex: 1;
   }
+`
+
+const Button = styled.button`
+  display: block;
+  background: none;
+  border: none;
+  width: 100%;
+  height: 100%;
 `
 
 const media = css`
@@ -107,8 +116,8 @@ const media = css`
 // for StyledImage and StyledVideo, we need to pass some
 // props to cloudinary's Image and Video components, but
 // we don't want to pass transitionSpeed since cloudinary
-// will just pass it on to the DOM. Thus, we extract that
-// prop and pass the rest
+// will just pass it on to the DOM as an invalid attribute.
+// Thus, we extract that prop and pass the rest
 const StyledImage = styled(({ transitionSpeed, ...rest }) => (
   <Image {...rest} />
 ))`
@@ -124,17 +133,18 @@ const StyledVideo = styled(({ transitionSpeed, ...rest }) => (
   ${media};
 `
 
-const Caption = styled.figcaption`
+const Title = styled.h3`
   position: absolute;
-  top: calc(100% + 0.5em);
+  top: calc(100% - 1.5em);
   left: 50%;
   transform: translateX(-50%);
+  margin: 0;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1em;
   transition: ${props => props.transitionSpeed};
   ${Block}:hover &,
   ${Block}:focus & {
-    top: calc(50%);
+    top: calc(50% - 0.5em);
     transform: translate(-50%, -50%) scale(1.8) rotate(4deg);
     background: ${props => props.theme.primaryColor};
     color: ${props => props.theme.white};
@@ -147,12 +157,15 @@ const Dialog = styled.dialog.attrs({
 })`
   display: block;
   opacity: ${props => (props.open ? 1 : 0)};
-  background: #fff;
+  background: ${props => props.theme.white};
+  padding: 15px;
   pointer-events: ${props => (props.open ? 'initial' : 'none')};
   position: fixed;
   top: 50%;
   left: 50%;
   width: 80%;
+  border: none;
+  border-radius: 10px;
   max-width: ${props => props.theme.maxContentWidth};
   overflow: hidden;
   transform: translate(-50%, -50%);
@@ -181,8 +194,10 @@ const CloseBtn = styled.button.attrs({
   tabIndex: props => (props.tabbable ? 0 : -1)
 })`
   position: absolute;
+  padding: 0;
+  margin: 0;
   top: 5px;
-  right: 5px;
+  right: 10px;
   background: none;
   border: none;
   font-size: 2rem;

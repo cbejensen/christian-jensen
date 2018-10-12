@@ -1,5 +1,9 @@
 import React from 'react'
 
+// TODO
+// only one viewportwatcher for whole app
+// maybe upgrade to React 16.3 and use context API
+
 class ViewportWatcher extends React.Component {
   state = {
     viewportWidth: window.innerWidth,
@@ -16,8 +20,7 @@ class ViewportWatcher extends React.Component {
         resizeTimeout = setTimeout(() => {
           resizeTimeout = null
           this.updateSize()
-          // will execute at a rate of 15fps
-        }, 66)
+        }, 1000)
       }
     }
     this.resizeListener = window.addEventListener(

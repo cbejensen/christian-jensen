@@ -4,6 +4,7 @@ import { hot } from 'react-hot-loader'
 import Routes from 'react-static-routes'
 import { ThemeProvider, injectGlobal } from 'styled-components'
 import { CloudinaryContext } from 'cloudinary-react'
+import 'normalize.css'
 
 const theme = {
   primaryColor: '#c73d15',

@@ -25,6 +25,7 @@ const theme = {
 injectGlobal`
   html {
     box-sizing: border-box;
+    line-height: 1.5;
   }
   *,
   *:before,
@@ -32,7 +33,7 @@ injectGlobal`
     box-sizing: inherit;
   }
   body {
-    font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue',
+    font-family: system-ui, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue',
       Helvetica, Arial, 'Lucida Grande', sans-serif;
     font-weight: 300;
     font-size: 16px;

@@ -8,7 +8,8 @@
       "technologies": ["React", "Bootstrap", "Firebase"],
       "img": "christian-jensen/wishfull-still",
       "video": "christian-jensen/wishfull-vid",
-      "alt": "Random image"
+      "alt": "Random image",
+      "link": "https://wishfull.firebaseapp.com"
     },
     {
       "id": "andale",
@@ -17,7 +18,8 @@
       "description": "As a musician, I really enjoyed working at Musician's Friend. What I did not enjoy so much, however, was how tough it was to give customers the support they needed efficiently. With the vast array of musical instruments, brands and products that we were asked to support, information was sometimes hard to find. Thus, I created Andale - a single place for all the data my team needed, offering easy search functionality, interactive image galleries, and detailed specifications.",
       "technologies": ["React", "Bootstrap", "Firebase"],
       "video": "christian-jensen/andale-vid",
-      "alt": "Random image"
+      "alt": "Random image",
+      "link": "https://andale.netlify.com"
     },
     {
       "id": "createChefs",
@@ -27,7 +29,8 @@
       "technologies": ["React", "Bootstrap", "Firebase"],
       "img": "christian-jensen/create-chefs-still",
       "video": "christian-jensen/create-chefs-vid",
-      "alt": "Random image"
+      "alt": "Random image",
+      "link": "https://createChefs.firebaseapp.com"
     }
   ],
   "education": [

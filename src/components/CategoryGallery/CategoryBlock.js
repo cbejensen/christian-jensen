@@ -120,9 +120,6 @@ const blockNormal = css`
   :hover {
     cursor: pointer;
   }
-  .user-is-tabbing &:focus {
-    outline: 5px auto ${props => props.theme.secondaryColor};
-  }
   @media (min-width: ${props => props.theme.media.medium}) {
     flex: 1;
   }
@@ -153,9 +150,8 @@ const mediaCommon = css`
 `
 
 const mediaNormal = css`
-  width: 100%;
   ${Block}:hover &,
-  ${Block}:focus & {
+  .user-is-tabbing ${Block}:focus & {
     transform: scale(1.1);
     box-shadow: 8px 8px 30px #000;
     outline: none;
@@ -164,7 +160,8 @@ const mediaNormal = css`
 
 const mediaExpanded = css`
   position: relative;
-  width: 100%;
+  display: block;
+  margin: auto;
   transform: rotate(2deg);
   @media (min-width: ${props => props.theme.media.small}) {
     max-width: 50%;
@@ -198,6 +195,7 @@ const StyledImage = styled(({ transitionSpeed, expanded, ...rest }) => (
 ))`
   ${mediaCommon};
   ${props => (props.expanded ? mediaExpanded : mediaNormal)};
+  background: #fff;
 `
 
 const StyledVideo = styled(({ transitionSpeed, expanded, ...rest }) => (

@@ -60,7 +60,7 @@ injectGlobal`
     color: ${theme.primaryColor};
   }
 
-  img {
+  img, video {
     max-width: 100%;
   }
 

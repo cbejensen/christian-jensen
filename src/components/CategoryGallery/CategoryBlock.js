@@ -37,11 +37,14 @@ export default class CategoryBlock extends React.Component {
     }
   }
   render() {
-    let media = <DefaultMedia expanded={this.state.expanded} />
-    if (this.props.video) {
+    let media = (
+      <DefaultMedia expanded={this.state.expanded} transitionSpeed=".4s" />
+    )
+    if (this.props.vid) {
       media = (
         <StyledVideo
-          publicId={this.props.video}
+          publicId={this.props.vid}
+          alt={this.props.vidAlt}
           resourceType="video"
           transitionSpeed=".4s"
           expanded={this.state.expanded}
@@ -52,7 +55,7 @@ export default class CategoryBlock extends React.Component {
       media = (
         <StyledImage
           publicId={this.props.img}
-          alt={this.props.alt}
+          alt={this.props.imgAlt}
           transitionSpeed=".4s"
           expanded={this.state.expanded}
           tabIndex="-1"
@@ -176,7 +179,10 @@ const DefaultMedia = styled.div`
   ${mediaCommon};
   ${mediaNormal};
   display: ${props => (props.expanded ? 'none' : 'block')};
-  height: 100%;
+  width: 400px;
+  max-width: 100%;
+  height: 200px;
+  margin: auto;
   background: linear-gradient(
     to bottom right,
     ${props => props.theme.secondaryColor},

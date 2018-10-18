@@ -9,7 +9,8 @@ export default class Home extends React.Component {
   render() {
     const headerHeight = '200px'
     const zIndexes = createZIndexes([
-      'dialog',
+      'modal',
+      'modalBackground',
       'mug',
       'headerStickLower',
       'intro'

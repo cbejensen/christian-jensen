@@ -4,10 +4,6 @@ import { H3 } from '../styled/Headings'
 import TriangleCurve from '../TriangleCurve'
 import { Image, Video } from 'cloudinary-react'
 
-// TODO:
-// - add background that covers entire viewport and shrinks modal when clicked
-// - figure out how to support screens with very small heights and widths
-// (so they don't get stuck on the expanded modal block)
 export default class CategoryBlock extends React.Component {
   state = {
     expanded: false
@@ -43,53 +39,67 @@ export default class CategoryBlock extends React.Component {
   render() {
     console.log('render', this.focusBackBtn)
     return (
-      <Block
-        expanded={this.state.expanded}
-        onClick={this.state.expanded ? null : this.expand}
-        tabIndex="0"
-        onKeyDown={
-          this.state.expanded ? this.catchEscapeKey : this.catchEnterKey
-        }
-      >
-        {this.props.video ? (
-          <StyledVideo
-            publicId={this.props.video}
-            resourceType="video"
-            transitionSpeed=".4s"
-            expanded={this.state.expanded}
-            tabIndex="-1"
-          />
-        ) : (
-          <StyledImage
-            publicId={this.props.img}
-            alt={this.props.alt}
-            transitionSpeed=".4s"
-            expanded={this.state.expanded}
-            tabIndex="-1"
-          />
-        )}
-        <Title expanded={this.state.expanded} transitionSpeed=".6s">
-          {this.props.title}
-        </Title>
-        <Description expanded={this.state.expanded} transitionSpeed=".4s">
-          {this.props.description}
-        </Description>
-        <ExpandedButtons expanded={this.state.expanded} transitionSpeed=".4s">
-          <button ref={this.setBackBtnRef} onClickCapture={this.shrink}>
-            Back
-            <div>&larr;</div>
-          </button>
-          {this.props.link && (
-            <a href={this.props.link} target="_blank" rel="external">
-              Visit
-              <div style={{ transform: 'rotate(-45deg)' }}>&rarr;</div>
-            </a>
+      <React.Fragment>
+        <ExpandBackground show={this.state.expanded} onClick={this.shrink} />
+        <Block
+          expanded={this.state.expanded}
+          onClick={this.state.expanded ? null : this.expand}
+          tabIndex="0"
+          onKeyDown={
+            this.state.expanded ? this.catchEscapeKey : this.catchEnterKey
+          }
+        >
+          {this.props.video ? (
+            <StyledVideo
+              publicId={this.props.video}
+              resourceType="video"
+              transitionSpeed=".4s"
+              expanded={this.state.expanded}
+              tabIndex="-1"
+            />
+          ) : (
+            <StyledImage
+              publicId={this.props.img}
+              alt={this.props.alt}
+              transitionSpeed=".4s"
+              expanded={this.state.expanded}
+              tabIndex="-1"
+            />
           )}
-        </ExpandedButtons>
-      </Block>
+          <Title expanded={this.state.expanded} transitionSpeed=".6s">
+            {this.props.title}
+          </Title>
+          <Description expanded={this.state.expanded} transitionSpeed=".4s">
+            {this.props.description}
+          </Description>
+          <ExpandedButtons expanded={this.state.expanded} transitionSpeed=".4s">
+            <button ref={this.setBackBtnRef} onClickCapture={this.shrink}>
+              Back
+              <div>&larr;</div>
+            </button>
+            {this.props.link && (
+              <a href={this.props.link} target="_blank" rel="external">
+                Visit
+                <div style={{ transform: 'rotate(-45deg)' }}>&rarr;</div>
+              </a>
+            )}
+          </ExpandedButtons>
+        </Block>
+      </React.Fragment>
     )
   }
 }
+
+const ExpandBackground = styled.div`
+  display: ${props => (props.show ? 'block' : 'none')};
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: ${props => props.theme.zIndexes.modalBackground};
+`
 
 const blockNormal = css`
   position: relative;
@@ -116,9 +126,12 @@ const blockExpanded = css`
   right: 0;
   left: 0;
   padding: 1em 30px 0;
+  max-height: 100vh;
+  max-width: 100vw;
+  overflow: scroll;
   transform: translateY(-50%);
   background: ${props => props.theme.darkGray};
-  z-index: ${props => props.theme.zIndexes.dialog};
+  z-index: ${props => props.theme.zIndexes.modal};
 `
 
 const Block = styled.div`
@@ -143,11 +156,19 @@ const mediaNormal = css`
 `
 
 const mediaExpanded = css`
+  position: relative;
   max-width: 50%;
   float: right;
-  position: relative;
   margin: 0 0 0.5rem 0.5rem;
   z-index: 1;
+  /* TODO: figure out why this media query doesn't work
+  (default width would change to 100%) */
+  @media (min-width: {props => props.theme.media.small}) {
+    max-width: 50%;
+    float: right;
+    margin: 0 0 0.5rem 0.5rem;
+    z-index: 1;
+  }
 `
 
 // for StyledImage and StyledVideo, we need to pass some
@@ -251,6 +272,7 @@ const ExpandedButtons = styled.div`
     background: none;
     border: none;
     color: ${props => props.theme.secondaryColor};
+    font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
     transition: 0.4s;

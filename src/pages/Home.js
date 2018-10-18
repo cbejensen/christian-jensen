@@ -30,13 +30,14 @@ export default class Home extends React.Component {
                 Hello! My name is Christian, and I am a front-end web developer.
                 In 2015, I attended{' '}
                 <a href="https://devmountain.com/">DevMountain</a>, a 3-month
-                coding bootcamp. After graduating, I was invited to sit in on
-                another 3-month cohort, which is when I was introduced to{' '}
-                <a href="https://reactjs.org/">React</a>. Since then, I have
-                primarily been coding in React for my personal projects, which
-                you can see below. Currently, I am a web developer at{' '}
-                <a href="https://www.180fusion.com/">180Fusion</a>, helping
-                small businesses with SEO and site performance.
+                coding bootcamp for aspiring web devs. I continued to learn and
+                build code with excitement, and in 2017 landed my first web dev
+                job at <a href="https://www.deluxe.com/">Deluxe</a>. My
+                specialty is <a href="https://reactjs.org/">React</a>, and it
+                has been my go-to framework for awhile now. If you have any
+                questions, please feel free to contact me at{' '}
+                <a href="tel:+1-801-633-8055">801-633-8055</a> or{' '}
+                <a href="mailto:cbejensen@gmail.com">cbejensen@gmail.com</a>.
               </Intro>
             </section>
             <PortfolioCategories>

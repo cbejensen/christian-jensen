@@ -157,13 +157,10 @@ const mediaNormal = css`
 
 const mediaExpanded = css`
   position: relative;
-  max-width: 50%;
-  float: right;
-  margin: 0 0 0.5rem 0.5rem;
-  z-index: 1;
+  width: 100%;
   /* TODO: figure out why this media query doesn't work
   (default width would change to 100%) */
-  @media (min-width: {props => props.theme.media.small}) {
+  @media (min-width: ${props => props.theme.media.small}) {
     max-width: 50%;
     float: right;
     margin: 0 0 0.5rem 0.5rem;

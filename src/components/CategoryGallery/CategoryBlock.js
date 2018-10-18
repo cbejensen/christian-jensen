@@ -157,10 +157,12 @@ const mediaNormal = css`
 const mediaExpanded = css`
   position: relative;
   width: 100%;
+  transform: rotate(2deg);
   @media (min-width: ${props => props.theme.media.small}) {
     max-width: 50%;
     float: right;
     margin: 0 0 0.5rem 0.5rem;
+    transform: rotate(4deg);
     z-index: 1;
   }
 `
@@ -239,9 +241,11 @@ const descriptionNormal = css`
 
 const descriptionExpanded = css`
   display: block;
-  margin-top: 2em;
   /* transition on expanded only - we don't want transition on close */
   transition: ${props => props.transitionSpeed};
+  @media (min-width: ${props => props.theme.media.small}) {
+    margin-top: 2em;
+  }
 `
 
 const Description = styled.p`

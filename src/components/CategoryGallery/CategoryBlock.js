@@ -125,10 +125,9 @@ const blockExpanded = css`
   top: 50%;
   right: 0;
   left: 0;
-  padding: 1em 30px 0;
+  padding: 30px 30px 0;
   max-height: 100vh;
   max-width: 100vw;
-  overflow: scroll;
   transform: translateY(-50%);
   background: ${props => props.theme.darkGray};
   z-index: ${props => props.theme.zIndexes.modal};
@@ -158,8 +157,6 @@ const mediaNormal = css`
 const mediaExpanded = css`
   position: relative;
   width: 100%;
-  /* TODO: figure out why this media query doesn't work
-  (default width would change to 100%) */
   @media (min-width: ${props => props.theme.media.small}) {
     max-width: 50%;
     float: right;
@@ -195,14 +192,13 @@ const growTitleLine = keyframes`
 `
 
 const titleNormal = css`
-  position: absolute;
   top: calc(100% - 1.5em);
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
   transition: ${props => props.transitionSpeed};
   ${Block}:hover &,
-  ${Block}:focus & {
+  .user-is-tabbing ${Block}:focus & {
     top: calc(50% - 0.5em);
     transform: translate(-50%, -50%) scale(1.8) rotate(4deg);
     background: ${props => props.theme.primaryColor};
@@ -212,19 +208,16 @@ const titleNormal = css`
 `
 
 const titleExpanded = css`
-  position: static;
-  display: inline-block;
   color: ${props => props.theme.white};
+  top: 0.5em;
   margin-top: 0;
-  margin-bottom: 0.5em;
   transform: rotate(-2deg);
   transition: ${props => props.transitionSpeed};
   ::before {
     content: '';
     position: absolute;
     width: 0;
-    height: 1.5em;
-    top: -0.25em;
+    height: 100%;
     left: -60px;
     background: ${props => props.theme.primaryColor};
     z-index: -1;
@@ -234,25 +227,26 @@ const titleExpanded = css`
 
 const Title = styled.h3`
   ${props => (props.expanded ? titleExpanded : titleNormal)};
+  position: absolute;
   font-weight: bold;
   font-size: 1em;
 `
 
 const descriptionNormal = css`
   display: none;
+  margin: 0;
 `
 
 const descriptionExpanded = css`
   display: block;
-  margin-top: 3rem;
-  // transition on expanded only - we don't want transition on close
+  margin-top: 2em;
+  /* transition on expanded only - we don't want transition on close */
   transition: ${props => props.transitionSpeed};
 `
 
 const Description = styled.p`
   ${props => (props.expanded ? descriptionExpanded : descriptionNormal)};
   font-size: 1.2rem;
-  margin: 0;
   color: ${props => props.theme.white};
 `
 

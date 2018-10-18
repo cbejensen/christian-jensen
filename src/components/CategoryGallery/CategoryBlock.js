@@ -37,7 +37,28 @@ export default class CategoryBlock extends React.Component {
     }
   }
   render() {
-    console.log('render', this.focusBackBtn)
+    let media = <DefaultMedia expanded={this.state.expanded} />
+    if (this.props.video) {
+      media = (
+        <StyledVideo
+          publicId={this.props.video}
+          resourceType="video"
+          transitionSpeed=".4s"
+          expanded={this.state.expanded}
+          tabIndex="-1"
+        />
+      )
+    } else if (this.props.img) {
+      media = (
+        <StyledImage
+          publicId={this.props.img}
+          alt={this.props.alt}
+          transitionSpeed=".4s"
+          expanded={this.state.expanded}
+          tabIndex="-1"
+        />
+      )
+    }
     return (
       <React.Fragment>
         <ExpandBackground show={this.state.expanded} onClick={this.shrink} />
@@ -49,23 +70,7 @@ export default class CategoryBlock extends React.Component {
             this.state.expanded ? this.catchEscapeKey : this.catchEnterKey
           }
         >
-          {this.props.video ? (
-            <StyledVideo
-              publicId={this.props.video}
-              resourceType="video"
-              transitionSpeed=".4s"
-              expanded={this.state.expanded}
-              tabIndex="-1"
-            />
-          ) : (
-            <StyledImage
-              publicId={this.props.img}
-              alt={this.props.alt}
-              transitionSpeed=".4s"
-              expanded={this.state.expanded}
-              tabIndex="-1"
-            />
-          )}
+          {media}
           <Title expanded={this.state.expanded} transitionSpeed=".6s">
             {this.props.title}
           </Title>
@@ -167,14 +172,26 @@ const mediaExpanded = css`
   }
 `
 
+const DefaultMedia = styled.div`
+  ${mediaCommon};
+  ${mediaNormal};
+  display: ${props => (props.expanded ? 'none' : 'block')};
+  height: 100%;
+  background: linear-gradient(
+    to bottom right,
+    ${props => props.theme.secondaryColor},
+    #15c785
+  );
+`
+
 // for StyledImage and StyledVideo, we need to pass some
 // props to cloudinary's Image and Video components, but
 // we don't want to pass all, so we extract and pass the rest
 const StyledImage = styled(({ transitionSpeed, expanded, ...rest }) => (
   <Image {...rest} />
 ))`
-  ${props => (props.expanded ? mediaExpanded : mediaNormal)};
   ${mediaCommon};
+  ${props => (props.expanded ? mediaExpanded : mediaNormal)};
 `
 
 const StyledVideo = styled(({ transitionSpeed, expanded, ...rest }) => (
@@ -183,8 +200,8 @@ const StyledVideo = styled(({ transitionSpeed, expanded, ...rest }) => (
   autoPlay: true,
   loop: true
 })`
-  ${props => (props.expanded ? mediaExpanded : mediaNormal)};
   ${mediaCommon};
+  ${props => (props.expanded ? mediaExpanded : mediaNormal)};
 `
 
 const growTitleLine = keyframes`

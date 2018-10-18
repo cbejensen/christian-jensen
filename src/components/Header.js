@@ -34,7 +34,7 @@ const HeaderContainer = styled.header`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 200vw;
+  height: 200vmin;
   overflow: hidden;
 `
 

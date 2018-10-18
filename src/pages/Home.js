@@ -2,12 +2,12 @@ import React from 'react'
 import PortfolioCategories from '../containers/PortfolioCategories.js'
 import CategoryGallery from '../components/CategoryGallery'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 import styled, { ThemeProvider, keyframes } from 'styled-components'
 import { createZIndexes } from '../utils'
 
 export default class Home extends React.Component {
   render() {
-    const headerHeight = '200px'
     const zIndexes = createZIndexes([
       'modal',
       'modalBackground',
@@ -18,7 +18,7 @@ export default class Home extends React.Component {
     return (
       <ThemeProvider theme={{ zIndexes }}>
         <React.Fragment>
-          <Header height={headerHeight} />
+          <Header />
           <Main>
             <section className="contained">
               <Mug
@@ -56,6 +56,7 @@ export default class Home extends React.Component {
               }
             </PortfolioCategories>
           </Main>
+          <Footer />
         </React.Fragment>
       </ThemeProvider>
     )
@@ -85,7 +86,7 @@ const Mug = styled.img.attrs({
 
 const Main = styled.main`
   padding: 0 15px;
-  margin: 180px auto 0;
+  margin: 180px auto 60px;
 `
 
 const Intro = styled.p`

@@ -11,13 +11,13 @@ class Header extends React.Component {
           triangleSize="15-40"
           triangleColor="gray"
           width="50%"
-          height="200vh"
+          height="100%"
         />
         <TriangleCurve
           triangleSize="15-40"
           triangleColor="gray"
           width="50%"
-          height="200vh"
+          height="100%"
           corner="right"
         />
         <HeaderSticks height={this.props.height}>
@@ -30,8 +30,12 @@ class Header extends React.Component {
 }
 
 const HeaderContainer = styled.header`
-  position: relative;
-  height: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 200vw;
+  overflow: hidden;
 `
 
 const HeaderSticks = styled(H1)`
@@ -54,7 +58,7 @@ const HeaderStick = styled.div`
   text-align: center;
   z-index: ${props => props.zIndex};
   :first-child {
-    top: 0.5em;
+    top: 0;
     transform: rotate(-7deg);
     background: linear-gradient(
       to right,
@@ -63,7 +67,7 @@ const HeaderStick = styled.div`
     );
   }
   :nth-child(2) {
-    bottom: 0;
+    top: 2em;
     transform: rotate(6deg);
     background: linear-gradient(
       to left,

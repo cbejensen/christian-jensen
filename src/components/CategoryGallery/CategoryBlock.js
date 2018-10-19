@@ -128,11 +128,10 @@ const blockNormal = css`
 const blockExpanded = css`
   position: fixed;
   top: 50%;
-  right: 0;
-  left: 0;
-  padding: 30px 30px 0;
-  max-height: 100vh;
-  max-width: 100vw;
+  right: 10vw;
+  left: 10vw;
+  padding: 15px;
+  max-height: 80vh;
   transform: translateY(-50%);
   overflow: auto;
   overscroll-behavior: contain;

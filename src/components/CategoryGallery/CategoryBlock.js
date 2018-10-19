@@ -134,6 +134,8 @@ const blockExpanded = css`
   max-height: 100vh;
   max-width: 100vw;
   transform: translateY(-50%);
+  overflow: auto;
+  overscroll-behavior: contain;
   background: ${props => props.theme.darkGray};
   z-index: ${props => props.theme.zIndexes.modal};
 `

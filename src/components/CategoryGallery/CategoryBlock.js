@@ -220,13 +220,13 @@ const titleNormal = css`
   transform: translateX(-50%);
   margin: 0;
   transition: ${props => props.transitionSpeed};
+  padding: 4px 20px;
   ${Block}:hover &,
   .user-is-tabbing ${Block}:focus & {
     top: calc(50% - 0.5em);
     transform: translate(-50%, -50%) scale(1.8) rotate(4deg);
     background: ${props => props.theme.primaryColor};
     color: ${props => props.theme.white};
-    padding: 4px 20px;
   }
 `
 

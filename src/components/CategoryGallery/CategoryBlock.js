@@ -19,7 +19,7 @@ export default class CategoryBlock extends React.Component {
   shrink = e => {
     if (e) e.stopPropagation()
     // TODO: figure out why Firefox keeps focus after shrinking
-    this.setState(state => ({ expanded: false }))
+    this.setState(state => ({ expanded: false }), window.focus())
   }
   focusBackBtn = () => {
     if (this.backBtnRef.offsetHeight) {
@@ -133,7 +133,8 @@ const blockExpanded = css`
   padding: 15px;
   max-height: 80vh;
   transform: translateY(-50%);
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
   overscroll-behavior: contain;
   background: ${props => props.theme.darkGray};
   z-index: ${props => props.theme.zIndexes.modal};
@@ -283,7 +284,7 @@ const ExpandedButtons = styled.div`
   transition: ${props => props.transitionSpeed};
   justify-content: space-evenly;
   text-align: center;
-  margin: 1rem 0;
+  margin-top: 1rem;
   & button,
   & a {
     background: none;

@@ -267,7 +267,7 @@ const descriptionExpanded = css`
   /* transition on expanded only - we don't want transition on close */
   transition: ${props => props.transitionSpeed};
   @media (min-width: ${props => props.theme.media.small}) {
-    margin-top: 2em;
+    margin-top: 3em;
   }
 `
 

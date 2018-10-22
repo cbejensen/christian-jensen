@@ -39,7 +39,7 @@
       "description": "Based on the recommendation of a couple programming friends, I decided to go through DevMountain’s front end web development course. We started with some essential command line knowledge, moved on to basic HTML & CSS, then spent a considerable amount of time diving into JavaScript. After that, we started using frameworks and other tools like Angular, Bootstrap, and Firebase. As the course came to a close, we each submitted our own personal projects, and I was honored with the request to present mine on graduation night. After this, I was invited to attend the next cohort, which is where I was introduced to React. I am grateful for DevMountain because it increased not only my skills but my love for web developement as well.",
       "technologies": ["React", "Angular", "Bootstrap", "Firebase"],
       "img": "christian-jensen/devmountain-logo",
-      "alt": "DevMountain logo"
+      "imgAlt": "DevMountain logo"
     },
     {
       "id": "paradigm",
@@ -47,7 +47,7 @@
       "summary": "Charter High School",
       "description": "I attended Paradigm High School from the second half of 11th grade through my senior year, and graduated with a GPA of 3.8.",
       "img": "christian-jensen/paradigm-building",
-      "alt": "Paradigm High School building"
+      "imgAlt": "Paradigm High School building"
     }
   ],
   "work history": [
@@ -57,7 +57,7 @@
       "summary": "Web Developer",
       "description": "Deluxe is a large corporation that made checks about 100 years ago. Since then, checks have fallen away from mainstream use, so they've turned to the digital market instead. As part of this technological advance, they aquired a small business called 180fusion, and it is this team that I joined in mid-2017 as the sole web developer. It is my responsibility to implement any and all changes on any of our clients web sites. Because our clients come from diverse backgrounds and differing styles, and because I was almost always working on existing sites using whichever platform the client preferred, I was exposed to a vast array of content management systems, coding styles, and development challenges. Anything from changing the meta description of a page to designing and coding a new WordPress site was ony my plate, and I am grateful for such a skill-stretching, eye-opening experience.",
       "img": "christian-jensen/deluxe-logo",
-      "alt": "Deluxe logo",
+      "imgAlt": "Deluxe logo",
       "imgContainsTitle": true
     },
     {
@@ -66,7 +66,7 @@
       "summary": "Tech Support",
       "description": "When I graduated from DevMountain, I was still an employee at Musician's Friend. I really wanted a job more closely related to programming, so I took this job as a Technical Support Representative for an auto glass software application as a sort of stepping stone in my career. In this role, I was required to troubleshoot issues that auto shop personel were having with our software program, GlasPac. This was almost always being operated on Windows, though I did see a few Mac come through, and really helped me gain a better understanding of how computers work and how to make changes in the Windows operating system.",
       "img": "christian-jensen/autopoint-logo",
-      "alt": "AutoPoint logo",
+      "imgAlt": "AutoPoint logo",
       "imgContainsTitle": true
     },
     {
@@ -75,7 +75,7 @@
       "summary": "Tech Support",
       "description": "I started out with Musician's Friend as a Customer Support Representative, but shortly after was promoted to a Technical Support Representative in the warranty department. My basic responsibilities involved diagnosing issues that customers were having with their gear, coming up with a solution, and fulfilling necessary repair and replacement orders. It is during this time that I attended DevMountain, learned Angular, and created Andale - a proprietary web site that enabled my team to quickly retrieve relevant product information.",
       "img": "christian-jensen/musicians-friend-logo",
-      "alt": "Musician's Friend logo",
+      "imgAlt": "Musician's Friend logo",
       "imgContainsTitle": true
     }
   ]

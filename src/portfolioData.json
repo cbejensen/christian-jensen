@@ -8,7 +8,7 @@
       "technologies": ["React", "Bootstrap", "Firebase"],
       "vid": "christian-jensen/wishfull-vid",
       "vidAlt": "Video showing the Wishfull web site being used",
-      "link": "https://wishfull.firebaseapp.com"
+      "link": "http://bit.ly/2CwLNpg"
     },
     {
       "id": "andale",
@@ -18,7 +18,7 @@
       "technologies": ["Angular", "Bootstrap"],
       "vid": "christian-jensen/andale-vid",
       "vidAlt": "Video showing the Andale web site being used",
-      "link": "https://andale.netlify.com"
+      "link": "http://bit.ly/2JapI15"
     },
     {
       "id": "createChefs",
@@ -28,7 +28,7 @@
       "technologies": ["React", "Bootstrap", "Firebase"],
       "vid": "christian-jensen/create-chefs-vid",
       "vidAlt": "Video showing the Create Chefs web site being used",
-      "link": "https://createChefs.firebaseapp.com"
+      "link": "http://bit.ly/2ypsxag"
     }
   ],
   "education": [
@@ -39,7 +39,8 @@
       "description": "Based on the recommendation of a couple programming friends, I decided to go through DevMountain’s front end web development course. We started with some essential command line knowledge, moved on to basic HTML & CSS, then spent a considerable amount of time diving into JavaScript. After that, we started using frameworks and other tools like Angular, Bootstrap, and Firebase. As the course came to a close, we each submitted our own personal projects, and I was honored with the request to present mine on graduation night. After this, I was invited to attend the next cohort, which is where I was introduced to React. I am grateful for DevMountain because it increased not only my skills but my love for web developement as well.",
       "technologies": ["React", "Angular", "Bootstrap", "Firebase"],
       "img": "christian-jensen/devmountain-logo",
-      "imgAlt": "DevMountain logo"
+      "imgAlt": "DevMountain logo",
+      "link": "http://bit.ly/2NY6bBB"
     },
     {
       "id": "paradigm",

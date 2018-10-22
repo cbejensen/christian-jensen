@@ -31,11 +31,7 @@ class Footer extends React.Component {
             cbejensen@gmail.com
           </Link>
         </Row>
-        <Link
-          href="https://res.cloudinary.com/cbejensen/image/upload/v1540242857/christian-jensen/resume-christian-jensen.pdf"
-          rel="external"
-          download
-        >
+        <Link href="http://bit.ly/2q5EmOg" rel="external" download>
           <FileTextIcon />
           Resume
         </Link>

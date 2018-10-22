@@ -1,7 +1,5 @@
 import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
-import { H3 } from '../styled/Headings'
-import TriangleCurve from '../TriangleCurve'
 import { Image, Video } from 'cloudinary-react'
 
 export default class CategoryBlock extends React.Component {

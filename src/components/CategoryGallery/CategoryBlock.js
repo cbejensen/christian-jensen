@@ -11,18 +11,12 @@ export default class CategoryBlock extends React.Component {
     this.backBtnRef = elem
   }
   expand = () => {
-    // TODO: figure out how to focus shrink btn right away
     this.setState({ expanded: true })
   }
   shrink = e => {
     if (e) e.stopPropagation()
-    // TODO: figure out why Firefox keeps focus after shrinking
-    this.setState(state => ({ expanded: false }), window.focus())
-  }
-  focusBackBtn = () => {
-    if (this.backBtnRef.offsetHeight) {
-      this.backBtnRef.focus()
-    }
+    // TODO: figure out why box sometimes keeps focus after shrinking
+    this.setState(state => ({ expanded: false }))
   }
   catchEnterKey = e => {
     if (e.keyCode === 13) {

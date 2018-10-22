@@ -35,9 +35,8 @@ export default class Home extends React.Component {
                 until landing my first programming job in 2017 at{' '}
                 <a href="https://www.deluxe.com/">Deluxe</a> as their sole web
                 developer. I'm a big fan of JavaScript, and my specialty is{' '}
-                <a href="https://reactjs.org/">React</a>, which has been my
-                go-to framework for awhile now. If you have any questions,
-                please feel free to contact me at{' '}
+                <a href="https://reactjs.org/">React</a>. If you have any
+                questions, please feel free to contact me at{' '}
                 <a href="tel:+1-801-633-8055">801-633-8055</a> or{' '}
                 <a href="mailto:cbejensen@gmail.com">cbejensen@gmail.com</a>.
               </Intro>

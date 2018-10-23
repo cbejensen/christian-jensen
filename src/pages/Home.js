@@ -1,6 +1,7 @@
 import React from 'react'
 import PortfolioCategories from '../containers/PortfolioCategories.js'
 import CategoryGallery from '../components/CategoryGallery'
+import { Head } from 'react-static'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import styled, { ThemeProvider, keyframes } from 'styled-components'
@@ -18,6 +19,13 @@ export default class Home extends React.Component {
     return (
       <ThemeProvider theme={{ zIndexes }}>
         <React.Fragment>
+          <Head>
+            <title>Christian Jensen - Online Portfolio / Resume</title>
+            <meta
+              name="description"
+              content="My name is Christian Jensen and I am a front-end web developer. I graduated from DevMountain and specialize in React. I love building useful and original web apps with modern technologies and am open to new opportunities. Feel free to contact me any time!"
+            />
+          </Head>
           <Header />
           <Main>
             <section className="contained">

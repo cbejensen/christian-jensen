@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router } from 'react-static'
+import { Router, SiteData } from 'react-static'
 import { hot } from 'react-hot-loader'
 import Routes from 'react-static-routes'
 import { ThemeProvider, injectGlobal } from 'styled-components'
@@ -7,7 +7,8 @@ import { CloudinaryContext } from 'cloudinary-react'
 import 'normalize.css'
 
 const theme = {
-  primaryColor: '#c73d15',
+  // primary color moved to /static.config.js
+  // so it can be used in some meta tags
   secondaryColor: '#108db8',
   black: '#171717',
   white: '#f1f1f1',
@@ -100,11 +101,17 @@ if (typeof window !== 'undefined')
 
 const App = () => (
   <Router>
-    <ThemeProvider theme={theme}>
-      <CloudinaryContext cloudName="cbejensen">
-        <Routes />
-      </CloudinaryContext>
-    </ThemeProvider>
+    <SiteData>
+      {siteData => (
+        <ThemeProvider
+          theme={{ ...theme, primaryColor: siteData.primaryColor }}
+        >
+          <CloudinaryContext cloudName="cbejensen">
+            <Routes />
+          </CloudinaryContext>
+        </ThemeProvider>
+      )}
+    </SiteData>
   </Router>
 )
 

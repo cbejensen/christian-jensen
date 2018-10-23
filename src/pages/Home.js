@@ -20,7 +20,7 @@ export default class Home extends React.Component {
       <ThemeProvider theme={{ zIndexes }}>
         <React.Fragment>
           <Head>
-            <title>Christian Jensen - Online Portfolio / Resume</title>
+            <title>Christian Jensen | Portfolio</title>
             <meta
               name="description"
               content="My name is Christian Jensen and I am a front-end web developer. I graduated from DevMountain and specialize in React. I love building useful and original web apps with modern technologies and am open to new opportunities. Feel free to contact me any time!"

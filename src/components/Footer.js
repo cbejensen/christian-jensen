@@ -81,6 +81,9 @@ const Link = styled.a`
   padding: 0.5em;
   min-width: 250px;
   color: ${props => props.theme.white};
+  :hover {
+    color: ${props => props.theme.primaryColor};
+  }
 `
 
 export default withTheme(Footer)

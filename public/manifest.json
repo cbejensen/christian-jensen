@@ -15,6 +15,6 @@
   ],
   "theme_color": "#c73d15",
   "background_color": "#c73d15",
-  "display": "fullscreen",
+  "display": "browser",
   "start_url": "/"
 }

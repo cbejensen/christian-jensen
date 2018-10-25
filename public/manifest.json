@@ -1,5 +1,5 @@
 {
-  "name": "Christian Jensen",
+  "name": "Christian Jensen | Portfolio",
   "short_name": "Christian Jensen",
   "icons": [
     {
@@ -15,5 +15,6 @@
   ],
   "theme_color": "#c73d15",
   "background_color": "#c73d15",
-  "display": "standalone"
+  "display": "fullscreen",
+  "start_url": "/"
 }

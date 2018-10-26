@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components'
 
 const fancyFont = css`
   /* only active when web-font loader adds active class to html */
-  .wf-tradewinds-n4-active & {
-    font-family: 'Trade Winds';
+  .wf-active & {
+    font-family: 'Merienda';
   }
   letter-spacing: 2px;
 `
@@ -18,7 +18,6 @@ export const H2 = styled.h2`
   font-weight: 200;
 `
 export const H3 = styled.h3`
-  ${fancyFont};
   font-size: 1.4rem;
 `
 

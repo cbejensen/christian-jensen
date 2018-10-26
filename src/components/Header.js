@@ -2,16 +2,8 @@ import React from 'react'
 import TriangleCurve from '../components/TriangleCurve'
 import styled from 'styled-components'
 import { H1 } from '../components/styled/Headings.js'
-import WebFont from 'webfontloader'
 
 class Header extends React.Component {
-  componentDidMount() {
-    WebFont.load({
-      google: {
-        families: ['Trade+Winds']
-      }
-    })
-  }
   render() {
     return (
       <HeaderContainer>
@@ -61,6 +53,7 @@ const HeaderStick = styled.div`
   position: absolute;
   left: -50%;
   padding: 10px 0;
+  color: rgba(241, 241, 241, 0.9);
   text-align: center;
   z-index: ${props => props.zIndex};
   :first-child {
@@ -71,7 +64,6 @@ const HeaderStick = styled.div`
       ${props => props.theme.darkGray},
       ${props => props.theme.primaryColor} 50%
     );
-    color: rgba(241, 241, 241, 0.9);
   }
   :nth-child(2) {
     top: 2em;
@@ -81,7 +73,6 @@ const HeaderStick = styled.div`
       ${props => props.theme.darkGray},
       ${props => props.theme.primaryColor} 50%
     );
-    color: rgba(0, 0, 0, 0.5);
     z-index: ${props => props.theme.zIndexes.headerStickLower};
   }
 `

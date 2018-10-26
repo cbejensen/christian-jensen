@@ -1,10 +1,17 @@
 import React from 'react'
-import { Router, SiteData } from 'react-static'
+import { Router } from 'react-static'
 import { hot } from 'react-hot-loader'
 import Routes from 'react-static-routes'
 import { ThemeProvider, injectGlobal } from 'styled-components'
 import { CloudinaryContext } from 'cloudinary-react'
+import WebFont from 'webfontloader'
 import 'normalize.css'
+
+WebFont.load({
+  google: {
+    families: ['Merienda']
+  }
+})
 
 const theme = {
   primaryColor: '#c73d15',

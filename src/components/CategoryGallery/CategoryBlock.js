@@ -196,14 +196,27 @@ const StyledVideo = styled(({ transitionSpeed, expanded, ...rest }) => (
   <Video {...rest} />
 )).attrs({
   autoPlay: true,
-  loop: true
+  loop: true,
+  controls: false,
+  playsInline: true
 })`
   ${mediaCommon};
   ${props => (props.expanded ? mediaExpanded : mediaNormal)};
+  .IIV::-webkit-media-controls-play-button,
+  video::-webkit-media-controls-start-playback-button {
+    display: none;
+  }
+`
+
+const fadeIn = keyframes`
+  to {
+    opacity: 1;
+  }
 `
 
 const growTitleLine = keyframes`
   to {
+    /* opacity: 1; */
     width: calc(100vw + 60px);
   }
 `
@@ -214,22 +227,21 @@ const titleNormal = css`
   transform: translateX(-50%);
   margin: 0;
   transition: ${props => props.transitionSpeed};
-  padding: 4px 20px;
   ${Block}:hover &,
   .user-is-tabbing ${Block}:focus & {
-    top: calc(50% - 0.5em);
-    transform: translate(-50%, -50%) scale(1.8) rotate(4deg);
+    transform: translateX(-50%) scale(1.4) rotate(4deg);
     background: ${props => props.theme.primaryColor};
     color: ${props => props.theme.white};
   }
 `
 
 const titleExpanded = css`
+  opacity: 0;
   color: ${props => props.theme.white};
   top: 0.5em;
   margin-top: 0;
   transform: rotate(-2deg);
-  transition: ${props => props.transitionSpeed};
+  animation: ${fadeIn} 0.5s 0.5s forwards;
   ::before {
     content: '';
     position: absolute;
@@ -238,7 +250,7 @@ const titleExpanded = css`
     left: -60px;
     background: ${props => props.theme.primaryColor};
     z-index: -1;
-    animation: ${growTitleLine} 0.5s 1s forwards;
+    animation: ${growTitleLine} 0.5s 0.5s forwards;
   }
 `
 
@@ -247,6 +259,7 @@ const Title = styled.h3`
   position: absolute;
   font-weight: bold;
   font-size: 1em;
+  padding: 0 10px;
 `
 
 const descriptionNormal = css`

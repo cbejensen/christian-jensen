@@ -35,17 +35,16 @@ export default class Home extends React.Component {
                 }}
               />
               <Intro>
-                Hello! My name is Christian and I am a front-end web developer.
-                In 2015 I attended{' '}
+                Hello! My name is Christian, and I am a front-end web developer.
+                In 2015, I attended{' '}
                 <a href="https://devmountain.com/">DevMountain</a>, a 3-month
-                coding bootcamp. From there I continued to hone my skills
-                through side projects and any opportunity I could find at work,
-                until landing my first programming job in 2017 at{' '}
+                coding bootcamp. I continued to hone my skills through side
+                projects and any opportunity I could find at work until, in
+                2017, I landed my first programming job at{' '}
                 <a href="https://www.deluxe.com/">Deluxe</a> as their sole web
                 developer. I'm a big fan of JavaScript, and my specialty is{' '}
-                <a href="https://reactjs.org/">React</a>. If you have any
-                questions, please feel free to contact me at{' '}
-                <a href="tel:+1-801-633-8055">801-633-8055</a> or{' '}
+                <a href="https://reactjs.org/">React</a>. Please feel free to
+                contact me at <a href="tel:+1-801-633-8055">801-633-8055</a> or{' '}
                 <a href="mailto:cbejensen@gmail.com">cbejensen@gmail.com</a>.
               </Intro>
             </section>

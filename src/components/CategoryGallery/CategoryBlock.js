@@ -130,7 +130,7 @@ const blockExpanded = css`
   max-width: 1000px;
   padding: 15px;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   overscroll-behavior: contain;
   background: ${props => props.theme.darkGray};
   z-index: ${props => props.theme.zIndexes.modal};

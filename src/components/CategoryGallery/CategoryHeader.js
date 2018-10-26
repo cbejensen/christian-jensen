@@ -32,7 +32,7 @@ const HashHeading = styled(withHash(H2))`
   }
   :after {
     content: '';
-    background: ${props => props.theme.primaryColor};
+    background: ${props => props.theme.secondaryColor};
     width: 100%;
     margin-right: -100%;
     height: 1px;
@@ -40,11 +40,15 @@ const HashHeading = styled(withHash(H2))`
     vertical-align: middle;
     outline: none;
   }
+  :hover:before {
+    transform: rotate(180deg);
+  }
   :hover:after {
-    background: ${props => props.theme.secondaryColor};
+    background: ${props => props.theme.primaryColor};
   }
 `
 const HeadingText = styled.span`
   padding-right: 10px;
   color: ${props => props.theme.black};
+  font-weight: 200;
 `

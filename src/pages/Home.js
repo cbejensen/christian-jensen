@@ -109,6 +109,7 @@ const Intro = styled.p`
     )
     27;
   border-radius: 15px;
+  font-weight: 400;
   padding: 20px 30px;
   position: relative;
   z-index: 1;

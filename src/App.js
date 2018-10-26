@@ -7,8 +7,7 @@ import { CloudinaryContext } from 'cloudinary-react'
 import 'normalize.css'
 
 const theme = {
-  // primary color moved to /static.config.js
-  // so it can be used in some meta tags
+  primaryColor: '#c73d15',
   secondaryColor: '#108db8',
   black: '#171717',
   white: '#f1f1f1',
@@ -101,17 +100,11 @@ if (typeof window !== 'undefined')
 
 const App = () => (
   <Router>
-    <SiteData>
-      {siteData => (
-        <ThemeProvider
-          theme={{ ...theme, primaryColor: siteData.primaryColor }}
-        >
-          <CloudinaryContext cloudName="cbejensen">
-            <Routes />
-          </CloudinaryContext>
-        </ThemeProvider>
-      )}
-    </SiteData>
+    <ThemeProvider theme={theme}>
+      <CloudinaryContext cloudName="cbejensen">
+        <Routes />
+      </CloudinaryContext>
+    </ThemeProvider>
   </Router>
 )
 

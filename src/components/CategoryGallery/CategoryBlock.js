@@ -139,6 +139,7 @@ const Block = styled.div`
 const mediaCommon = css`
   display: block;
   margin: auto;
+  margin-bottom: 15px;
   border-radius: 5px;
   box-shadow: 2px 2px 10px #000;
   transition: ${props => props.transitionSpeed};

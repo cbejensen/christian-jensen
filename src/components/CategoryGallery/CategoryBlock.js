@@ -197,15 +197,10 @@ const StyledVideo = styled(({ transitionSpeed, expanded, ...rest }) => (
 )).attrs({
   autoPlay: true,
   loop: true,
-  controls: false,
-  playsInline: true
+  playInline: true
 })`
   ${mediaCommon};
   ${props => (props.expanded ? mediaExpanded : mediaNormal)};
-  .IIV::-webkit-media-controls-play-button,
-  video::-webkit-media-controls-start-playback-button {
-    display: none;
-  }
 `
 
 const fadeIn = keyframes`
@@ -248,7 +243,11 @@ const titleExpanded = css`
     width: 0;
     height: 100%;
     left: -60px;
-    background: ${props => props.theme.primaryColor};
+    background: linear-gradient(
+      to left,
+      ${props => props.theme.darkGray},
+      ${props => props.theme.primaryColor} 30%
+    );
     z-index: -1;
     animation: ${growTitleLine} 0.5s 0.5s forwards;
   }

@@ -7,17 +7,12 @@ export default class CategoryBlock extends React.Component {
   state = {
     expanded: false
   }
-  setBackBtnRef = elem => {
-    // used to set focus on close button when expanded
-    this.backBtnRef = elem
-  }
   expand = () => {
     this.setState({ expanded: true })
   }
   shrink = e => {
     if (e) e.stopPropagation()
-    // TODO: figure out why box sometimes keeps focus after shrinking
-    this.setState(state => ({ expanded: false }), this.backBtnRef.blur())
+    this.setState(state => ({ expanded: false }))
   }
   catchEnterKey = e => {
     if (e.keyCode === 13) {
@@ -77,7 +72,7 @@ export default class CategoryBlock extends React.Component {
             {this.props.description}
           </Description>
           <ExpandedButtons expanded={this.state.expanded} transitionSpeed=".4s">
-            <button ref={this.setBackBtnRef} onClickCapture={this.shrink}>
+            <button onClickCapture={this.shrink}>
               Back
               <div>&larr;</div>
             </button>

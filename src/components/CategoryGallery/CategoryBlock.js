@@ -142,7 +142,7 @@ const mediaCommon = css`
   margin-bottom: 15px;
   border-radius: 5px;
   box-shadow: 2px 2px 10px #000;
-  transition: ${props => props.transitionSpeed};
+  transition: all ${props => props.transitionSpeed}, max-width 0s;
 `
 
 const mediaNormal = css`

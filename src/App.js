@@ -16,6 +16,9 @@ WebFont.load({
 const theme = {
   primaryColor: '#c73d15',
   secondaryColor: '#108db8',
+  fancyFont: 'Merienda',
+  standardFont:
+    'system-ui, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif',
   black: '#171717',
   white: '#f1f1f1',
   lightGray: '#e2e2e2',
@@ -40,10 +43,10 @@ injectGlobal`
     box-sizing: inherit;
   }
   body {
-    font-family: system-ui, 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue',
-      Helvetica, Arial, 'Lucida Grande', sans-serif;
+    font-family: ${theme.standardFont};
     font-weight: 300;
     font-size: 16px;
+    line-height: 1.5;
     color: ${theme.black};
     margin: 0;
     padding: 0;

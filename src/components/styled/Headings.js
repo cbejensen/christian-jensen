@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 const fancyFont = css`
   /* only active when web-font loader adds active class to html */
   .wf-active & {
-    font-family: 'Merienda';
+    font-family: ${props => props.theme.fancyFont};
   }
   letter-spacing: 2px;
 `

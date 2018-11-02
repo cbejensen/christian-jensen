@@ -96,7 +96,6 @@ const Main = styled.main`
 `
 
 const Intro = styled.p`
-  line-height: 1.5em;
   max-width: 1000px;
   margin-top: 0;
   background: ${props => props.theme.white};

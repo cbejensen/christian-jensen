@@ -4,14 +4,16 @@ import { hot } from 'react-hot-loader'
 import Routes from 'react-static-routes'
 import { ThemeProvider, injectGlobal } from 'styled-components'
 import { CloudinaryContext } from 'cloudinary-react'
-import WebFont from 'webfontloader'
 import 'normalize.css'
 
-WebFont.load({
-  google: {
-    families: ['Merienda']
-  }
-})
+if (typeof window !== 'undefined') {
+  var WebFont = require('webfontloader')
+  WebFont.load({
+    google: {
+      families: ['Merienda']
+    }
+  })
+}
 
 const theme = {
   primaryColor: '#c73d15',

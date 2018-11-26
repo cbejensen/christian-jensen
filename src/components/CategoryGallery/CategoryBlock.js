@@ -196,8 +196,7 @@ const StyledVideo = styled(({ transitionSpeed, expanded, ...rest }) => (
   <Video {...rest} />
 )).attrs({
   autoPlay: true,
-  loop: true,
-  playInline: true
+  loop: true
 })`
   ${mediaCommon};
   ${props => (props.expanded ? mediaExpanded : mediaNormal)};

@@ -2,6 +2,8 @@ import React from 'react'
 import styled, { css, withTheme } from 'styled-components'
 import TriangleCurve from '../components/TriangleCurve'
 import { FileText, Mail, Smartphone } from 'react-feather'
+import SocialIcon from '../components/SocialIcon'
+import { Link } from 'react-static'
 
 class Footer extends React.Component {
   render() {
@@ -22,19 +24,36 @@ class Footer extends React.Component {
           triangleSize="15-40"
         />
         <Row>
-          <Link href="tel:+1-801-633-8055">
+          <StyledLink to="tel:+1-801-633-8055">
             <PhoneIcon />
             801-633-8055
-          </Link>
-          <Link href="mailto:cbejensen@gmail.com">
+          </StyledLink>
+          <StyledLink to="mailto:cbejensen@gmail.com">
             <MailIcon />
             cbejensen@gmail.com
-          </Link>
+          </StyledLink>
+          <StyledLink to="http://bit.ly/2q5EmOg" rel="external" download>
+            <FileTextIcon />
+            Resume
+          </StyledLink>
         </Row>
-        <Link href="http://bit.ly/2q5EmOg" rel="external" download>
-          <FileTextIcon />
-          Resume
-        </Link>
+        <Row>
+          <StyledLink to="https://www.linkedin.com/in/cbejensen/" external>
+            <SocialIcon icon="LinkedIn" />
+          </StyledLink>
+          <StyledLink to="https://github.com/cbejensen" external>
+            <SocialIcon icon="GitHub" />
+          </StyledLink>
+          <StyledLink to="https://codepen.io/cbejensen/" external>
+            <SocialIcon icon="CodePen" />
+          </StyledLink>
+          <StyledLink to="https://twitter.com/cbejensen" external>
+            <SocialIcon icon="Twitter" />
+          </StyledLink>
+          <StyledLink to="https://www.facebook.com/cbejensen" external>
+            <SocialIcon icon="Facebook" />
+          </StyledLink>
+        </Row>
       </Container>
     )
   }
@@ -55,34 +74,38 @@ const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding: 10px 0;
 `
 
-const Icon = css`
-  margin-right: 10px;
-  :hover {
-    color: inherit;
-  }
+const iconStyles = css`
+  margin-right: 6px;
+  transition: transform 0.4s;
 `
 
 const PhoneIcon = styled(Smartphone)`
-  ${Icon};
+  ${iconStyles};
 `
 const MailIcon = styled(Mail)`
-  ${Icon};
+  ${iconStyles};
 `
 const FileTextIcon = styled(FileText)`
-  ${Icon};
+  ${iconStyles};
 `
 
-const Link = styled.a`
+const StyledLink = styled(Link).attrs({
+  rel: props => props.external && 'external noopener',
+  target: props => props.external && '_blank'
+})`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5em;
-  min-width: 250px;
+  margin: 0 10px;
   color: ${props => props.theme.white};
   :hover {
     color: ${props => props.theme.primaryColor};
+  }
+  :hover svg {
+    transform: rotate(3deg) scale(1.1);
   }
 `
 

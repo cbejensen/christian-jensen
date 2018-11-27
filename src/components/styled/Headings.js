@@ -11,11 +11,15 @@ const fancyFont = css`
 export const H1 = styled.h1`
   ${fancyFont};
   font-size: 3rem;
+  letter-spacing: 5px;
+  font-weight: bold;
   color: ${props => props.theme.black};
 `
 export const H2 = styled.h2`
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 200;
+  letter-spacing: 2px;
+  margin: 0;
 `
 export const H3 = styled.h3`
   font-size: 1.4rem;

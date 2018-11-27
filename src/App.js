@@ -10,7 +10,7 @@ if (typeof window !== 'undefined') {
   var WebFont = require('webfontloader')
   WebFont.load({
     google: {
-      families: ['Merienda']
+      families: ['Poiret+One']
     }
   })
 }
@@ -18,13 +18,13 @@ if (typeof window !== 'undefined') {
 const theme = {
   primaryColor: '#c73d15',
   secondaryColor: '#108db8',
-  fancyFont: 'Merienda',
-  standardFont:
-    'system-ui, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif',
-  black: '#171717',
   white: '#f1f1f1',
   lightGray: '#e2e2e2',
   darkGray: '#404040',
+  fancyFont: 'Poiret One',
+  standardFont:
+    'system-ui, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif',
+  black: '#171717',
   maxContentWidth: '800px',
   media: {
     small: '500px',

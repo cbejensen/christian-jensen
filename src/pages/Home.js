@@ -28,7 +28,7 @@ export default class Home extends React.Component {
           </Head>
           <Header />
           <Main>
-            <section className="contained">
+            <section className="contained" style={{ marginBottom: 30 }}>
               <Mug
                 style={{
                   zIndex: zIndexes.mug
@@ -52,11 +52,7 @@ export default class Home extends React.Component {
               {cats =>
                 cats.map((cat, i) => (
                   <section key={i}>
-                    <CategoryGallery
-                      title={cat.category}
-                      items={cat.items}
-                      headerStyle={{ margin: '60px auto 0' }}
-                    />
+                    <CategoryGallery title={cat.category} items={cat.items} />
                   </section>
                 ))
               }

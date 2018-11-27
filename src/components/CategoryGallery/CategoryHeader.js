@@ -10,11 +10,7 @@ export default class CategoryHeader extends React.Component {
     const hashLink = this.props.hashLink || this.props.title.replace(/ /, '-')
     return (
       <Link to={`#${hashLink}`}>
-        <HashHeading
-          id={hashLink}
-          className="contained"
-          style={this.props.style}
-        >
+        <HashHeading id={hashLink} className="contained">
           <HeadingText>{this.props.title}</HeadingText>
         </HashHeading>
       </Link>

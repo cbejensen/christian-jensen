@@ -32,6 +32,8 @@ class Footer extends React.Component {
             <MailIcon />
             cbejensen@gmail.com
           </StyledLink>
+        </Row>
+        <Row>
           <StyledLink to="http://bit.ly/2q5EmOg" rel="external" download>
             <FileTextIcon />
             Resume
@@ -92,14 +94,14 @@ const FileTextIcon = styled(FileText)`
   ${iconStyles};
 `
 
-const StyledLink = styled(Link).attrs({
+const StyledLink = styled(({ external, ...rest }) => <Link {...rest} />).attrs({
   rel: props => props.external && 'external noopener',
   target: props => props.external && '_blank'
 })`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 10px;
+  margin: 10px;
   color: ${props => props.theme.white};
   :hover {
     color: ${props => props.theme.primaryColor};

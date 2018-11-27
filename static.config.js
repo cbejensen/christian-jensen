@@ -3,9 +3,6 @@ import { ServerStyleSheet } from 'styled-components'
 
 export default {
   siteRoot: 'https://christianjensen.netlify.com',
-  getSiteData: async () => ({
-    primaryColor: '#c73d15'
-  }),
   getRoutes: async () => [
     {
       path: '/',
@@ -22,7 +19,7 @@ export default {
     meta.styleTags = sheet.getStyleElement()
     return html
   },
-  Document: ({ Html, Head, Body, children, renderMeta, siteData }) => (
+  Document: ({ Html, Head, Body, children, renderMeta }) => (
     <Html>
       <Head>
         <meta charSet="UTF-8" />
@@ -45,13 +42,9 @@ export default {
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/manifest.json" />
-        <link
-          rel="mask-icon"
-          href="/safari-pinned-tab.svg"
-          color={siteData.primaryColor}
-        />
-        <meta name="msapplication-TileColor" content={siteData.primaryColor} />
-        <meta name="theme-color" content={siteData.primaryColor} />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#c73d15" />
+        <meta name="msapplication-TileColor" content="#c73d15" />
+        <meta name="theme-color" content="#c73d15" />
         {renderMeta.styleTags}
       </Head>
       <Body>{children}</Body>

@@ -33,14 +33,14 @@ const HeaderContainer = styled.header`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 200vmin;
+  width: 100%;
+  height: 700px;
   overflow: hidden;
 `
 
 const HeaderSticks = styled(H1)`
   position: absolute;
-  top: 0;
+  top: 10px;
   height: ${props => props.height};
   width: 100%;
   margin: 0;
@@ -52,9 +52,8 @@ const HeaderStick = styled.div`
   width: 200vw;
   position: absolute;
   left: -50%;
-  margin-top: 10px;
-  color: ${props => props.theme.white};
-  padding: 5px;
+  padding: 10px 0;
+  color: rgba(241, 241, 241, 0.9);
   text-align: center;
   z-index: ${props => props.zIndex};
   :first-child {

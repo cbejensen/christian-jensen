@@ -1,21 +1,17 @@
 import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
+import { H3 } from '../../components/styled/Headings'
 import { Image, Video } from 'cloudinary-react'
 
 export default class CategoryBlock extends React.Component {
   state = {
     expanded: false
   }
-  setBackBtnRef = elem => {
-    // used to set focus on close button when expanded
-    this.backBtnRef = elem
-  }
   expand = () => {
     this.setState({ expanded: true })
   }
   shrink = e => {
     if (e) e.stopPropagation()
-    // TODO: figure out why box sometimes keeps focus after shrinking
     this.setState(state => ({ expanded: false }))
   }
   catchEnterKey = e => {
@@ -41,6 +37,9 @@ export default class CategoryBlock extends React.Component {
           transitionSpeed=".4s"
           expanded={this.state.expanded}
           tabIndex="-1"
+          autoPlay
+          loop
+          playinline="true"
         />
       )
     } else if (this.props.img) {
@@ -73,7 +72,7 @@ export default class CategoryBlock extends React.Component {
             {this.props.description}
           </Description>
           <ExpandedButtons expanded={this.state.expanded} transitionSpeed=".4s">
-            <button ref={this.setBackBtnRef} onClickCapture={this.shrink}>
+            <button onClickCapture={this.shrink}>
               Back
               <div>&larr;</div>
             </button>
@@ -104,7 +103,6 @@ const ExpandBackground = styled.div`
 const blockNormal = css`
   position: relative;
   padding: 30px;
-  padding-bottom: 2em;
   margin: 10px;
   min-width: 300px;
   max-width: 600px;
@@ -120,13 +118,14 @@ const blockNormal = css`
 const blockExpanded = css`
   position: fixed;
   top: 50%;
-  right: 10vw;
-  left: 10vw;
-  padding: 15px;
+  left: 50%;
+  transform: translate(-50%, -50%);
   max-height: 80vh;
-  transform: translateY(-50%);
+  width: 90%;
+  max-width: 1000px;
+  padding: 15px;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   overscroll-behavior: contain;
   background: ${props => props.theme.darkGray};
   z-index: ${props => props.theme.zIndexes.modal};
@@ -138,14 +137,16 @@ const Block = styled.div`
 `
 
 const mediaCommon = css`
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
   border-radius: 5px;
   box-shadow: 2px 2px 10px #000;
-  transition: ${props => props.transitionSpeed};
+  transition: all ${props => props.transitionSpeed}, max-width 0s;
 `
 
 const mediaNormal = css`
-  ${Block}:hover &,
-  .user-is-tabbing ${Block}:focus & {
+  ${Block}:hover & {
     transform: scale(1.1);
     box-shadow: 8px 8px 30px #000;
     outline: none;
@@ -216,14 +217,10 @@ const growTitleLine = keyframes`
 `
 
 const titleNormal = css`
-  top: calc(100% - 1.5em);
-  left: 50%;
-  transform: translateX(-50%);
   margin: 0;
   transition: ${props => props.transitionSpeed};
-  ${Block}:hover &,
-  .user-is-tabbing ${Block}:focus & {
-    transform: translateX(-50%) scale(1.4) rotate(4deg);
+  ${Block}:hover & {
+    transform: scale(1.4) rotate(4deg);
     background: ${props => props.theme.primaryColor};
     color: ${props => props.theme.white};
   }
@@ -232,15 +229,16 @@ const titleNormal = css`
 const titleExpanded = css`
   opacity: 0;
   color: ${props => props.theme.white};
-  top: 0.5em;
-  margin-top: 0;
+  font-size: 2rem;
+  margin: 0;
   transform: rotate(-2deg);
-  animation: ${fadeIn} 0.5s 0.5s forwards;
+  animation: ${fadeIn} 0.5s 0.3s forwards;
   ::before {
     content: '';
     position: absolute;
     width: 0;
     height: 100%;
+    top: 0;
     left: -60px;
     background: linear-gradient(
       to left,
@@ -248,16 +246,14 @@ const titleExpanded = css`
       ${props => props.theme.primaryColor} 30%
     );
     z-index: -1;
-    animation: ${growTitleLine} 0.5s 0.5s forwards;
+    animation: ${growTitleLine} 0.5s 0.3s forwards;
   }
 `
 
-const Title = styled.h3`
+const Title = styled(H3)`
   ${props => (props.expanded ? titleExpanded : titleNormal)};
-  position: absolute;
-  font-weight: bold;
-  font-size: 1em;
-  padding: 0 10px;
+  display: inline-block;
+  padding: 10px;
 `
 
 const descriptionNormal = css`
@@ -269,9 +265,6 @@ const descriptionExpanded = css`
   display: block;
   /* transition on expanded only - we don't want transition on close */
   transition: ${props => props.transitionSpeed};
-  @media (min-width: ${props => props.theme.media.small}) {
-    margin-top: 3em;
-  }
 `
 
 const Description = styled.p`

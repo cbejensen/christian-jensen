@@ -23,39 +23,41 @@ class Footer extends React.Component {
           triangleColor={this.props.theme.secondaryColor}
           triangleSize="15-40"
         />
-        <Row>
-          <StyledLink to="tel:+1-801-633-8055">
-            <PhoneIcon />
-            801-633-8055
-          </StyledLink>
-          <StyledLink to="mailto:cbejensen@gmail.com">
-            <MailIcon />
-            cbejensen@gmail.com
-          </StyledLink>
-        </Row>
-        <Row>
-          <StyledLink to="http://bit.ly/2q5EmOg" rel="external" download>
-            <FileTextIcon />
-            Resume
-          </StyledLink>
-        </Row>
-        <Row>
-          <StyledLink to="https://www.linkedin.com/in/cbejensen/" external>
-            <SocialIcon icon="LinkedIn" />
-          </StyledLink>
-          <StyledLink to="https://github.com/cbejensen" external>
-            <SocialIcon icon="GitHub" />
-          </StyledLink>
-          <StyledLink to="https://codepen.io/cbejensen/" external>
-            <SocialIcon icon="CodePen" />
-          </StyledLink>
-          <StyledLink to="https://twitter.com/cbejensen" external>
-            <SocialIcon icon="Twitter" />
-          </StyledLink>
-          <StyledLink to="https://www.facebook.com/cbejensen" external>
-            <SocialIcon icon="Facebook" />
-          </StyledLink>
-        </Row>
+        <Content>
+          <Row>
+            <StyledLink to="tel:+1-801-633-8055">
+              <PhoneIcon />
+              801-633-8055
+            </StyledLink>
+            <StyledLink to="mailto:cbejensen@gmail.com">
+              <MailIcon />
+              cbejensen@gmail.com
+            </StyledLink>
+          </Row>
+          <Row>
+            <StyledLink to="http://bit.ly/2q5EmOg" rel="external" download>
+              <FileTextIcon />
+              Resume
+            </StyledLink>
+          </Row>
+          <Row>
+            <StyledLink to="https://www.linkedin.com/in/cbejensen/" external>
+              <SocialIcon icon="LinkedIn" />
+            </StyledLink>
+            <StyledLink to="https://github.com/cbejensen" external>
+              <SocialIcon icon="GitHub" />
+            </StyledLink>
+            <StyledLink to="https://codepen.io/cbejensen/" external>
+              <SocialIcon icon="CodePen" />
+            </StyledLink>
+            <StyledLink to="https://twitter.com/cbejensen" external>
+              <SocialIcon icon="Twitter" />
+            </StyledLink>
+            <StyledLink to="https://www.facebook.com/cbejensen" external>
+              <SocialIcon icon="Facebook" />
+            </StyledLink>
+          </Row>
+        </Content>
       </Container>
     )
   }
@@ -70,6 +72,11 @@ const Container = styled.footer`
   overflow: hidden;
   padding: 0.5em;
   background: ${props => props.theme.black};
+`
+
+const Content = styled.div`
+  position: relative;
+  z-index: 1;
 `
 
 const Row = styled.div`

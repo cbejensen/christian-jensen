@@ -19,7 +19,7 @@ export const H2 = styled.h2`
   font-size: 2.2rem;
   font-weight: 200;
   letter-spacing: 2px;
-  margin: 0;
+  margin: auto;
 `
 export const H3 = styled.h3`
   font-size: 1.4rem;

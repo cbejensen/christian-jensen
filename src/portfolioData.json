@@ -79,5 +79,16 @@
       "imgAlt": "Musician's Friend logo",
       "imgContainsTitle": true
     }
+  ],
+  "tutorials": [
+    {
+      "id": "useLayoutEffect",
+      "title": "React Hooks - useLayoutEffect",
+      "summary": "What is the useLayoutEffect hook for, and when might we use it?",
+      "description": "React hooks are currently in alpha stage, and they're really fun to use. One hook I don't hear addressed often is useLayoutEffect. This tutorial quickly goes over when and why you may want to use the useLayoutEffect hook.",
+      "img": "christian-jensen/react-hooks-useLayoutEffect-tutorial-screenshot",
+      "imgAlt": "Screenshot of an online tutorial for the React useLayoutEffect hook",
+      "link": "https://scrimba.com/c/c68wGu2"
+    }
   ]
 }

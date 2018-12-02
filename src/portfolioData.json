@@ -82,13 +82,22 @@
   ],
   "tutorials": [
     {
-      "id": "useLayoutEffect",
+      "id": "useState",
       "title": "React Hooks - useState",
       "summary": "The useState React Hook in a simple counter",
       "description": "React hooks are currently in alpha stage, and they're really fun to use! This tutorial covers the most basic hook - useState.",
       "img": "christian-jensen/screenshot-tutorial-useState",
       "imgAlt": "Screenshot of an online tutorial for the React useState hook",
-      "link": "https://scrimba.com/c/cEE4qfg"
+      "link": "https://scrimba.com/p/pwQZ6tV/cEE4qfg"
+    },
+    {
+      "id": "useRef",
+      "title": "React Hooks - useRef",
+      "summary": "How to use the useRef hook to mutate the DOM",
+      "description": "The API for refs in React has changed multiple times, but with a hook it's better than ever, and this quick tutorial shows how easy it is to use.",
+      "img": "christian-jensen/screenshot-tutorial-react-hooks-ref",
+      "imgAlt": "Screenshot of an online tutorial for the React useRef hook",
+      "link": "https://scrimba.com/p/pwQZ6tV/cnVy7AN"
     },
     {
       "id": "useLayoutEffect",
@@ -97,7 +106,7 @@
       "description": "One hook I don't hear addressed often is useLayoutEffect. This tutorial quickly goes over when and why you may want to use the useLayoutEffect hook.",
       "img": "christian-jensen/screenshot-tutorial-useLayoutEffect",
       "imgAlt": "Screenshot of an online tutorial for the React useLayoutEffect hook",
-      "link": "https://scrimba.com/c/c68wGu2"
+      "link": "https://scrimba.com/p/pwQZ6tV/c68wGu2"
     }
   ]
 }

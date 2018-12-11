@@ -85,10 +85,10 @@
       "id": "useState",
       "title": "React Hooks - useState",
       "summary": "The useState React Hook in a simple counter",
-      "description": "React hooks are currently in alpha stage, and they're really fun to use! This tutorial covers the most basic hook - useState.",
+      "description": "React hooks are currently in alpha stage, and they're really fun to use! Plus, code looks cleaner and is easier to understand. This tutorial covers the most basic hook: useState.",
       "img": "christian-jensen/screenshot-tutorial-useState",
       "imgAlt": "Screenshot of an online tutorial for the React useState hook",
-      "link": "https://scrimba.com/p/pwQZ6tV/cEE4qfg"
+      "link": "https://scrimba.com/p/pwQZ6tV/cKDE4Ag"
     },
     {
       "id": "useRef",
